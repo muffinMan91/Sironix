@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Job Application Form</title>
+</head>
+
+<body>
+    <h1>Job Application Form</h1>
+    <form action="/submit-form" method="post">
+        <!-- Personal Information Section -->
+        <h2>Personal Information</h2>
+        <label for="full-name">Full Name:</label><br>
+        <input type="text" id="full-name" name="full-name" value="John Doe"><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" value="1990-01-01"><br>
+
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" value="john.doe@example.com"><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" value="+1234567890"><br>
+
+        <label for="location">State/City:</label><br>
+        <input type="text" id="location" name="location" value="New York, NY"><br>
+
+        <!-- Professional Experience Section -->
+        <h2>Professional Experience</h2>
+        <label for="jobs">Previous Jobs (Company, Role, Dates):</label><br>
+        <textarea id="jobs" name="jobs">TechCorp, Senior Developer, 2018-2021</textarea><br>
+
+        <label for="responsibilities">Primary Responsibilities:</label><br>
+        <textarea id="responsibilities"
+            name="responsibilities">Developed and maintained web applications using JavaScript and Python</textarea><br>
+
+        <label for="achievements">Specific Achievements or Projects:</label><br>
+        <textarea id="achievements"
+            name="achievements">Led the development of a new feature that increased user engagement by 20%</textarea><br>
+
+        <label for="skills">Skills Acquired:</label><br>
+        <textarea id="skills" name="skills">JavaScript, Python, React, Node.js</textarea><br>
+
+        <!-- Education and Training Section -->
+        <h2>Education and Training</h2>
+        <label for="education">Degrees/Certifications:</label><br>
+        <textarea id="education" name="education">B.S. in Computer Science</textarea><br>
+
+        <label for="institutions">Institutions and Dates:</label><br>
+        <textarea id="institutions" name="institutions">Tech University, 2014-2018</textarea><br>
+
+        <label for="additional-courses">Additional Courses/Training:</label><br>
+        <textarea id="additional-courses" name="additional-courses">Certified AWS Solutions Architect</textarea><br>
+
+        <!-- Skills Section -->
+        <h2>Skills</h2>
+        <label for="languages">Languages and Proficiency:</label><br>
+        <textarea id="languages" name="languages">English (Native), Spanish (Fluent)</textarea><br>
+
+        <label for="tech-skills">Technical Skills:</label><br>
+        <textarea id="tech-skills"
+            name="tech-skills">Advanced knowledge in cloud computing and cybersecurity</textarea><br>
+
+        <label for="software-skills">Software and Technology Skills:</label><br>
+        <textarea id="software-skills" name="software-skills">Microsoft Office, Adobe Creative Suite</textarea><br>
+
+        <!-- Achievements and Awards Section -->
+        <h2>Achievements and Awards</h2>
+        <label for="awards">Awards and Recognitions:</label><br>
+        <textarea id="awards" name="awards">Employee of the Year (2020), Best Innovator Award (2019)</textarea><br>
+
+        <label for="projects">Projects or Initiatives Led:</label><br>
+        <textarea id="projects"
+            name="projects">Initiated and led a successful digital transformation project</textarea><br>
+
+        <!-- Career Goals Section -->
+        <h2>Career Goals</h2>
+        <label for="position-sought">Position Sought:</label><br>
+        <input type="text" id="position-sought" name="position-sought" value="Lead Software Engineer"><br>
+
+        <label for="long-term-goals">Long-term Professional Aspirations:</label><br>
+        <textarea id="long-term-goals" name="long-term-goals">To become a CTO at a leading tech company</textarea><br>
+
+        <label for="industry-preferences">Industry/Sector Preferences:</label><br>
+        <input type="text" id="industry-preferences" name="industry-preferences"
+            value="Technology, Software Development"><br>
+
+        <!-- Additional Experiences Section -->
+        <h2>Additional Experiences</h2>
+        <label for="volunteer">Volunteer Activities:</label><br>
+        <textarea id="volunteer" name="volunteer">Volunteered at local community tech education programs</textarea><br>
+
+        <label for="hobbies">Hobbies/Interests:</label><br>
+        <textarea id="hobbies" name="hobbies">Hiking, Photography, Traveling</textarea><br>
+
+        <!-- References Section -->
+        <h2>References</h2>
+        <label for="references">References Contact Details:</label><br>
+        <textarea id="references" name="references">Jane Smith, former manager, jane.smith@example.com</textarea><br>
+
+        <!-- LinkedIn and Resume/Cover Letter Section -->
+        <h2>LinkedIn & Current Resume/Cover Letter</h2>
+        <label for="linkedin">LinkedIn Profile:</label><br>
+        <input type="url" id="linkedin" name="linkedin" value="https://www.linkedin.com/in/john-doe/"><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+// In generateWebsite.js
+const express = require('express');
+const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+const openai = require('../services/openaiClient');
+
+let generatedWebsiteContent = '';
+
+module.exports = function (userData, jobDescription) {
+
+
+
+
+    const router = express.Router();
+
+
+
+    router.post('/generate-website', async (req, res) => {
+        let gptPrompt = `User Profile Overview: 
+        - Full Name: ${userData['full-name']}
+        - Date of Birth: ${userData.dob}
+        - Email Address: ${userData.email}
+        - Phone Number: ${userData.phone}
+        - Location: ${userData.location}
+        - Professional Experience: ${userData.jobs}
+        - Primary Responsibilities: ${userData.responsibilities}
+        - Specific Achievements: ${userData.achievements}
+        - Skills Acquired: ${userData.skills}
+        - Educational Background: ${userData.education} at ${userData.institutions}
+        - Additional Courses/Training: ${userData['additional-courses']}
+        - Language Proficiency: ${userData.languages}
+        - Technical Skills: ${userData['tech-skills']}
+        - Software and Technology Skills: ${userData['software-skills']}
+        - Awards and Recognitions: ${userData.awards}
+        - Major Projects and Initiatives: ${userData.projects}
+        - Career Goals: Seeking a position as ${userData['position-sought']}, with long-term aspirations in ${userData['long-term-goals']}
+        - Industry Preferences: ${userData['industry-preferences']}
+        - Volunteer Activities: ${userData.volunteer}
+        - Hobbies and Interests: ${userData.hobbies}
+        - LinkedIn Profile: ${userData.linkedin}
+        `;
+
+        //generate the website title
+        const websiteTitleCompletion = await openai.chat.completions.create({
+            messages: [{
+                role: "system", content: `You are an AI assistant tasked with generating a brief and versatile HTML section for a user's personal profile website, 
+                based on the detailed information provided. The output should be concise, containing only three lines of HTML, and should mirror the style and format 
+                of the provided template. The content should be tailored to highlight the user's specific professional expertise and background. Use the following 
+                template as a stylistic guide:
+                <h1 id="text01" class="style2">
+                    <span class="p">Professional Expertise</span>
+                    <span class="p">Industry Experience</span>
+                    <span class="p">Personal Branding</span>
+                </h1>
+                Based on the user's profile information: ${gptPrompt}, create a concise HTML header section that captures their unique professional identity and expertise.`
+            }],
+            //todo: try to limit amount of responses
+            n: 1,
+            temperature: 0.1,
+            model: "gpt-3.5-turbo",
+        });
+        websiteTitle = websiteTitleCompletion.choices[0].message.content;
+
+
+        //generate the sub-title of the website
+        const websiteSubTitleCompletion = await openai.chat.completions.create({
+            messages: [{
+                role: "system", content: `Create a professional and engaging one-liner for a personal profile website's subtitle. The one-liner should be suited for a
+                 job application and reflect the user's enthusiasm and suitability for the position. the one-liner should be related to the job description. Here are the details:
+
+                - Job Description: "${jobDescription.text}"
+                - User's Professional Background: ${userData.jobs}
+                - User's Skills: ${userData.skills}
+                - User's Educational Background: ${userData.education}
+
+                The one-liner should be formatted as an HTML paragraph (<p>) with id="text04" and class="style1". It should address the hiring manager and express the user's interest in the job, 
+                incorporating elements from the job description and the user's profile. Example format: <p id="text04" class="style1">[Generated content here]</p>.`
+            }],
+            //todo: try to limit amount of responses
+            n: 1,
+            temperature: 0.1,
+            model: "gpt-3.5-turbo",
+        });
+        websiteSubTitle = websiteSubTitleCompletion.choices[0].message.content;
+
+
+
+        //generate the sub-title of the website
+        const websiteSchoolSummaryCompletion = await openai.chat.completions.create({
+            messages: [{
+                role: "system", content: `Create a detailed and engaging paragraph for a personal profile website, highlighting the user's educational achievements and current studies. The content should be suitable for an HTML paragraph with a <span> tag and reflect the user's academic journey. Here are the details:
+
+                - User's Educational Background: ${userData.education}
+                - Degrees or Qualifications Pursued/Completed: ${userData.degrees}
+                - Any Specialization or Major Fields of Study: ${userData.majorFields}
+                - Current Study or Research Focus (if applicable): ${userData.currentStudy}
+                - Educational Institutions Attended: ${userData.institutions}
+
+                Format the output as an HTML paragraph with id="text09" and class="style1", using <span> tags to encapsulate the information. It should convey the user's academic credentials and aspirations, similar to the following format:
+                <p id="text09" class="style1">
+                    <span class="p">
+                        [Generated content here]
+                    </span>
+                </p>.`
+            }],
+            //todo: try to limit amount of responses
+            n: 1,
+            temperature: 0.1,
+            model: "gpt-3.5-turbo",
+        });
+        websiteSchoolSummary = websiteSchoolSummaryCompletion.choices[0].message.content;
+
+
+
+
+        // const websiteSchoolDetailsCompletion = await openai.chat.completions.create({
+        //     messages: [{
+        //         role: "system", content: `Create a detailed and engaging paragraph that describes a user's educational experience and coursework, focusing on the details provided in their profile. The content should be suitable for an HTML structure with multiple <span> tags and should convey the depth and breadth of the user's academic journey, including how their education applies to various sectors. Here are the details from the user's profile:
+
+        //         - Educational Background: ${userData.education} at ${userData.institutions}
+        //         - Additional Courses/Training: ${userData['additional-courses']}
+        //         - Skills Acquired: ${userData.skills}
+
+        //         Format the output as a series of HTML <span> elements within a <p> tag, each highlighting different aspects of the educational experience. It should convey the user's academic involvement, coursework details, and how this education applies to different sectors. The content should be formatted for inclusion in a div with id="container03" and class="style1 container default full", similar to the following format:
+        //         <div id="container03" class="style1 container default full">
+        //             <p id="text05" class="style5">
+        //                 <span class="p">[Generated content about educational background]</span>
+        //                 <span class="p">[Generated content about additional courses/training]</span>
+        //                 <span class="p">[Generated content about skills acquired and their application]</span>
+        //             </p>
+        //         </div>.`
+        //     }],
+        //     //todo: try to limit amount of responses
+        //     n: 1,
+        //     temperature: 0.1,
+        //     model: "gpt-3.5-turbo",
+        // });
+        // websiteSchoolDetails = websiteSchoolDetailsCompletion.choices[0].message.content;
+
+
+
+        //read the html template as plain text and store it in htmlTemplate
+        let htmlTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'userProfile.html'), 'utf8');
+        //insert the ai content into the html template
+        htmlTemplate = htmlTemplate.replace('<!-- website title -->', websiteTitle);
+        htmlTemplate = htmlTemplate.replace('<!-- website sub title -->', websiteSubTitle);
+        htmlTemplate = htmlTemplate.replace('<!-- website school summary -->', websiteSchoolSummary);
+        // htmlTemplate = htmlTemplate.replace('<!-- website school summary -->', websiteSchoolDetails);
+
+        generatedWebsiteContent = htmlTemplate;
+        res.json({ url: '/generatedWebsite' });  // Send the URL to the clients
+
+    });
+
+    router.get('/generatedWebsite', (req, res) => {
+        console.log("get generated website");
+        if (generatedWebsiteContent) {
+            res.send(generatedWebsiteContent);
+        } else {
+            res.status(404).send('Generated content not found');
+        }
+    });
+
+    return router;
+
+}
