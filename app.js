@@ -2,11 +2,10 @@ const express = require('express');
 const openai = require('./services/openaiClient');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
 let userData = {};
 let jobDescription = { text: "" };
 
-
+const PORT = process.env.PORT || 3000;
 
 const generateWebsiteRoute = require('./routes/generate-website')(userData, jobDescription);
 
@@ -55,6 +54,6 @@ app.post('/generate-materials', (req, res) => {
 
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
