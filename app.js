@@ -3,11 +3,12 @@ const openai = require('./services/openaiClient');
 const bodyParser = require('body-parser');
 const app = express();
 let userData = {};
-let jobDescription = { text: "" };
 
 const PORT = process.env.PORT || 3000;
 
-const generateWebsiteRoute = require('./routes/generate-website')(userData, jobDescription);
+const generateCoverLetterRoute = require('./routes/generate-coverLetter.js')(userData);
+const generateResumeRoute = require('./routes/generate-resume.js')(userData);
+const generateWebsiteRoute = require('./routes/generate-website.js')(userData);
 
 require('dotenv').config();
 
@@ -27,6 +28,11 @@ app.get('/', (req, res) => {
 });
 // route to handle the generate website
 app.use('/', generateWebsiteRoute);
+// route to handle the generate resume
+app.use('/', generateResumeRoute);
+// route to handle the generate cover letter
+app.use('/', generateCoverLetterRoute);
+
 
 // Route to handle form submission
 app.post('/submit-form', (req, res) => {
@@ -38,19 +44,6 @@ app.post('/submit-form', (req, res) => {
 app.get('/job-description', (req, res) => {
     res.sendFile(__dirname + '/public/job-description.html');
 });
-
-
-// generate resume, cover letter, email to HR, and video script for the user
-app.post('/generate-materials', (req, res) => {
-    jobDescription.text = req.body.jobDescription;
-    const generatedContent = "<p>Generated Resume based on " + jobDescription.text + "</p><p>Generated Cover Letter based on user's experience</p>";
-
-    res.json({ content: generatedContent });
-
-
-});
-
-
 
 
 // Start the server

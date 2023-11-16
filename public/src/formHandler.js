@@ -3,23 +3,31 @@
 async function handleSubmit(event) {
     event.preventDefault();
     const jobDescription = document.getElementById('job-description').value;
+    console.log("job description: ", jobDescription);
 
     try {
-        // Send job description to server
-        const materialsResponse = await axios.post('/generate-materials', { jobDescription });
+        console.log("get generated materials");
+        // request for cover letter
+        const coverLetterResponse = await axios.get('/generate-coverLetter', { params: { jobDescription } });
+        // request for resume
+        const resumeResponse = await axios.get('/generate-resume', { params: { jobDescription } });
+        //request for website
+        const websiteResponse = await axios.get('/generate-website', { params: { jobDescription } });
+
+        console.log("responses recieved");
+
+
 
         // Display generated resume and cover letter
-        document.getElementById('generated-content').innerHTML = materialsResponse.data.content;
+        document.getElementById('generated-coverLetter').innerHTML = coverLetterResponse.data.content;
+        document.getElementById('generated-resume').innerHTML = resumeResponse.data.content;
 
-        // Now, generate the website
-        const websiteResponse = await axios.post('/generate-website');
-        const response = await axios.post('/generate-website');
         // Display a link to the generated website
         const link = document.createElement('a');
-        link.href = response.data.url;
+        link.href = websiteResponse.data.url;
         link.textContent = 'View Generated Website';
         link.target = '_blank';  // Opens in a new tab/window
-        document.getElementById('link-container').appendChild(link);
+        document.getElementById('generated-website').appendChild(link);
 
 
     } catch (error) {
@@ -36,4 +44,3 @@ async function handleSubmit(event) {
 document.getElementById('job-description-form').addEventListener('submit', handleSubmit);
 
 
-document.getElementById('job-description-form').addEventListener('submit', handleSubmit);
