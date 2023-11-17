@@ -72,6 +72,8 @@ module.exports = function (userData) {
         });
         let websiteTitle = websiteTitleCompletion.choices[0].message.content;
 
+        console.log('websiteTitle: ', websiteTitle);
+
 
         //generate the sub-title of the website
         const websiteSubTitleCompletion = await openai.chat.completions.create({
@@ -94,6 +96,7 @@ module.exports = function (userData) {
         });
         let websiteSubTitle = websiteSubTitleCompletion.choices[0].message.content;
 
+        console.log('websiteSubTitle: ', websiteSubTitle);
 
 
         //generate the sub-title of the website
@@ -121,7 +124,7 @@ module.exports = function (userData) {
         });
         let websiteSchoolSummary = websiteSchoolSummaryCompletion.choices[0].message.content;
 
-
+        console.log('websiteSchoolSummary: ', websiteSchoolSummary);
 
         const websiteSchoolDetailsCompletion = await openai.chat.completions.create({
             messages: [{
@@ -166,7 +169,7 @@ module.exports = function (userData) {
         });
         let websiteSchoolDetails = websiteSchoolDetailsCompletion.choices[0].message.content;
 
-
+        console.log('websiteSchoolDetails: ', websiteSchoolDetails);
 
 
         const websiteExperiencesCompletion = await openai.chat.completions.create({
@@ -351,16 +354,20 @@ module.exports = function (userData) {
         htmlTemplate = htmlTemplate.replace('<!-- experience3 -->', websiteExperience3);
 
 
-        generatedWebsiteContent = htmlTemplate;
-        res.json({ url: '/generatedWebsite' });  // Send the URL to the clients
-
-
         console.log("website generated");
-        if (generatedWebsiteContent) {
-            res.send(generatedWebsiteContent);
-        } else {
-            res.status(404).send('Generated content not found');
-        }
+
+        generatedWebsiteContent = htmlTemplate;
+        //each client will have their own generated website link
+        res.json({ url: '/generatedWebsite' });
+
+
+
+
+    });
+
+    //once the user recieves their specific link, they can request the generated website
+    router.get('/generatedWebsite', async (req, res) => {
+        res.send(generatedWebsiteContent);
     });
 
 
