@@ -6,13 +6,10 @@ const path = require('path');
 const openai = require('../services/openaiClient');
 
 
-let generatedResumeContent = '';
-let htmlTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'resumeTemplate.html'), 'utf8');
+
+let resumeTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'resumeTemplate.html'), 'utf8');
 
 module.exports = function (userData) {
-
-    //read the html template as plain text and store it in htmlTemplate
-
 
 
     const router = express.Router();
@@ -39,99 +36,50 @@ module.exports = function (userData) {
         - Primary Responsibilities: ${userData.responsibilities}
         - Specific Achievements: ${userData.achievements}
         - Skills Acquired: ${userData.skills}
-        - Educational Background: ${userData.education} at ${userData.institutions}
+        - Educational Background and Certifications: ${userData.education}
         - Additional Courses/Training: ${userData['additional-courses']}
-        - Technical Skills: ${userData['tech-skills']}
-        - Software and Technology Skills: ${userData['software-skills']}
+        - Additional Skills: ${userData['other/additional-skills']}
         - Awards and Recognitions: ${userData.awards}
-        - Major Projects and Initiatives: ${userData.projects}
-        - Career Goals: Seeking a position as ${userData['position-sought']}, with long-term aspirations in ${userData['long-term-goals']}
-        - Industry Preferences: ${userData['industry-preferences']}
+        - Projects or Initiatives Led: ${userData.projects}
+        - Position Sought: ${userData['position-sought']}
+        - Long-term Professional Aspirations: ${userData['long-term-goals']}
+        - Industry/Sector Preferences: ${userData['industry-preferences']}
         - Volunteer Activities: ${userData.volunteer}
-        - Hobbies and Interests: ${userData.hobbies}
-        - References: ${userData.references}
+        - Hobbies/Interests: ${userData.hobbies}
+        - References Contact Details: ${userData.references}
         - LinkedIn Profile: ${userData.linkedin}
-    `;
+        `;
 
-        let resumeHTML = `
-    <body>
-        <div class="container mt-5">
-            <div class="resume">
-                <header class="text-center mb-4">
-                    <h1 id="name"></h1>
-                    <small id="title" class="text-muted"></small>
-                </header>
-                <div class="row mb-3">
-                    <div class="col-md-4 text-center">
-                        <p>Email: <span id="email"></span></p>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <p>Phone: <span id="phone"></span></p>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <p>LinkedIn: <span id="linkedin"></span></p>
-                    </div>
-                </div>
-                <section class="mb-4">
-                    <h2 class="h4">Professional Summary</h2>
-                    <p id="professional-summary"></p>
-                </section>
-                <section class="mb-4">
-                    <h2 class="h4">Skills</h2>
-                    <ul id="skills-list" class="list-unstyled">
-                        <!-- Skills will go here. add more if needed -->
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </section>
-                <section class="mb-4">
-                    <h2 class="h4">Experience</h2>
-                    <ul id="experience-list" class="list-unstyled">
-                        <!-- Experience items will go here. add more if needed -->
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </section>
-                <section class="mb-4">
-                    <h2 class="h4">Education</h2>
-                    <ul id="education-list" class="list-unstyled">
-                        <!-- Education items will go here. add more if needed -->
-                        <li></li>
-                    </ul>
-                </section>
-                <!-- Additional sections like Projects, Certifications, Languages can be added here -->
-            </div>
-        </div>
-        <!-- Bootstrap JS, Popper.js, and jQuery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </body>`;
+
+
 
         //generate the resume
         const websiteResumeCompletion = await openai.chat.completions.create({
             messages: [{
-                role: "system", content: `I have HTML for a resume. here is the html: ${resumeHTML}. 
-                  ... here is the applicant's information: ${userInfo}.
-                  Could you please help me fill in the resumeHTML with the data from userInfo? Specifically, 
-                  replace placeholders in the HTML with values from the information of the applicant.
-                  as you are doing that, make sure to align the resume with the job description while also making sure your inputs are relavent to the applicant: ${jobDescription}...
-                  make sure not to put info into the resume that aligns with the job description but is not relavent to the applicant. do not change the structure of the 
-                  resume in the html. just fill in the placeholders.`
+                role: "system", content: `I have an HTML template for a resume and need to populate it with an applicant's information: ${userInfo}. The HTML of the resume template is as follows: ${resumeTemplate}... make sure to include keywords from the job description into the resume if they are aligned with the client's experience. Here is the job description: ${jobDescription}...
+
+                Please update the resume HTML with the applicant's data, ensuring that:
+                1. All personal details like name, contact information, and email are correctly replaced, directly substituting the placeholders in the HTML.
+                2. The 'Profile' section reflects the applicant's professional summary or objective, aligning with the job description while staying true to the applicant's actual experience. It should be around 3-5 sentences.
+                3. The 'Skills' section accurately lists 3 of the most relevant applicant's skills as provided in the userInfo. The title of each of those 3 skills should be 2 words maximum. below those titles, there should be a short description of each skill, around 3-4 sentences.
+                4. The 'Technical' section should list the applicant's technical and soft skills and proficiencies. Update the list items to reflect the applicant's actual technical and soft skills, ensuring they align with the job description. do not include any skills that do not apply to the applicant. there should be a max of 6 skills listed.
+                5. The 'Experience' section is updated with the applicant's work history, including company names, roles, and dates, ensuring alignment with the job description. below each role, there should be a short description of the applicant's responsibilities and achievements, around 3-4 sentences.
+                6. The 'Education' section reflects the applicant's academic background and any certifications. Follow the format of the original template where the university name and location are an h2 and the dates and degree are h3s. For certifications, the name of the certification is in h2 and the date for it is in h3.
+                7. Any placeholder text not relevant to the applicant is removed or replaced with the applicant's actual information.
+                8. The structure and formatting of the resume remain unchanged.
+                
+                Please pay close attention to ensure that all sections of the resume are updated accurately and no placeholder text from the original template remains unless it directly applies to the applicant. Only generate the HTML, do not output anything after the HTML is generated.
+                 `
 
             }],
-            //todo: try to limit amount of responses
-            n: 1,
             temperature: 0.1,
-            model: "gpt-3.5-turbo",
+            model: "gpt-4-1106-preview",
         });
-        generatedResumeContent = websiteResumeCompletion.choices[0].message.content;
+        resumeTemplate = websiteResumeCompletion.choices[0].message.content;
 
 
-        console.log("resume html generated:", generatedResumeContent);
+        console.log("resume html generated:", resumeTemplate);
 
-        htmlTemplate = htmlTemplate.replace('<!-- resume template -->', generatedResumeContent);
 
         //each client will have their own generated website link
         res.json({ url: '/generatedResume' });
@@ -141,7 +89,7 @@ module.exports = function (userData) {
 
     //once the user recieves their specific link, they can request the generated website
     router.get('/generatedResume', async (req, res) => {
-        res.send(htmlTemplate);
+        res.send(resumeTemplate);
     });
 
 

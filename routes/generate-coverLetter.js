@@ -77,19 +77,20 @@ module.exports = function (userData) {
         - Primary Responsibilities: ${userData.responsibilities}
         - Specific Achievements: ${userData.achievements}
         - Skills Acquired: ${userData.skills}
-        - Educational Background: ${userData.education} at ${userData.institutions}
+        - Educational Background and Certifications: ${userData.education}
         - Additional Courses/Training: ${userData['additional-courses']}
-        - Technical Skills: ${userData['tech-skills']}
-        - Software and Technology Skills: ${userData['software-skills']}
+        - Technical Skills: ${userData['other/additional-skills']}
         - Awards and Recognitions: ${userData.awards}
-        - Major Projects and Initiatives: ${userData.projects}
-        - Career Goals: Seeking a position as ${userData['position-sought']}, with long-term aspirations in ${userData['long-term-goals']}
-        - Industry Preferences: ${userData['industry-preferences']}
+        - Projects or Initiatives Led: ${userData.projects}
+        - Position Sought: ${userData['position-sought']}
+        - Long-term Professional Aspirations: ${userData['long-term-goals']}
+        - Industry/Sector Preferences: ${userData['industry-preferences']}
         - Volunteer Activities: ${userData.volunteer}
-        - Hobbies and Interests: ${userData.hobbies}
-        - References: ${userData.references}
+        - Hobbies/Interests: ${userData.hobbies}
+        - References Contact Details: ${userData.references}
         - LinkedIn Profile: ${userData.linkedin}
-    `;
+        `;
+
 
         //generate the cover letter
         const websiteCoverLetterCompletion = await openai.chat.completions.create({

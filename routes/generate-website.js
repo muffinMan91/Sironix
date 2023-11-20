@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const openai = require('../services/openaiClient');
 
-let generatedWebsiteContent = '';
+//read the html template as plain text and store it in websiteTemplate
+let websiteTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'userProfile.html'), 'utf8');
 
 module.exports = function (userData) {
 
@@ -24,31 +25,32 @@ module.exports = function (userData) {
         const jobDescription = req.query.jobDescription;
 
         let userInfo = `User Profile Overview: 
-        - Full Name: ${userData['full-name']}
-        - Date of Birth: ${userData.dob}
-        - Email Address: ${userData.email}
-        - Phone Number: ${userData.phone}
-        - Location: ${userData.location}
-        - Nationality: ${userData.nationality}
-        - Language Proficiency: ${userData.languages}
-        - Current Position: ${userData['current-position']}
-        - Professional Experience: ${userData.jobs}
-        - Primary Responsibilities: ${userData.responsibilities}
-        - Specific Achievements: ${userData.achievements}
-        - Skills Acquired: ${userData.skills}
-        - Educational Background: ${userData.education} at ${userData.institutions}
-        - Additional Courses/Training: ${userData['additional-courses']}
-        - Technical Skills: ${userData['tech-skills']}
-        - Software and Technology Skills: ${userData['software-skills']}
-        - Awards and Recognitions: ${userData.awards}
-        - Major Projects and Initiatives: ${userData.projects}
-        - Career Goals: Seeking a position as ${userData['position-sought']}, with long-term aspirations in ${userData['long-term-goals']}
-        - Industry Preferences: ${userData['industry-preferences']}
-        - Volunteer Activities: ${userData.volunteer}
-        - Hobbies and Interests: ${userData.hobbies}
-        - References: ${userData.references}
-        - LinkedIn Profile: ${userData.linkedin}
-    `;
+- Full Name: ${userData['full-name']}
+- Date of Birth: ${userData.dob}
+- Email Address: ${userData.email}
+- Phone Number: ${userData.phone}
+- Location: ${userData.location}
+- Nationality: ${userData.nationality}
+- Language Proficiency: ${userData.languages}
+- Current Position: ${userData['current-position']}
+- Professional Experience: ${userData.jobs}
+- Primary Responsibilities: ${userData.responsibilities}
+- Specific Achievements: ${userData.achievements}
+- Skills Acquired: ${userData.skills}
+- Educational Background and Certifications: ${userData.education}
+- Additional Courses/Training: ${userData['additional-courses']}
+- Technical Skills: ${userData['other/additional-skills']}
+- Awards and Recognitions: ${userData.awards}
+- Projects or Initiatives Led: ${userData.projects}
+- Position Sought: ${userData['position-sought']}
+- Long-term Professional Aspirations: ${userData['long-term-goals']}
+- Industry/Sector Preferences: ${userData['industry-preferences']}
+- Volunteer Activities: ${userData.volunteer}
+- Hobbies/Interests: ${userData.hobbies}
+- References Contact Details: ${userData.references}
+- LinkedIn Profile: ${userData.linkedin}
+`;
+
         console.log("attempting to generate html");
 
         //generate the website title
@@ -82,9 +84,8 @@ module.exports = function (userData) {
                  job application and reflect the user's enthusiasm and suitability for the position. the one-liner should be related to the job description. Here are the details:
 
                 - Job Description: "${jobDescription.text}"
-                - User's Professional Background: ${userData.jobs}
-                - User's Skills: ${userData.skills}
-                - User's Educational Background: ${userData.education}
+                - User's personal information:  ${userInfo}...
+               
 
                 The one-liner should be formatted as an HTML paragraph (<p>) with id="text04" and class="style1". It should address the hiring manager and express the user's interest in the job, 
                 incorporating elements from the job description and the user's profile. Example format: <p id="text04" class="style1">[Generated content here]</p>.`
@@ -104,11 +105,7 @@ module.exports = function (userData) {
             messages: [{
                 role: "system", content: `Create a detailed and engaging paragraph for a personal profile website, highlighting the user's educational achievements and current studies. The content should be suitable for an HTML paragraph with a <span> tag and reflect the user's academic journey. Here are the details:
 
-                - User's Educational Background: ${userData.education}
-                - Degrees or Qualifications Pursued/Completed: ${userData.degrees}
-                - Any Specialization or Major Fields of Study: ${userData.majorFields}
-                - Current Study or Research Focus (if applicable): ${userData.currentStudy}
-                - Educational Institutions Attended: ${userData.institutions}
+                - User's personal information: ${userInfo}...
 
                 Format the output as an HTML paragraph with id="text09" and class="style1", using <span> tags to encapsulate the information. It should convey the user's academic credentials and aspirations, similar to the following format:
                 <p id="text09" class="style1">
@@ -153,10 +150,7 @@ module.exports = function (userData) {
                     </div>
                 </div>
 
-                User's Profile Details:
-                - Educational Background: ${userData.education} at ${userData.institutions}
-                - Additional Courses/Training: ${userData['additional-courses']}
-                - Skills Acquired: ${userData.skills}
+                - User's personal information: ${userInfo}...
 
                 The generated content should follow the template's format closely, using the same tags and classes,
                  but with content tailored to the user's specific educational and professional experiences. Ensure the tone is engaging and the content is informative,
@@ -185,8 +179,7 @@ module.exports = function (userData) {
                 2. <ul id="links05" class="style2 links"><li class="n01"><a href="#experience2">[Second Experience Title]</a></li></ul>
                 3. <ul id="links03" class="style2 links"><li class="n01"><a href="#experience3">[Third Experience Title]</a></li></ul>
 
-                User Profile Overview (userInfo):
-                ${userInfo}
+                - User's personal information: ${userInfo}...
 
                 The output should reflect the user's professional journey as described in 'userInfo', with the HTML formatting and styling exactly as shown in the example. Ensure that each experience is presented in its own <ul> for clarity and visual consistency with the provided template. for the images, use this src: https://picsum.photos/200`}],
 
@@ -231,7 +224,8 @@ module.exports = function (userData) {
                     3. Include insights or skills gained, emphasizing how this experience is relevant to the user's professional growth.
                 
                 User Profile Overview (websiteExperiences variable):
-                ${websiteExperiences}
+                ${websiteExperiences}...
+                - User's personal information: ${userInfo}...
                 
                 Ensure the output is tailored to reflect the specifics of the first experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200`
             }],
@@ -274,7 +268,8 @@ module.exports = function (userData) {
                     3. Include insights or skills gained, emphasizing how this experience is relevant to the user's professional growth.
                 
                 User Profile Overview (websiteExperiences variable):
-                ${websiteExperiences}
+                ${websiteExperiences}...
+                - User's personal information: ${userInfo}...
                 
                 Ensure the output is tailored to reflect the specifics of the second experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200`
             }],
@@ -320,7 +315,8 @@ module.exports = function (userData) {
                     3. Include insights or skills gained, emphasizing how this experience is relevant to the user's professional growth.
                 
                 User Profile Overview (websiteExperiences variable):
-                ${websiteExperiences}
+                ${websiteExperiences}...
+                - User's personal information: ${userInfo}...
                 
                 Ensure the output is tailored to reflect the specifics of the third experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template.`
             }],
@@ -341,33 +337,26 @@ module.exports = function (userData) {
 
 
 
-        //read the html template as plain text and store it in htmlTemplate
-        let htmlTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'userProfile.html'), 'utf8');
+
         // //insert the ai content into the html template
-        htmlTemplate = htmlTemplate.replace('<!-- title -->', websiteTitle);
-        htmlTemplate = htmlTemplate.replace('<!-- sub title -->', websiteSubTitle);
-        htmlTemplate = htmlTemplate.replace('<!-- school summary -->', websiteSchoolSummary);
-        htmlTemplate = htmlTemplate.replace('<!-- school details -->', websiteSchoolDetails);
-        htmlTemplate = htmlTemplate.replace('<!-- experiences -->', websiteExperiences);
-        htmlTemplate = htmlTemplate.replace('<!-- experience1 -->', websiteExperience1);
-        htmlTemplate = htmlTemplate.replace('<!-- experience2 -->', websiteExperience2);
-        htmlTemplate = htmlTemplate.replace('<!-- experience3 -->', websiteExperience3);
-
-
+        websiteTemplate = websiteTemplate.replace('<!-- title -->', websiteTitle);
+        websiteTemplate = websiteTemplate.replace('<!-- sub title -->', websiteSubTitle);
+        websiteTemplate = websiteTemplate.replace('<!-- school summary -->', websiteSchoolSummary);
+        websiteTemplate = websiteTemplate.replace('<!-- school details -->', websiteSchoolDetails);
+        websiteTemplate = websiteTemplate.replace('<!-- experiences -->', websiteExperiences);
+        websiteTemplate = websiteTemplate.replace('<!-- experience1 -->', websiteExperience1);
+        websiteTemplate = websiteTemplate.replace('<!-- experience2 -->', websiteExperience2);
+        websiteTemplate = websiteTemplate.replace('<!-- experience3 -->', websiteExperience3);
         console.log("website generated");
 
-        generatedWebsiteContent = htmlTemplate;
+
         //each client will have their own generated website link
         res.json({ url: '/generatedWebsite' });
-
-
-
-
     });
 
     //once the user recieves their specific link, they can request the generated website
     router.get('/generatedWebsite', async (req, res) => {
-        res.send(generatedWebsiteContent);
+        res.send(websiteTemplate);
     });
 
 
