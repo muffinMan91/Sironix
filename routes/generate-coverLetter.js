@@ -100,7 +100,8 @@ module.exports = function (userData) {
             and here is the coverLetterFormat. do not follow the format exactly as it is only a general outline. try to be creative in your coverletter: ${coverLetterFormat}...
             make sure to include keywords from the job description into the resume if they are aligned with the client's experience. make the cover letter around 240-400 words. 
             do not put too much "fluff" in the cover letter. make it concise and to the point. make sure that skills and experience are aligned with the job description while at the 
-            same time making sure that the applicant actually has the skills and experience.`
+            same time making sure that the applicant actually has the skills and experience.do not include text that is related to the job description but not the user's profile. for example, saying that 
+            the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
 
             }],
             //todo: try to limit amount of responses

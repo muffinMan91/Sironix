@@ -24,6 +24,7 @@ module.exports = function (userData) {
 
         const jobDescription = req.query.jobDescription;
 
+
         let userInfo = `User Profile Overview: 
 - Full Name: ${userData['full-name']}
 - Date of Birth: ${userData.dob}
@@ -67,7 +68,9 @@ module.exports = function (userData) {
                     <br />
                     <span class="p">Personal Branding</span>
                 </h1>
-                Based on the user's profile information: ${userInfo}, create a concise HTML header section that captures their unique professional identity and expertise.`
+                Based on the user's profile information: ${userInfo}... create a concise HTML header section that captures their unique professional identity and expertise.
+                The 3 titles that you choose must be related to the job description and the user's profile. here is the job description: ${jobDescription}... do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
             }],
             //todo: try to limit amount of responses
             n: 1,
@@ -83,16 +86,18 @@ module.exports = function (userData) {
         const websiteSubTitleCompletion = await openai.chat.completions.create({
             messages: [{
                 role: "system", content: `Create a professional and engaging one-liner for a personal profile website's subtitle. The one-liner should be suited for a
-                 job application and reflect the user's enthusiasm and suitability for the position. the one-liner should be related to the job description and include the company and job they are applying to. Here are the details:
+                 job application and reflect the user's enthusiasm and suitability for the position.  the one-liner should be related to the job description and include the company and job they are applying to.  ...example of a one liner could be: "Passionate community development coordinator with a proven track record of networking with public officials and advocating for social justice. Excited to bring my expertise in fundraising and strategic planning to contribute to Helping Hands Foundation."...
+                 do not include text that is related to the job description but not the user's profile. for example, saying that 
+                 the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile. Here are the details:
 
-                - Job Description: "${jobDescription.text}"
+                - Job Description: ${jobDescription}...
                 - User's personal information:  ${userInfo}...
                
 
                 The one-liner should be formatted as an HTML paragraph (<p>) with id="text04" and class="style1". It should address the hiring manager and express the user's interest in the job, 
                 incorporating elements from the job description and the user's profile. Example format: <p id="text04" class="style1">[Generated content here]</p>.
-                
-                ...example of a one liner could be: "Passionate community development coordinator with a proven track record of networking with public officials and advocating for social justice. Excited to bring my expertise in fundraising and strategic planning to contribute to Helping Hands Foundation."`
+                remember to cross reference the html you are generating and the user profile to make sure that the information is accurate.
+               `
 
             }],
             //todo: try to limit amount of responses
@@ -119,7 +124,7 @@ module.exports = function (userData) {
                         [Generated content here]
                     </span>
                 </p>.
-                ... here is an example of the html that should be generated:  <p id="text09" class="style1">
+                ... here is an example template of the html that should be generated:  <p id="text09" class="style1">
                 <span class="p">
                     I am preparing a Double Degree at EFAP &amp; Essca Shanghai (2025).
                     <br />
@@ -127,7 +132,10 @@ module.exports = function (userData) {
                     <br />
                     A Master of Science in EU-Asia Digital Marketing and Business, by ESSCA
                 </span>
-            </p> ... notice how the length of the paragraph is around 3-4 sentences.`
+            </p> ...not that this is only an example and the content should be different. the degrees that the applicant is pursuing will most likely be different.
+             the point of the example is to show how the length of the paragraph is around 3-4 sentences, and should relate to the job description and the user's profile. follow the html format closely. here is the job description that you should try to relate it to: ${jobDescription}...
+             do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
             }],
             //todo: try to limit amount of responses
             n: 1,
@@ -140,9 +148,10 @@ module.exports = function (userData) {
 
         const websiteSchoolDetailsCompletion = await openai.chat.completions.create({
             messages: [{
-                role: "system", content: `Create a paragraph that precisely matches the style, structure, and formatting of the given HTML template example, while varying the content to suit the user's profile. The output should maintain the same use of <div>, <p>, and <span> elements, including classes and IDs, but the text within these tags should reflect the user's educational and professional background. Here is the template to emulate:
+                role: "system", content: `Create a paragraph that precisely matches the style, structure, and formatting of the given HTML template example, while varying the content to suit the user's profile. The output should maintain the same use of <div>, <p>, and <span> elements, including classes and IDs, but the text within these tags should reflect the user's educational background. here is the personal information
+                about the applicant:  ${userInfo}... Here is the template to emulate:
 
-                HTML Template Example:
+               
                 <div id="container03" class="style1 container default full">
                     <div class="wrapper">
                         <div class="inner">
@@ -163,11 +172,11 @@ module.exports = function (userData) {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>...
 
-                - User's personal information: ${userInfo}...
+               
 
-                here is an example of the html that should be generated:
+                here is an example of another user's school section of their website. this is what the structure of the html should look like:
                 <div id="container03" class="style1 container default full">
                 <div class="wrapper">
                     <div class="inner">
@@ -206,8 +215,11 @@ module.exports = function (userData) {
             </div> ...
 
                 The generated content should follow the template's format closely, using the same tags and classes,
-                 but with content tailored to the user's specific educational and professional experiences. Ensure the tone is engaging and the content is informative,
-                  fitting seamlessly into the provided template style. for the images, use this src: https://picsum.photos/200. Also, only mention that they are "currently studying" if they are still in school which can be checked by the date of they degree.`
+                 but with content tailored to the user's specific educational experiences. This means that the content within the tags will be different for the user you are generating content for. The html above is only an example that shows
+                  the general structure of the html tags. Ensure the tone is engaging and the content is informative,
+                  fitting seamlessly into the provided template style. If the courses the user has taken can not be found, then generate ones that you think the user has taken instead of just copying the ones
+                  from the html template example. for the images, use this src: https://picsum.photos/200. Also, only mention that they are "currently studying" if they are still in school which can be checked by the date of they degree.
+                  this section should relate to the job description and the user's profile. here is the job description: ${jobDescription}...remember to cross reference the html you are generating and the user profile to make sure that the information is accurate.`
             }],
             //todo: try to limit amount of responses
             n: 1,
@@ -254,7 +266,10 @@ module.exports = function (userData) {
                     </li>
                 </ul> ... follow the html format exactly as it is shown in the example. the only thing that should change is the text in the <a> tags.
 
-                The output should reflect the user's professional journey as described in 'userInfo', with the HTML formatting and styling exactly as shown in the example. Ensure that each experience is presented in its own <ul> for clarity and visual consistency with the provided template. for the images, use this src: https://picsum.photos/200`}],
+                The output should reflect the user's professional journey as described in 'userInfo', with the HTML formatting and styling exactly as shown in the example. Ensure that each experience is presented in its own <ul> for clarity and visual consistency with the provided template. for the images, use this src: https://picsum.photos/200
+                this section should relate to the job description and the user's profile. here is the job description: ${jobDescription}...do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
+            }],
 
             //todo: try to limit amount of responses
             n: 1,
@@ -335,15 +350,17 @@ module.exports = function (userData) {
                     </div> ...
                 
                 - Content Requirements:
-                    1. The description should be specific to the role and company of the first experience listed in 'websiteExperiences'.
+                    1. The description should relate back to the role and company of the first experience listed in 'websiteExperiences':  ${websiteExperiences}...
                     2. Highlight key responsibilities, projects, and the impact made during this experience.
                     3. Include insights or skills gained, emphasizing how this experience is relevant to the user's professional growth.
                 
-                User Profile Overview (websiteExperiences variable):
-                ${websiteExperiences}...
-                - User's personal information: ${userInfo}...
                 
-                Ensure the output is tailored to reflect the specifics of the first experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200`
+               
+                - User's personal information can be used to learn more about the user's experiences: ${userInfo}...
+                
+                Ensure the output is tailored to reflect the specifics of the first experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200 ... this section should relate to the job description and the user's profile. here is the job description: ${jobDescription}...
+                do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
             }],
 
             //todo: try to limit amount of responses
@@ -425,7 +442,9 @@ module.exports = function (userData) {
                 ${websiteExperiences}...
                 - User's personal information: ${userInfo}...
                 
-                Ensure the output is tailored to reflect the specifics of the second experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200`
+                Ensure the output is tailored to reflect the specifics of the second experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. for the images, use this src: https://picsum.photos/200 ... this section should relate to the job description and the user's profile. here is the job description: ${jobDescription}...
+                do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
             }],
 
             //todo: try to limit amount of responses
@@ -519,7 +538,9 @@ module.exports = function (userData) {
                 ${websiteExperiences}...
                 - User's personal information: ${userInfo}...
                 
-                Ensure the output is tailored to reflect the specifics of the third experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template.`
+                Ensure the output is tailored to reflect the specifics of the third experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the user's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. this section should relate to the job description and the user's profile. here is the job description: ${jobDescription}...
+                do not include text that is related to the job description but not the user's profile. for example, saying that 
+                the user is a "software engineer" when they are not a software engineer. or saying that they are a liscenced professional in a certain field when they are not. you can verify this type of information by looking at the user's profile.`
             }],
 
             //todo: try to limit amount of responses

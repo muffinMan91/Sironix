@@ -7,9 +7,9 @@ async function handleSubmit(event) {
 
     try {
         console.log("get generated materials");
-        // request for cover letter and display
-        const coverLetterResponse = await axios.get('/generate-coverLetter', { params: { jobDescription } });
-        document.getElementById('generated-coverLetter').innerHTML = coverLetterResponse.data;
+        // // request for cover letter and display
+        // const coverLetterResponse = await axios.get('/generate-coverLetter', { params: { jobDescription } });
+        // document.getElementById('generated-coverLetter').innerHTML = coverLetterResponse.data;
         // request for resume html
         const resumeResponse = await axios.get('/generate-resume', { params: { jobDescription } });
         // Display a link to the generated resume
