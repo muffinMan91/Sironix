@@ -98,7 +98,9 @@ module.exports = function (userData) {
                 role: "system", content: `generate a personalized cover letter for this job description: ${jobDescription}... 
             here is the description of the client: ${userInfo}... and here is the coverLetterRequirements: ${coverLetterRequirements}... 
             and here is the coverLetterFormat. do not follow the format exactly as it is only a general outline. try to be creative in your coverletter: ${coverLetterFormat}...
-            make sure to include keywords from the job description into the resume if they are aligned with the client's experience.`
+            make sure to include keywords from the job description into the resume if they are aligned with the client's experience. make the cover letter around 240-400 words. 
+            do not put too much "fluff" in the cover letter. make it concise and to the point. make sure that skills and experience are aligned with the job description while at the 
+            same time making sure that the applicant actually has the skills and experience.`
 
             }],
             //todo: try to limit amount of responses

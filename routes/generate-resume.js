@@ -60,11 +60,11 @@ module.exports = function (userData) {
 
                 Please update the resume HTML with the applicant's data, ensuring that:
                 1. All personal details like name, contact information, and email are correctly replaced, directly substituting the placeholders in the HTML.
-                2. The 'Profile' section reflects the applicant's professional summary or objective, aligning with the job description while staying true to the applicant's actual experience. It should be around 3-5 sentences.
+                2. The 'Profile' section reflects the applicant's professional summary or objective, aligning with the job description while staying true to the applicant's actual experience. It should be around 2-3 sentences and be direct and to the point.
                 3. The 'Skills' section accurately lists 3 of the most relevant applicant's skills as provided in the userInfo. The title of each of those 3 skills should be 2 words maximum. below those titles, there should be a short description of each skill, around 3-4 sentences.
                 4. The 'Technical' section should list the applicant's technical and soft skills and proficiencies. Update the list items to reflect the applicant's actual technical and soft skills, ensuring they align with the job description. do not include any skills that do not apply to the applicant. there should be a max of 6 skills listed.
                 5. The 'Experience' section is updated with the applicant's work history, including company names, roles, and dates, ensuring alignment with the job description. below each role, there should be a short description of the applicant's responsibilities and achievements, around 3-4 sentences.
-                6. The 'Education' section reflects the applicant's academic background and any certifications. Follow the format of the original template where the university name and location are an h2 and the dates and degree are h3s. For certifications, the name of the certification is in h2 and the date for it is in h3.
+                6. The 'Education' section reflects the applicant's academic background and any certifications. Follow the format of the original template where the university name and location are an h2 and the dates and degree are h3s. For certifications, the name of the certification is in h2 and the date for it is in h3. make sure to always put the location of the univeristy as well.
                 7. Any placeholder text not relevant to the applicant is removed or replaced with the applicant's actual information.
                 8. The structure and formatting of the resume remain unchanged.
                 
