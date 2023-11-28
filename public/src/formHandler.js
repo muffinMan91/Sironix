@@ -1,25 +1,50 @@
 
+// function to extract text from pdf
+async function extractTextFromPdf(pdfFile) {
+    const fileReader = new FileReader();
 
+    return new Promise((resolve, reject) => {
+        fileReader.onload = async (event) => {
+            const typedArray = new Uint8Array(event.target.result);
+
+            const loadingTask = pdfjsLib.getDocument(typedArray);
+            const pdf = await loadingTask.promise;
+
+            let textContent = '';
+
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                const text = await page.getTextContent();
+                textContent += text.items.map(item => item.str).join(' ');
+            }
+
+            resolve(textContent);
+        };
+
+        fileReader.onerror = (event) => {
+            reject(event.target.error);
+        };
+
+        fileReader.readAsArrayBuffer(pdfFile);
+    });
+}
+
+// function to handle form submission
 async function handleSubmit(event) {
     event.preventDefault();
-    const jobDescription = document.getElementById('job-description').value;
-    console.log("job description: ", jobDescription);
+
 
     try {
-        console.log("get generated materials");
-        // // request for cover letter and display
-        // const coverLetterResponse = await axios.get('/generate-coverLetter', { params: { jobDescription } });
-        // document.getElementById('generated-coverLetter').innerHTML = coverLetterResponse.data;
-        // request for resume html
-        const resumeResponse = await axios.get('/generate-resume', { params: { jobDescription } });
-        // Display a link to the generated resume
-        const resumeLink = document.createElement('a');
-        resumeLink.href = resumeResponse.data.url;
-        resumeLink.textContent = 'View Generated resume';
-        resumeLink.target = '_blank';  // Opens in a new tab/window
-        document.getElementById('generated-resume').appendChild(resumeLink);
-        //request for website html
-        const websiteResponse = await axios.get('/generate-website', { params: { jobDescription } });
+        const pdfFile = document.getElementById('resumeUpload').files[0];
+        const extractedText = await extractTextFromPdf(pdfFile);
+
+        console.log("text extracted", extractedText);
+
+        // Consider using a POST request
+        console.log("sending request");
+        const websiteResponse = await axios.post('/generate-website', {
+            resumeText: extractedText
+        });
         // Display a link to the generated website
         const websiteLink = document.createElement('a');
         websiteLink.href = websiteResponse.data.url;
@@ -36,13 +61,9 @@ async function handleSubmit(event) {
         console.error('Error:', error);
     }
 
-    try {
 
-    } catch (error) {
-        console.error('Error:', error);
-    }
 }
 
-document.getElementById('job-description-form').addEventListener('submit', handleSubmit);
+document.getElementById('submit-resume').addEventListener('submit', handleSubmit);
 
 

@@ -2,192 +2,75 @@
 <html>
 
 <head>
-    <title>Job Application Form</title>
+    <title>AI Application</title>
+    <!-- Bootstrap CSS for modern styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.js"></script>
+
+    <style>
+        body {
+            background-color: #121212;
+            /* Dark background */
+            color: #f8f9fa;
+            /* Light text */
+            font-family: 'Roboto', sans-serif;
+            /* Modern font */
+        }
+
+        .container {
+            padding-top: 40px;
+        }
+
+        .custom-form {
+            max-width: 400px;
+            /* Smaller form */
+            margin: auto;
+            background: #1e1e1e;
+            /* Darker form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .custom-submit-btn {
+            background-color: #007bff;
+            /* Bootstrap primary color */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .custom-submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Job Application Form</h1>
-    <form action="/submit-form" method="post">
-        <!-- Personal Information Section -->
-        <h2>Personal Information</h2>
-        <label for="full-name">Full Name:</label><br>
-        <input type="text" id="full-name" name="full-name" value="Hyun Martin"><br>
+    <div class="container">
+        <h1 class="text-center">Job Application Form</h1>
+        <form id="submit-resume" class="custom-form" enctype="multipart/form-data">
+            <!-- Resume Upload Field -->
+            <div class="mb-3">
+                <label for="resumeUpload" class="form-label">Upload Your Resume:</label>
+                <input type="file" class="form-control" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx"
+                    required>
+            </div>
 
-        <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="dob" value="1990-01-01"><br>
+            <!-- Submit Button -->
+            <button type="submit" class="custom-submit-btn">Submit Application</button>
+        </form>
+    </div>
 
-        <label for="email">Email Address:</label><br>
-        <input type="email" id="email" name="email" value="beyouspa@gmail.com"><br>
+    <div id="generated-website"></div>
 
-        <label for="phone">Phone Number:</label><br>
-        <input type="tel" id="phone" name="phone" value="2023217508"><br>
-
-        <label for="location">State/City:</label><br>
-        <input type="text" id="location" name="location" value="Virginia, Arlington"><br>
-
-        <label for="nationality">Nationality:</label><br>
-        <input type="text" id="nationality" name="nationality" value="Asian"><br>
-
-        <label for="languages">Languages:</label><br>
-        <textarea id="languages" name="languages">English (Native), Korean</textarea><br>
-
-        <!-- Professional Experience Section -->
-        <h2>Professional Experience</h2>
-        <label for="current-position">Current Position:</label><br>
-        <input type="text" id="current-position" name="current-position"
-            value="  Community development coordinator	 12/2022 to Current  Light of Truth Center, INC | Baltimore, MD  Visitation and networking activities with public officials (ex., Judges, lawyers, addiction counselors, political activists, and other public officials.) Ensure 3.1 facilities, IOP, Wheeler, and OP are fulfilled to maximum capacity. Fundraising activities for LTC jazz and rhythm blues and procuring agreed-upon entertainment and resident funding through the National Association of Recovery Residences versus participant funding. Procure corporate sponsorship for the organization for various activities agreed upon by both parties.  Develop a strategic plan, including goals and performance measures.  Work with LTC Director for succession planning activities. Facilitate weekly S.M.A.R.T. Recovery groups focused on various issues to help groups and individuals approach recovery through healthy living skills. Help clients approach substance use, mental health, experiencing homelessness, and other life concerns through individualized peer support. Maintain updated trauma-informed knowledge. Assist in the development of treatment plans to help enhance self-efficacy in clients. Work with a multidisciplinary healthcare team to provide comprehensive mental healthcare to patients. Maintain professionalism in emergencies, assisting staff members in potential overdoses, mental health crises, or medical emergencies, while maintaining a calm atmosphere for peers. Communicate with legal services providers, social services agencies, and local judicial systems regarding cases. Advocated with peers for social justice and assisted peers with new language through the system. Assist individuals with navigating health care systems, appointments, and classes."><br>
-
-        <label for="jobs">Previous Jobs (Company, Role, Dates):</label><br>
-        <textarea id="jobs" name="jobs">Maryland Health and aging coalition
-            Montgomery County, Maryland	since 2017 
-            Member of Leadership Program of Community Action Board.
-            Expert witness for Montgomery County Government on behalf of Tree House Advocacy Center.
-            Advocated bi-lingual counseling services during 2018 Budget Hearings.
-            Liaison between Montgomery County Government and business community to promotes advocacy for persons suffering from injustice.
-            Performed advocacy services the aging and disabled in accordance with Federal, State and county regulations.
-            Conducted programs and seminars to improve customer experience for the organization.
-            Participated in program and policy development with all levels of the organization.
-            Fostered collaborative partnerships between the organization and Montgomery County government representatives.
-            ....second job is this: licensed primary caregiving aide 	 from 11/17 to 5/22 
-            Virginia 
-            Helped with activities for an elderly patient with dementia and limited mobility.
-            Helped with activities of daily living for an elderly woman with limited mobility.
-            Supervised medication and prepared ethnic food.
-            Managed appointments and scheduled public transportation for wheelchair-bound individual.
-            Designed contracts, collected, and assessed fees, and booked venues for events.
-            Designed and maintained spreadsheets documenting vendor, facility, and guest information.
-            Created agendas and communication materials for team meetings.
-             ... third job is : 
-            
-            spa owner 	 01/2005 to 06/2018 
-            Be You Spa, Inc| Bethesda, MD
-            Oversaw a high-paced organization.
-            Purchased inventory of supplies and retail products, marketing, and public relations.
-            Recognized in several publications, such as: Washington Magazine, The Washington Post, Bethesda Magazine, Washington Post Magazine, and other local publications. 
-            Managed scheduling and resource allocation.
-            Demonstrated strong attention to detail and accuracy when providing information to employees, vendors, and business associates.
-            Assessed company security risks and developed actionable solutions.
-            Monitored employee safety.
-            Developed and implemented strategic planning activities for the company. 
-             ... fourth job is this: 
-            
-            On Our Own of Montgomery County Gaithersburg, MD  2018-2020
-            Volunteered as a participant in workshops, became a Board Member and was voted President of the Board because of issues with a peer run organization for providing a resource for people dealing with mental illness.
-            
-            Montgomery County Executive Candidate Forum March 2018
-            Worked with several organizations to host different MoCo County Executive Candidates Forums including at a high school and at a breakfast. Involved in many different advocacy groups.
-            
-            Unity of Fairfax 2003-2006
-            Coordinated speaker engagements, specifically David Hawkins and other authors of programs and workshops.
-            
-            National Association of Women Business Owners 2006-2008
-            Conference Chair of the Mid-Atlantic Conference with workshops and speakers and securing $50K in donations. 
-            
-            
-            </textarea><br>
-
-        <label for="responsibilities">Primary Responsibilities:</label><br>
-        <textarea id="responsibilities" name="responsibilities"></textarea><br>
-
-        <label for="achievements">Specific Achievements or Projects:</label><br>
-        <textarea id="achievements"
-            name="achievements">got a leadership award from the county executive from montgomery county from mark albreight in 2019. leadership award from leggett in 2014 from montgomery county. in 2006, i got woman entreprenurial awards and opened up my spa. </textarea><br>
-
-        <label for="skills">Skills Acquired:</label><br>
-        <textarea id="skills" name="skills"></textarea><br>
-
-        <!-- Education and Training Section -->
-        <h2>Education and Training</h2>
-        <label for="education">Degrees/Certifications:</label><br>
-        <textarea id="education" name="education">
-
-            Intentional Peer Support Certification 2023
-            Recovery Coach Academy Recovery Coach Certification 2020
-            Personal Caregiver Aide Certification 2017-220 Fairfax, VA
-            Leadership Institute of Community Action Board 2017-2018 Montgomery County, MD
-            Wellness Recovery Action Plan Certified Co-Facilitator 2018
-             
-            Train The Trainer, Warrior Training, Mastery  by Millionaire Mind Intensive 2015
-            
-            Indiana University Purdue University in Indianapolis 1986-1990 BA in Political Science
-            Dean’s List; President of Minority Student Business Group; Candidate for President of Student Body; student member of Search and Screen Committee for Dean of Student Affairs 1987-88
-            
-            Baltimore School of Massage 1993-1995 500 Hour Massage Therapist Program
-            
-            French Institute of Cosmetology 1998 500 Hour Esthetician Program
-            
-            </textarea><br>
-
-
-        <label for="additional-courses">Additional Courses/Training:</label><br>
-        <textarea id="additional-courses" name="additional-courses"></textarea><br>
-
-        <!-- Skills Section -->
-        <h2>Skills</h2>
-        <label for="other/additional-skills">Technical Skills:</label><br>
-        <textarea id="other/additional-skills" name="other/additional-skills">Wellness support
-            Receiving support
-            Skill-building support
-            Employee support
-            One-on-one support
-            
-            
-            Behavior support
-            Implementation support
-            Clinical personnel support
-            Staff development support 
-            Special needs support
-            
-            </textarea><br>
-
-        <!-- Achievements and Awards Section -->
-        <h2>Achievements and Awards</h2>
-        <label for="awards">Awards and Recognitions:</label><br>
-        <textarea id="awards" name="awards"></textarea><br>
-
-        <label for="projects">Projects or Initiatives Led:</label><br>
-        <textarea id="projects" name="projects"></textarea><br>
-
-        <!-- Career Goals Section -->
-        <h2>Career Goals</h2>
-        <label for="position-sought">Position Sought:</label><br>
-        <input type="text" id="position-sought" name="position-sought"
-            value="writing and public relations marketing"><br>
-
-        <label for="long-term-goals">Long-term Professional Aspirations:</label><br>
-        <textarea id="long-term-goals" name="long-term-goals">business owner</textarea><br>
-
-        <label for="industry-preferences">Industry/Sector Preferences:</label><br>
-        <input type="text" id="industry-preferences" name="industry-preferences"
-            value="working with democrats and working with social justice and non profits. and benifittin the community"><br>
-
-        <!-- Additional Experiences Section -->
-        <h2>Additional Experiences</h2>
-        <label for="volunteer">Volunteer Activities:</label><br>
-        <textarea id="volunteer" name="volunteer"></textarea><br>
-
-        <label for="hobbies">Hobbies/Interests:</label><br>
-        <textarea id="hobbies"
-            name="hobbies">painting, art, writing books, public speaking, public testimonies, advocating for services where people cant speak for themselves such as children and disabled people</textarea><br>
-
-        <!-- References Section -->
-        <h2>References</h2>
-        <label for="references">References Contact Details:</label><br>
-        <textarea id="references"
-            name="references">Jane Smith, former manager, jane.smith@example.com; Alex Johnson, colleague, alex.johnson@example.com</textarea><br>
-
-        <!-- LinkedIn and Resume/Cover Letter Section -->
-        <h2>LinkedIn & Current Resume/Cover Letter</h2>
-        <label for="linkedin">LinkedIn Profile:</label><br>
-        <input type="url" id="linkedin" name="linkedin" value="https://www.linkedin.com/in/Hyun-Martin/"><br>
-
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="Submit">
-        </div>
-    </form>
-    <!-- Bootstrap JS bundle (optional) -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/src/formHandler.js"></script>
 </body>
 
 </html>
