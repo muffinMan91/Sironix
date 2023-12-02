@@ -38,10 +38,7 @@ async function handleSubmit(event) {
         const pdfFile = document.getElementById('resumeUpload').files[0];
         const extractedText = await extractTextFromPdf(pdfFile);
 
-        console.log("text extracted", extractedText);
 
-        // Consider using a POST request
-        console.log("sending request");
         const websiteResponse = await axios.post('/generate-website', {
             resumeText: extractedText
         });
@@ -52,8 +49,6 @@ async function handleSubmit(event) {
         websiteLink.target = '_blank';  // Opens in a new tab/window
         document.getElementById('generated-website').appendChild(websiteLink);
 
-
-        console.log("responses recieved");
 
 
 
