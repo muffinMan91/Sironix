@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 
 const generateWebsiteRoute = require('./routes/generate-website.js');
+const imageUploadRoute = require('./routes/image-upload.js');
 
 require('dotenv').config();
 
@@ -24,6 +25,8 @@ app.use(express.static('public'));
 
 // route to handle the generate website
 app.use('/', generateWebsiteRoute);
+// route to handle image upload
+app.use('/', imageUploadRoute);
 
 
 // Start the server and store the server object

@@ -35,6 +35,14 @@ async function handleSubmit(event) {
 
 
     try {
+        //first upload the image
+        // const form = document.getElementById('submit-documents');
+        // const formData = new FormData(form);
+
+        // const imageResponse = await axios.post(`/upload-image`, formData);
+        // console.log("image response: ", imageResponse);
+
+
         const pdfFile = document.getElementById('resumeUpload').files[0];
         const extractedText = await extractTextFromPdf(pdfFile);
 
@@ -59,6 +67,6 @@ async function handleSubmit(event) {
 
 }
 
-document.getElementById('submit-resume').addEventListener('submit', handleSubmit);
+document.getElementById('submit-documents').addEventListener('submit', handleSubmit);
 
 

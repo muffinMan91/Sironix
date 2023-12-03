@@ -5,11 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const openai = require('../services/openaiClient');
 
+const router = express.Router();
+
 //read the html template as plain text and store it in websiteTemplate ... gpt-3.5-turbo
 let websiteTemplate = fs.readFileSync(path.join(__dirname, '..', 'public', 'userProfile.html'), 'utf8');
 
 
-const router = express.Router();
 
 router.post('/generate-website', async (req, res) => {
     const resumeText = req.body.resumeText;
