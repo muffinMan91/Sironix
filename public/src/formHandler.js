@@ -41,7 +41,7 @@ async function handleSubmit(event) {
 
         // const imageResponse = await axios.post(`/upload-image`, formData);
         // console.log("image response: ", imageResponse);
-
+        console.log("somethjing");
 
         const pdfFile = document.getElementById('resumeUpload').files[0];
         const extractedText = await extractTextFromPdf(pdfFile);
@@ -50,12 +50,19 @@ async function handleSubmit(event) {
         const websiteResponse = await axios.post('/generate-website', {
             resumeText: extractedText
         });
+
+
+        //get the link to the website by doing a get request to the server
+        const websiteLinkResponse = await axios.get('/get-link');
+        //get the link from the response
+        const websiteLink = websiteLinkResponse.data.link;
+
         // Display a link to the generated website
-        const websiteLink = document.createElement('a');
-        websiteLink.href = websiteResponse.data.url;
-        websiteLink.textContent = 'View Generated Website';
-        websiteLink.target = '_blank';  // Opens in a new tab/window
-        document.getElementById('generated-website').appendChild(websiteLink);
+        const linkTag = document.createElement('a');
+        linkTag.href = websiteLink;
+        linkTag.textContent = 'View Generated Website';
+        linkTag.target = '_blank';  // Opens in a new tab/window
+        document.getElementById('generated-website').appendChild(linkTag);
 
 
 

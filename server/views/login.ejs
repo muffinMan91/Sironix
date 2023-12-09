@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Add Roboto Foont -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        /* Updated color theme */
+        body {
+            background-color: #ffffff;
+            /* White */
+            color: #000000;
+            /* Black */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+            /* Blue */
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .navbar-item {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            /* Increase font size */
+            padding: 12px 24px;
+            /* Adjusted padding */
+        }
+
+        h1 {
+            color: #007BFF;
+            /* Blue */
+        }
+
+        .container {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .google-signin {
+            display: block;
+            margin: auto;
+        }
+
+        /* Ovals around navbar items */
+        .navbar-nav .nav-item .nav-link,
+        .navbar-nav .nav-item .navbar-brand {
+            border-radius: 25px;
+            /* Rounded corners */
+            padding: 10px 20px;
+            /* Padding to make it oval */
+            margin: 0 5px;
+            /* Margin between items */
+            transition: background-color 0.3s ease;
+            /* Smooth transition */
+        }
+
+        /* Change background on hover */
+        .navbar-nav .nav-item .nav-link:hover,
+        .navbar-nav .nav-item .navbar-brand:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Semi-transparent white */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center">
+        <h1>Login</h1>
+        <br>
+        <a href="/login/federated/google" class="google-signin">
+            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"
+                alt="Google Sign-In" />
+        </a>
+    </div>
+
+
+</body>
+
+</html>
