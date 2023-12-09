@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const openai = require('../services/openaiClient');
 const PersonalWebsite = require('../../models/PersonalWebsite.js');
+const wrapAsync = require('./routeErrors/wrapAsync');
+const AppError = require('./routeErrors/AppError');
 
 
 const router = express.Router();
@@ -14,7 +16,7 @@ let generatedWebsite = fs.readFileSync(path.join(__dirname, '..', '..', 'public'
 
 
 
-router.post('/generate-website', isLoggedIn, async (req, res) => {
+router.post('/generate-website', isLoggedIn, wrapAsync(async (req, res) => {
     const resumeText = req.body.resumeText;
 
 
@@ -590,7 +592,7 @@ router.post('/generate-website', isLoggedIn, async (req, res) => {
 
     //send the html to the client
     return res.send("success");
-});
+}));
 
 
 

@@ -35,28 +35,28 @@ async function handleSubmit(event) {
 
 
     try {
-        //first upload the image
-        // const form = document.getElementById('submit-documents');
-        // const formData = new FormData(form);
 
-        // const imageResponse = await axios.post(`/upload-image`, formData);
-        // console.log("image response: ", imageResponse);
-        console.log("somethjing");
 
+        //get the text from the pdf
         const pdfFile = document.getElementById('resumeUpload').files[0];
         const extractedText = await extractTextFromPdf(pdfFile);
 
-
+        //generate the website
         const websiteResponse = await axios.post('/generate-website', {
             resumeText: extractedText
         });
 
+        // get the image file to send to the server
+        const form = document.getElementById('submit-documents');
+        const formData = new FormData(form);
+        //upload the image to cloudinary
+        const imageResponse = await axios.post(`/upload-image`, formData);
+        // console.log("image response: ", imageResponse);
 
-        //get the link to the website by doing a get request to the server
+
+        //get the link to the website
         const websiteLinkResponse = await axios.get('/get-link');
-        //get the link from the response
         const websiteLink = websiteLinkResponse.data.link;
-
         // Display a link to the generated website
         const linkTag = document.createElement('a');
         linkTag.href = websiteLink;

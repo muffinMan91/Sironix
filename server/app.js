@@ -112,3 +112,17 @@ mongoose.connect(dbUrl)
         console.log('Error connecting to MongoDB:', err);
         process.exit(1); // Exit the process with failure code
     });
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+    // Check if error is an instance of AppError
+    if (err instanceof AppError) {
+        return res.status(err.status).json({ success: false, message: err.message });
+    }
+
+    // For other types of errors, you might want to log them or handle them differently
+    console.error('An error occurred:', err);
+
+    // Send a generic error response
+    res.status(500).json({ success: false, message: 'An unexpected error occurred' });
+});

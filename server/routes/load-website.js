@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const PersonalWebsite = require('../../models/PersonalWebsite.js');
-const { isLoggedIn } = require('../utils/middleware.js')
+const { isLoggedIn } = require('../utils/middleware.js');
+const wrapAsync = require('./routeErrors/wrapAsync');
+const AppError = require('./routeErrors/AppError');
 
 
 // get method for loading the personalized website for the user based on the unique path
-router.get('/website/:displayName-:uniqueId', async (req, res) => {
+router.get('/website/:displayName-:uniqueId', wrapAsync(async (req, res) => {
 
     const { displayName, uniqueId } = req.params;
     try {
@@ -21,12 +23,12 @@ router.get('/website/:displayName-:uniqueId', async (req, res) => {
         console.error(error);
         res.status(500).send('Server error');
     }
-});
+}));
 
 
 
 // get the specific link of the user 
-router.get('/get-link', isLoggedIn, async (req, res) => {
+router.get('/get-link', isLoggedIn, wrapAsync(async (req, res) => {
     if (!req.user || !req.user.id) {
         return res.status(401).send('User not authenticated');
     }
@@ -48,7 +50,7 @@ router.get('/get-link', isLoggedIn, async (req, res) => {
         console.error('Error fetching personalized website:', error);
         res.status(500).send('Server error');
     }
-});
+}));
 
 
 
