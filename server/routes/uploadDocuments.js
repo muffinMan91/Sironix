@@ -4,8 +4,8 @@ const multer = require('multer');
 const { storage } = require('../services/cloudinary/index.js');
 const PersonalWebsite = require('../../models/PersonalWebsite.js');
 const upload = multer({ storage });
-const wrapAsync = require('./routeErrors/wrapAsync');
-const AppError = require('./routeErrors/AppError');
+const wrapAsync = require('./routeErrors/wrapAsync.js');
+const AppError = require('./routeErrors/AppError.js');
 
 // Define multiple fields
 const multipleUpload = upload.fields([
@@ -13,7 +13,7 @@ const multipleUpload = upload.fields([
     { name: 'resume', maxCount: 1 }
 ]);
 
-router.post('/upload-image', multipleUpload, wrapAsync(async (req, res, next) => {
+router.post('/upload-documents', multipleUpload, wrapAsync(async (req, res, next) => {
     const file = req.files;
 
     // Error checks using AppError
@@ -32,6 +32,17 @@ router.post('/upload-image', multipleUpload, wrapAsync(async (req, res, next) =>
     websiteItem.imageURL = file.image[0].path;
     //save the resume url to the database
     websiteItem.resumeURL = file.resume[0].path;
+    await websiteItem.save();
+
+
+    //update the html content of the website
+    let htmlContent = websiteItem.htmlContent;
+    //replace the word IMAGELINK with the image url
+    htmlContent = htmlContent.replace("IMAGELINK", websiteItem.imageURL);
+    //replace the word RESUMELINK with the resume url
+    htmlContent = htmlContent.replace("RESUMELINK", websiteItem.resumeURL);
+    //update the html content in the database
+    websiteItem.htmlContent = htmlContent;
     await websiteItem.save();
 
 

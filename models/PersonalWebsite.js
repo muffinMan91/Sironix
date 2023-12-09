@@ -16,6 +16,11 @@ const personalWebsiteSchema = new Schema({
         type: String,
         // required: true
     },
+    //this is so to keep track of experiences to generate details of each one
+    websiteExperiences: {
+        type: String,
+        // required: true
+    },
     imageURL: {
         type: String,
         // required: true

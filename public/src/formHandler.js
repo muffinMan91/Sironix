@@ -41,17 +41,51 @@ async function handleSubmit(event) {
         const pdfFile = document.getElementById('resumeUpload').files[0];
         const extractedText = await extractTextFromPdf(pdfFile);
 
-        //generate the website
-        const websiteResponse = await axios.post('/generate-website', {
+        //generate the title of the website
+        const websiteTitleResponse = await axios.post('/generate-Title', {
             resumeText: extractedText
         });
+
+        //generate the subtitle of the website
+        const websiteSubtitleResponse = await axios.post('/generate-Subtitle', {
+            resumeText: extractedText
+        });
+        //generate the school summary of the website
+        const websiteSchoolSummaryResponse = await axios.post('/generate-SchoolSummary', {
+            resumeText: extractedText
+        });
+        //generate the school details of the website
+        const websiteSchoolDetailsResponse = await axios.post('/generate-SchoolDetails', {
+            resumeText: extractedText
+        });
+        //generate the experiences of the website
+        const websiteExperiencesResponse = await axios.post('/generate-Experiences', {
+            resumeText: extractedText
+        });
+        //generate the experience1 of the website
+        const websiteExperience1Response = await axios.post('/generate-Experience1', {
+            resumeText: extractedText
+        });
+        //generate the experience2 of the website
+        const websiteExperience2Response = await axios.post('/generate-Experience2', {
+            resumeText: extractedText
+        });
+        //generate the experience3 of the website
+        const websiteExperience3Response = await axios.post('/generate-Experience3', {
+            resumeText: extractedText
+        });
+        //generate the contact of the website
+        const websiteContactResponse = await axios.post('/generate-Contact', {
+            resumeText: extractedText
+        });
+
 
         // get the image file to send to the server
         const form = document.getElementById('submit-documents');
         const formData = new FormData(form);
-        //upload the image to cloudinary
-        const imageResponse = await axios.post(`/upload-image`, formData);
-        // console.log("image response: ", imageResponse);
+        //upload the image and the resume to cloudinary
+        const uploadResponse = await axios.post(`/upload-documents`, formData);
+        // console.log("upload response: ",uploadResponse);
 
 
         //get the link to the website
