@@ -91,7 +91,7 @@ router.post('/generate-subTitle', isLoggedIn, wrapAsync(async (req, res) => {
 
                 The one-liner should be formatted as an HTML paragraph (<p>) with id="text06" and class="style5". Example format: <p id="text06" class="style5">[Generated content here]</p>.
                 remember to cross reference the html you are generating and the applicant profile to make sure that the information is accurate.Only generate the html. 
-                Do not include any text/comments/recommendations/warnings before or after that is not html.
+                Do not include any text/comments/recommendations/warnings before or after that is not html. 
                `
 
         }],
@@ -156,7 +156,7 @@ router.post('/generate-schoolSummary', isLoggedIn, wrapAsync(async (req, res) =>
             </p> ...note that this is only an example and the content should be different. the degrees that the applicant is pursuing will most likely be different.
              the point of the example is to show how the length of the paragraph is around 3-4 sentences, and should relate to the resume given to you. follow the html format closely. 
              Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. make the paragraph very short and straight to the point. do not
-             make it longer than the xample i have given you.`
+             make it longer than the xample i have given you.=`
         }],
         //todo: try to limit amount of responses
         n: 1,
@@ -755,7 +755,8 @@ router.post('/generate-Contact', isLoggedIn, wrapAsync(async (req, res) => {
                                     </li>
                                 </ul> ... the phone number should be the one in the resume. the email should be the one in the resume. the linkedin should be the one in the resume.
                                   Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. you may a contact method if the applicant does not have one.
-                                  for example, if the applicant does not have a linkedin, then you may remove that html section. if the applicant does not have a phone number, then you may remove that html section.`
+                                  for example, if the applicant does not have a linkedin, then you may remove that html section. if the applicant does not have a phone number, then you may remove that html section.
+                                `
         }],
 
         //todo: try to limit amount of responses
