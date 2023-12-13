@@ -8,8 +8,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-// const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/sironix';
-const dbUrl = "mongodb+srv://sironixai:pakistan@sironix.rwh5das.mongodb.net/?retryWrites=true&w=majority";
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/sironix';
 
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
@@ -23,7 +22,6 @@ const imageUploadRoute = require('./routes/uploadDocuments.js');
 const googleAuthRoute = require('./routes/googleAuth.js');
 const loadWebsiteRoute = require('./routes/load-website.js');
 const session = require('express-session');
-require('dotenv').config();
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
 const AppError = require('./routes/routeErrors/AppError');
