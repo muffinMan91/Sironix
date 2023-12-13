@@ -8,7 +8,9 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/sironix';
+// const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/sironix';
+const dbUrl = "mongodb+srv://sironixai:pakistan@sironix.rwh5das.mongodb.net/?retryWrites=true&w=majority";
+
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const path = require('path');
