@@ -106,7 +106,7 @@ function requireHTTPS(req, res, next) {
 }
 
 //uncomment in production
-requireHTTPS();
+app.requireHTTPS();
 
 
 
