@@ -26,7 +26,7 @@ if (!process.env['GOOGLE_CLIENT_ID'] || !process.env['GOOGLE_CLIENT_SECRET']) {
 passport.use(new GoogleStrategy({
     clientID: process.env['GOOGLE_CLIENT_ID'],
     clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-    callbackURL: 'https://sironix-df637c0fca51.herokuapp.com/oauth2/redirect/google',
+    callbackURL: '/oauth2/redirect/google',
     scope: ['profile', 'email']
 },
     async function (issuer, profile, done) {
