@@ -35,7 +35,9 @@ function requireHTTPS(req, res, next) {
 }
 
 //uncomment in production
-app.use(requireHTTPS);
+// app.use(requireHTTPS);
+
+
 
 app.use(session({
     secret: 'keyboard cat',
@@ -83,17 +85,21 @@ passport.deserializeUser(async (data, done) => {
 });
 
 
-
+//to use in the ejs files if i need 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 
 
 app.get('/', (req, res) => {
     // Render the home page or redirect, etc. and pass the promo code
-    res.render('login');
+    res.render('home');
 });
 
-app.get('/home', isLoggedIn, (req, res) => {
+app.get('/home', (req, res) => {
     // Render the home page or redirect, etc. and pass the promo code
     res.render('home');
 });

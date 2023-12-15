@@ -63,15 +63,12 @@ router.get('/login/federated/google', passport.authenticate('google'));
 
 
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-    failureRedirect: '/login',
+    failureRedirect: '/home',
 }), (req, res) => {
     res.redirect('/home');
 });
 
 
-router.get('/login', (req, res) => {
-    res.render('login');
-})
 
 
 router.get('/logout', (req, res, next) => {
@@ -80,7 +77,7 @@ router.get('/logout', (req, res, next) => {
             if (err) {
                 return next(new AppError('Logout failed', 500));
             }
-            res.redirect('login');
+            res.redirect('/home');
         });
     } catch (err) {
         next(new AppError('An unexpected error occurred during logout', 500));
