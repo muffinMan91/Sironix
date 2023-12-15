@@ -2089,6 +2089,10 @@
                 transition: none !important;
                 filter: none !important;
             }
+
+            #generated-website-div {
+                font-size: 30px;
+            }
         </style>
     </noscript>
 </head>
@@ -2262,7 +2266,8 @@
                                                 style="font-size: 16px; padding: 12px 24px; border-radius: 25px; background-color: #007bff; color: white; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">Submit</button>
                                         </form>
                                         <br>
-                                        <div id="generated-website"></div>
+                                        <div id="generated-website-div"></a>
+                                        </div>
                                         <br>
                                     </div>
                                     <% } %>
@@ -2305,7 +2310,7 @@
 
     <script>// Select the form and the div element
         const form = document.getElementById('submit-documents');
-        const generatedWebsiteDiv = document.getElementById('generated-website');
+        const generatedWebsiteDiv = document.getElementById('generated-website-div');
 
         // Add an event listener to the form's submit event
         form.addEventListener('submit', function (event) {

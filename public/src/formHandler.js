@@ -46,38 +46,38 @@ async function handleSubmit(event) {
             resumeText: extractedText
         });
 
-        //generate the subtitle of the website
-        const websiteSubtitleResponse = await axios.post('/generate-Subtitle', {
-            resumeText: extractedText
-        });
-        //generate the school summary of the website
-        const websiteSchoolSummaryResponse = await axios.post('/generate-SchoolSummary', {
-            resumeText: extractedText
-        });
-        //generate the school details of the website
-        const websiteSchoolDetailsResponse = await axios.post('/generate-SchoolDetails', {
-            resumeText: extractedText
-        });
-        //generate the experiences of the website
-        const websiteExperiencesResponse = await axios.post('/generate-Experiences', {
-            resumeText: extractedText
-        });
-        //generate the experience1 of the website
-        const websiteExperience1Response = await axios.post('/generate-Experience1', {
-            resumeText: extractedText
-        });
-        //generate the experience2 of the website
-        const websiteExperience2Response = await axios.post('/generate-Experience2', {
-            resumeText: extractedText
-        });
-        //generate the experience3 of the website
-        const websiteExperience3Response = await axios.post('/generate-Experience3', {
-            resumeText: extractedText
-        });
-        //generate the contact of the website
-        const websiteContactResponse = await axios.post('/generate-Contact', {
-            resumeText: extractedText
-        });
+        // //generate the subtitle of the website
+        // const websiteSubtitleResponse = await axios.post('/generate-Subtitle', {
+        //     resumeText: extractedText
+        // });
+        // //generate the school summary of the website
+        // const websiteSchoolSummaryResponse = await axios.post('/generate-SchoolSummary', {
+        //     resumeText: extractedText
+        // });
+        // //generate the school details of the website
+        // const websiteSchoolDetailsResponse = await axios.post('/generate-SchoolDetails', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experiences of the website
+        // const websiteExperiencesResponse = await axios.post('/generate-Experiences', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience1 of the website
+        // const websiteExperience1Response = await axios.post('/generate-Experience1', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience2 of the website
+        // const websiteExperience2Response = await axios.post('/generate-Experience2', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience3 of the website
+        // const websiteExperience3Response = await axios.post('/generate-Experience3', {
+        //     resumeText: extractedText
+        // });
+        // //generate the contact of the website
+        // const websiteContactResponse = await axios.post('/generate-Contact', {
+        //     resumeText: extractedText
+        // });
 
 
         // get the image file to send to the server
@@ -88,15 +88,20 @@ async function handleSubmit(event) {
         // console.log("upload response: ",uploadResponse);
 
 
+        console.log("generating link");
         //get the link to the website
         const websiteLinkResponse = await axios.get('/get-link');
         const websiteLink = websiteLinkResponse.data.link;
         // Display a link to the generated website
         const linkTag = document.createElement('a');
         linkTag.href = websiteLink;
-        linkTag.textContent = 'View Generated Website';
+        //concatenate the link to the text content
+
+        linkTag.textContent = websiteLink;
         linkTag.target = '_blank';  // Opens in a new tab/window
-        document.getElementById('generated-website').appendChild(linkTag);
+        const linkContainer = document.getElementById('generated-website-div');
+        linkContainer.innerHTML = 'here is the permenant link to your website: <br> <br>';
+        linkContainer.appendChild(linkTag);
 
 
 
