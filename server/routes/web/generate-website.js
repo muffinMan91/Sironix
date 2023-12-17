@@ -1,18 +1,18 @@
 // In generateWebsite.js
 const express = require('express');
-const { isLoggedIn } = require('../utils/middleware.js')
+const { isLoggedIn } = require('../../utils/middleware.js')
 const fs = require('fs');
 const path = require('path');
-const openai = require('../services/openaiClient');
-const PersonalWebsite = require('../../models/PersonalWebsite.js');
-const wrapAsync = require('./routeErrors/wrapAsync.js');
-const AppError = require('./routeErrors/AppError.js');
+const openai = require('../../services/openaiClient.js');
+const PersonalWebsite = require('../../../models/PersonalWebsite.js');
+const wrapAsync = require('../routeErrors/wrapAsync.js');
+const AppError = require('../routeErrors/AppError.js');
 
 
 const router = express.Router();
 
 //read the html template as plain text and store it in generatedWebsite 
-let generatedWebsite = fs.readFileSync(path.join(__dirname, '..', '..', 'public', 'userProfile.html'), 'utf8');
+let generatedWebsite = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'public', 'userProfile.html'), 'utf8');
 
 
 

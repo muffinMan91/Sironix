@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const PersonalWebsite = require('../../models/PersonalWebsite.js');
-const { isLoggedIn } = require('../utils/middleware.js');
-const wrapAsync = require('./routeErrors/wrapAsync');
-const AppError = require('./routeErrors/AppError');
+const PersonalWebsite = require('../../../models/PersonalWebsite.js');
+const { isLoggedIn } = require('../../utils/middleware.js');
+const wrapAsync = require('../routeErrors/wrapAsync');
+const AppError = require('../routeErrors/AppError');
 
 
 // get method for loading the personalized website for the user based on the unique path

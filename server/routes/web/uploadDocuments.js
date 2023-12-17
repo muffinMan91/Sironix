@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { storage } = require('../services/cloudinary/index.js');
-const PersonalWebsite = require('../../models/PersonalWebsite.js');
+const { storage } = require('../../services/cloudinary/index.js');
+const PersonalWebsite = require('../../../models/PersonalWebsite.js');
 const upload = multer({ storage });
-const wrapAsync = require('./routeErrors/wrapAsync.js');
-const AppError = require('./routeErrors/AppError.js');
+const wrapAsync = require('../routeErrors/wrapAsync.js');
+const AppError = require('../routeErrors/AppError.js');
 
 // Define multiple fields
 const multipleUpload = upload.fields([

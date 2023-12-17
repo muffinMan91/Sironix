@@ -17,10 +17,10 @@ const passport = require('passport');
 const PORT = process.env.PORT || 2999;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));
-const generateWebsiteRoute = require('./routes/generate-website.js');
-const imageUploadRoute = require('./routes/uploadDocuments.js');
-const googleAuthRoute = require('./routes/googleAuth.js');
-const loadWebsiteRoute = require('./routes/load-website.js');
+const generateWebsiteRoute = require('./routes/web/generate-website.js');
+const imageUploadRoute = require('./routes/web/uploadDocuments.js');
+const googleAuthRoute = require('./routes/web/googleAuth.js');
+const loadWebsiteRoute = require('./routes/web/load-website.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');

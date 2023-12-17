@@ -74,6 +74,8 @@ async function handleSubmit(event) {
         const websiteExperience3Response = await axios.post('/generate-Experience3', {
             resumeText: extractedText
         });
+
+
         //generate the contact of the website
         const websiteContactResponse = await axios.post('/generate-Contact', {
             resumeText: extractedText

@@ -6,9 +6,9 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 var GoogleStrategy = require('passport-google-oidc');
-const User = require('../../models/User.js');
-const wrapAsync = require('./routeErrors/wrapAsync');
-const AppError = require('./routeErrors/AppError');
+const User = require('../../../models/User.js');
+const wrapAsync = require('../routeErrors/wrapAsync');
+const AppError = require('../routeErrors/AppError');
 
 
 
