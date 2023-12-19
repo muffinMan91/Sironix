@@ -52,12 +52,11 @@ router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
 
 
     if (personalWebsiteExists) {
-        //get the html content of the website
-        let htmlContent = personalWebsiteExists.htmlContent;
-        htmlContent = generatedWebsite.replace('<!-- title -->', websiteTitle);
+        //even if it exists, start the website from scratch. generatedWebsite is the original html template
+        generatedWebsite = generatedWebsite.replace('<!-- title -->', websiteTitle);
         //if it already exists, then update the htmlContent and imageURL
         await PersonalWebsite.updateOne({ userID: req.user.id }, {
-            htmlContent: htmlContent
+            htmlContent: generatedWebsite
         });
     } else {
         //replace the generatedWebsite's title with the websiteTitle
