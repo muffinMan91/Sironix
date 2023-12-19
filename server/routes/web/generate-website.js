@@ -48,6 +48,7 @@ router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
 
     //if the req.user.id is already in the PersonalWebsite collection, then update the htmlContent and imageURL
     const personalWebsiteExists = await PersonalWebsite.findOne({ userID: req.user.id });
+    console.log('personalWebsiteExists: ', personalWebsiteExists);
 
 
     if (personalWebsiteExists) {

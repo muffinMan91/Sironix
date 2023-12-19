@@ -50,30 +50,30 @@ async function handleSubmit(event) {
         const websiteSubtitleResponse = await axios.post('/generate-Subtitle', {
             resumeText: extractedText
         });
-        //generate the school summary of the website
-        const websiteSchoolSummaryResponse = await axios.post('/generate-SchoolSummary', {
-            resumeText: extractedText
-        });
-        //generate the school details of the website
-        const websiteSchoolDetailsResponse = await axios.post('/generate-SchoolDetails', {
-            resumeText: extractedText
-        });
-        //generate the experiences of the website
-        const websiteExperiencesResponse = await axios.post('/generate-Experiences', {
-            resumeText: extractedText
-        });
-        //generate the experience1 of the website
-        const websiteExperience1Response = await axios.post('/generate-Experience1', {
-            resumeText: extractedText
-        });
-        //generate the experience2 of the website
-        const websiteExperience2Response = await axios.post('/generate-Experience2', {
-            resumeText: extractedText
-        });
-        //generate the experience3 of the website
-        const websiteExperience3Response = await axios.post('/generate-Experience3', {
-            resumeText: extractedText
-        });
+        // //generate the school summary of the website
+        // const websiteSchoolSummaryResponse = await axios.post('/generate-SchoolSummary', {
+        //     resumeText: extractedText
+        // });
+        // //generate the school details of the website
+        // const websiteSchoolDetailsResponse = await axios.post('/generate-SchoolDetails', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experiences of the website
+        // const websiteExperiencesResponse = await axios.post('/generate-Experiences', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience1 of the website
+        // const websiteExperience1Response = await axios.post('/generate-Experience1', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience2 of the website
+        // const websiteExperience2Response = await axios.post('/generate-Experience2', {
+        //     resumeText: extractedText
+        // });
+        // //generate the experience3 of the website
+        // const websiteExperience3Response = await axios.post('/generate-Experience3', {
+        //     resumeText: extractedText
+        // });
 
 
         //generate the contact of the website
