@@ -121,7 +121,7 @@ async function convertHtmlToPdf(html) {
 }
 
 // API Route
-router.post('/createResume', async (req, res) => {
+router.post('/createResumeAPI', async (req, res) => {
     try {
 
         const userData = req.body;
