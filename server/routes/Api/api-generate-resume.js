@@ -61,6 +61,21 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- experience3Dates -->', data.experience3Dates);
     resumeHtml = resumeHtml.replace('<!-- experience3Description -->', data.experience3Description);
 
+    // Education and Certifications
+    resumeHtml = resumeHtml.replace('<!-- universityName -->', data.universityName);
+    resumeHtml = resumeHtml.replace('<!-- universityCity -->', data.universityCity);
+    resumeHtml = resumeHtml.replace('<!-- universityState -->', data.universityState);
+    resumeHtml = resumeHtml.replace('<!-- degreeType -->', data.degreeType);
+    resumeHtml = resumeHtml.replace('<!-- degreeFieldOfStudy -->', data.degreeFieldOfStudy);
+    resumeHtml = resumeHtml.replace('<!-- gpa -->', data.gpa);
+    resumeHtml = resumeHtml.replace('<!-- certification1Name -->', data.certification1Name);
+    resumeHtml = resumeHtml.replace('<!-- certification1Origin -->', data.certification1Origin);
+    resumeHtml = resumeHtml.replace('<!-- certification1Date -->', data.certification1Date);
+    resumeHtml = resumeHtml.replace('<!-- certification2Name -->', data.certification2Name);
+    resumeHtml = resumeHtml.replace('<!-- certification2Origin -->', data.certification2Origin);
+    resumeHtml = resumeHtml.replace('<!-- certification2Date -->', data.certification2Date);
+
+
     return resumeHtml;
 }
 
