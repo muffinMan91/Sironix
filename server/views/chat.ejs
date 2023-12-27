@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #333333;
+        /* Updated to dark grey */
+    }
+
+    .chatbox {
+        width: 500px;
+        /* increased width */
+        height: 600px;
+        /* increased height */
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .chatlogs {
+        padding: 10px;
+        height: 540px;
+        /* adjusted height to account for bigger chat box */
+        overflow-y: auto;
+        background: #e5e5e5;
+    }
+
+
+    .chat-form {
+        display: flex;
+        padding: 10px;
+    }
+
+    .chat-form textarea {
+        width: 80%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        resize: none;
+    }
+
+    .chat-form button {
+        width: 20%;
+        border: none;
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    /* Add styles for user and assistant messages */
+    .user,
+    .assistant {
+        margin-bottom: 15px;
+        /* space between messages */
+        padding: 5px;
+        /* optional: adds padding inside each message */
+        border-radius: 5px;
+        /* optional: rounds the corners of each message */
+        /* Add more styling here if needed */
+    }
+</style>
+
+<body>
+    <div class="chatbox">
+        <div class="chatlogs">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <div class="chat-form">
+            <textarea id="chat-input" placeholder="Type a message..."></textarea>
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    // Clear the conversation history from local storage when the chat page is loaded
+    window.onload = function () {
+        localStorage.removeItem('chatHistory');
+    };
+
+    // Add click event listener to the send button
+    document.getElementById('send-btn').addEventListener('click', function () {
+        // Get the user's input message
+        let input = document.getElementById('chat-input');
+        let userMessage = input.value.trim();
+
+        // Check if the user message is not empty
+        if (userMessage) {
+            // Display the user message in the chat log
+            addMessageToChat("user", userMessage);
+            // Update the conversation history in local storage
+            updateHistory("user", userMessage);
+            // Clear the input field after sending the message
+            input.value = '';
+            // Fetch the reply from the server
+            fetchReply();
+        }
+    });
+
+    // Function to add a message to the chat log
+    function addMessageToChat(sender, message) {
+        // Get the chat log container
+        let chatlogs = document.querySelector('.chatlogs');
+        // Create a new div element for the message
+        let newMessage = document.createElement('div');
+        // Set the class for styling based on the sender
+        newMessage.className = sender;
+        // Set the text content of the message
+        newMessage.textContent = message;
+        // Append the new message to the chat log
+        chatlogs.appendChild(newMessage);
+        // Auto-scroll to the latest message
+        chatlogs.scrollTop = chatlogs.scrollHeight;
+    }
+
+    // Async function to fetch the reply from the server
+    async function fetchReply() {
+        try {
+            // Retrieve the existing history from local storage
+            let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
+            // Send a POST request to the server with the user message and conversation history
+            let response = await fetch('/reply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ conversationHistory: history })
+            });
+
+            // Parse the JSON response
+            let data = await response.json();
+
+            // Display the bot's reply in the chat log
+            addMessageToChat("assistant", data.reply);
+
+            // Update the conversation history in local storage
+            updateHistory("assistant", data.reply);
+        } catch (error) {
+            // Handle any errors by logging and showing an error message
+            console.error('Error fetching reply:', error);
+            addMessageToChat("assistant", "Error getting a reply.");
+        }
+    }
+
+    // Function to update the conversation history in local storage
+    function updateHistory(sender, message) {
+        // Retrieve the existing history from local storage, or initialize a new array if none exists
+        let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        // Add the new message to the history
+        history.push({ role: sender, content: message });
+        // Save the updated history back to local storage
+        localStorage.setItem('chatHistory', JSON.stringify(history));
+    }
+</script>
+
+
+
+</html>

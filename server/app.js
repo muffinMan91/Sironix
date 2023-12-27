@@ -22,6 +22,7 @@ const imageUploadRoute = require('./routes/web/uploadDocuments.js');
 const googleAuthRoute = require('./routes/web/googleAuth.js');
 const loadWebsiteRoute = require('./routes/web/load-website.js');
 const apiGenerateWebsite = require('./routes/Api/api-generate-resume.js');
+const chatRoute = require('./routes/web/chat.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
@@ -36,7 +37,7 @@ function requireHTTPS(req, res, next) {
 }
 
 //uncomment in production
-app.use(requireHTTPS);
+// app.use(requireHTTPS);
 
 
 
@@ -117,6 +118,8 @@ app.use('/', googleAuthRoute);
 app.use('/', loadWebsiteRoute);
 // route to handle api generate website
 app.use('/', apiGenerateWebsite);
+// route to hand chatbot
+app.use('/', chatRoute);
 
 
 
