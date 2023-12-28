@@ -8,8 +8,8 @@ const wrapAsync = require('../routeErrors/wrapAsync.js');
 const AppError = require('../routeErrors/AppError.js');
 const fs = require('fs');
 const path = require('path');
-const axios = require('axios'); // Ensure you have axios installed
-const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js'); // Import the new function
+const axios = require('axios');
+const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
 
 // API Route
 router.post('/createResumeAPI', async (req, res) => {

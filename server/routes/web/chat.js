@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const OpenAI = require('openai');
 const bodyParser = require('body-parser');
-
+const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
 const app = express();
 app.use(bodyParser.json());
 
@@ -11,6 +11,8 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 // Define a function to create a resume with the user-provided data
 async function createResume(userData) {
     console.log("generating resume with these contents: ", userData);
+    const pdfUrl = await createResumeFromData(userData);
+    return pdfUrl;
 }
 
 // Route to render the chat page
@@ -25,27 +27,25 @@ router.post('/reply', async (req, res) => {
     // Insert a system message under certain conditions
     const systemMessage = {
         role: "system",
-        content: `You are a Resume Builder, an interactive tool designed to meticulously collect comprehensive information necessary for creating a resume.
-         It emphasizes gathering details about the user's job experiences, skills, tools they are familiar with, major projects, and key achievements. This thorough 
-         approach ensures all aspects of the resume are covered, including smaller projects or roles.
+        content: `
 
-        The process typically takes about 10 minutes per user and is crucial for crafting a resume that accurately reflects the individual's professional journey. 
-        Once the information is collected, the Resume Builder autonomously generates a profile summary. This summary is a concise yet compelling narrative that highlights the user's 
-        primary strengths and experiences.
-        
-        To ensure a complete profile, users are guided to provide information in various sections of the resume, such as the "experiences", "univeristy" and "certifications"
-         sections.  The tool is designed to automatically fill in all technical and soft skills fields based on the user's responses. 
+        you are a freindly interrogating resume builder tool. you are trying to gather as much information as you can from the user about their professional background.
+        the only things you are allowed to ask the user directly are their name, email, phone number, professional experiences such as jobs, personal projects, volunteering, or any other experiences. you can 
+        also ask for their education and certifications. you are not allowed to ask the user to provide a profile description that will be used in the createResume function call. neither are you allowed to ask the user to 
+        list their skills. this is becasue you must derive the skills and profile description of the user from the information they provide about their professional career, education and certifications.
          You can add any number of technical and soft skills, but the total should be nine, derived from the context and information about the user provided during the interaction.
         
-        The Resume Builder methodically asks about each job experience individually, prompting follow-up questions to gather more details about the experiences, projects,
+        The Resume Builder methodically asks about each job experience individually, you must prompt follow-up questions to gather more details about the experiences, projects,
          achievements, skills developed, role, and other relevant aspects. The goal is to extract as much information as possible from the user about their professional background. 
-        
-        Towards the end of the process, if any information is missing, such as the user's name, email, or details about personal projects or educational background, the 
-        tool will prompt the user to provide this information. If the user omits any details in their responses, the tool will follow up to ensure all necessary information is captured.
-        
-        The tool requires at least three significant experiences from the user. These can be jobs or personal projects or volunteering, and the Resume Builder will select the three most 
-        relevant ones to include in the resume.`
+        `
     };
+
+
+    // Towards the end of the process, if any information is missing, such as the user's name, email, or details about personal projects or educational background, the 
+    // tool will prompt the user to provide this information. If the user omits any details in their responses, the tool will follow up to ensure all necessary information is captured.
+
+    // The tool requires at least three significant experiences from the user. These can be jobs or personal projects or volunteering, and the Resume Builder will select the three most 
+    // relevant ones to include in the resume.
 
     // Example condition to add the system message: if the conversation is just starting
     if (conversationHistory.length === 1) {
@@ -132,9 +132,10 @@ router.post('/reply', async (req, res) => {
             const functionCallName = response.choices[0].message.function_call.name;
             if (functionCallName === "createResume") {
                 const completionArguments = JSON.parse(response.choices[0].message.function_call.arguments);
-                const resumeData = await createResume(completionArguments);
+                const resumeLink = await createResume(completionArguments);
+                console.log("Resume data:", resumeLink)
                 // Handle the resume data here
-                res.json({ reply: "Resume created successfully", resumeData });
+                res.json({ reply: "Resume created successfully", resumeLink });
             }
         } else {
             const assistantMessage = response.choices[0].message.content;
