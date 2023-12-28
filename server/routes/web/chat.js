@@ -10,8 +10,52 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // Define a function to create a resume with the user-provided data
 async function createResume(userData) {
-    console.log("generating resume with these contents: ", userData);
-    const pdfUrl = await createResumeFromData(userData);
+
+    let userDataString = JSON.stringify(userData);
+
+    const completion = await openai.chat.completions.create({
+        messages: [
+            {
+                role: "system",
+                content: `You are going to be given a strigified json object containing the professional experience of an applicant. You are going to generate a few
+            sections for a resume, which include the profile description, 3 of the main skills of the applicant, and 9 technical or soft skills of the applicant, but just make
+            sure that they add up to 9. Each technical or soft skill should be a maximum of 2 words long.`,
+            },
+            {
+                role: "user", content: `here is the stringified json containing information about the applicant: ${userDataString} ... taking that information about the applicant,
+          please fill in this json:    "profileDescription": { "type": "string" },
+          "skill1": { "type": "string" },
+          "skill1Description": { "type": "string" },
+          "skill2": { "type": "string" },
+          "skill2Description": { "type": "string" },
+          "skill3": { "type": "string" },
+          "skill3Description": { "type": "string" },
+          "TechOrSoftSkill1": { "type": "string" },
+          "TechOrSoftSkill2": { "type": "string" },
+          "TechOrSoftSkill3": { "type": "string" },
+          "TechOrSoftSkill4": { "type": "string" },
+          "TechOrSoftSkill5": { "type": "string" },
+          "TechOrSoftSkill6": { "type": "string" },
+          "TechOrSoftSkill7": { "type": "string" },
+          "TechOrSoftSkill8": { "type": "string" },
+          "TechOrSoftSkill9": { "type": "string" },
+      ` },
+        ],
+        model: "gpt-4-1106-preview",
+        response_format: { type: "json_object" },
+    });
+    let secondHalfUserData = completion.choices[0].message.content;
+    console.log("second half user data", secondHalfUserData);
+
+    //merge the userData and the secondHalfUserData into one json object
+    let secondHalfUserDataObject = JSON.parse(secondHalfUserData);
+
+    let mergedUserData = { ...userData, ...secondHalfUserDataObject };
+
+    console.log("merged user data", mergedUserData);
+
+    //create the resume from the mergedUserData
+    const pdfUrl = await createResumeFromData(mergedUserData);
     return pdfUrl;
 }
 
@@ -31,23 +75,16 @@ router.post('/reply', async (req, res) => {
 
         you are a freindly interrogating resume builder tool. you are trying to gather as much information as you can from the user about their professional background.
         the only things you are allowed to ask the user directly are their name, email, phone number, professional experiences such as jobs, personal projects, volunteering, or any other experiences. you can 
-        also ask for their education and certifications. you are not allowed to ask the user to provide a profile description that will be used in the createResume function call. neither are you allowed to ask the user to 
-        list their skills. this is becasue you must derive the skills and profile description of the user from the information they provide about their professional career, education and certifications.
-         You can add any number of technical and soft skills, but the total should be nine, derived from the context and information about the user provided during the interaction.
+        also ask for their education and certifications. 
         
-        The Resume Builder methodically asks about each job experience individually, you must prompt follow-up questions to gather more details about the experiences, projects,
-         achievements, skills developed, role, and other relevant aspects. The goal is to extract as much information as possible from the user about their professional background. 
+        The Resume Builder methodically asks about each job experience individually. After the user responds to your questions, you must prompt follow-up questions to gather more details about
+         the experiences, projects,
+         achievements, skills developed, role, and other relevant aspects. The goal is to extract as much information as possible from the user about their professional background. You must ask at least a single
+         follow up questions for each of the user's responses.
         `
     };
 
 
-    // Towards the end of the process, if any information is missing, such as the user's name, email, or details about personal projects or educational background, the 
-    // tool will prompt the user to provide this information. If the user omits any details in their responses, the tool will follow up to ensure all necessary information is captured.
-
-    // The tool requires at least three significant experiences from the user. These can be jobs or personal projects or volunteering, and the Resume Builder will select the three most 
-    // relevant ones to include in the resume.
-
-    // Example condition to add the system message: if the conversation is just starting
     if (conversationHistory.length === 1) {
         conversationHistory.push(systemMessage);
     }
@@ -59,7 +96,7 @@ router.post('/reply', async (req, res) => {
             "functions": [
                 {
                     "name": "createResume",
-                    "description": "Create a resume from user-provided data",
+                    "description": "generate pdf link to a resume generated from user-provided data",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -67,34 +104,30 @@ router.post('/reply', async (req, res) => {
                             "title": { "type": "string" },
                             "email": { "type": "string" },
                             "phone": { "type": "string" },
-                            "profileDescription": { "type": "string" },
-                            "skill1": { "type": "string" },
-                            "skill1Description": { "type": "string" },
-                            "skill2": { "type": "string" },
-                            "skill2Description": { "type": "string" },
-                            "skill3": { "type": "string" },
-                            "skill3Description": { "type": "string" },
-                            "TechOrSoftSkill1": { "type": "string" },
-                            "TechOrSoftSkill2": { "type": "string" },
-                            "TechOrSoftSkill3": { "type": "string" },
-                            "TechOrSoftSkill4": { "type": "string" },
-                            "TechOrSoftSkill5": { "type": "string" },
-                            "TechOrSoftSkill6": { "type": "string" },
-                            "TechOrSoftSkill7": { "type": "string" },
-                            "TechOrSoftSkill8": { "type": "string" },
-                            "TechOrSoftSkill9": { "type": "string" },
                             "experience1Company": { "type": "string" },
                             "experience1Role": { "type": "string" },
                             "experience1Dates": { "type": "string" },
-                            "experience1Description": { "type": "string" },
+                            "experience1Description": {
+                                "type": "string", "description": `the details the user gives you about their first experience. you must ask atleast 2 follow up questions to extract 
+                            more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
+                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            },
                             "experience2Company": { "type": "string" },
                             "experience2Role": { "type": "string" },
                             "experience2Dates": { "type": "string" },
-                            "experience2Description": { "type": "string" },
+                            "experience2Description": {
+                                "type": "string", "description": `the details the user gives you about their second experience. you must ask atleast 2 follow up questions to extract 
+                            more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
+                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            },
                             "experience3Company": { "type": "string" },
                             "experience3Role": { "type": "string" },
                             "experience3Dates": { "type": "string" },
-                            "experience3Description": { "type": "string" },
+                            "experience3Description": {
+                                "type": "string", "description": `the details the user gives you about their third experience. you must ask atleast 2 follow up questions to extract 
+                            more details about the experience such as , projects worked on, achievements, skills developed, role, and other follow up details you would like to ask. 
+                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            },
                             "universityName": { "type": "string" },
                             "universityCity": { "type": "string" },
                             "universityState": { "type": "string" },
@@ -109,11 +142,7 @@ router.post('/reply', async (req, res) => {
                             "certification2Date": { "type": "string" }
                         },
                         "required": [
-                            "fullName", "title", "email", "phone", "profileDescription",
-                            "skill1", "skill1Description", "skill2", "skill2Description",
-                            "skill3", "skill3Description", "TechSoft1", "TechSoft2", "TechSoft3",
-                            "TechSoft4", "TechSoft5", "TechSoft6", "TechSoft7", "TechSoft8",
-                            "TechSoft9", "experience1Company", "experience1Role", "experience1Dates",
+                            "fullName", "title", "email", "phone", "experience1Company", "experience1Role", "experience1Dates",
                             "experience1Description", "experience2Company", "experience2Role",
                             "experience2Dates", "experience2Description", "experience3Company",
                             "experience3Role", "experience3Dates", "experience3Description",
