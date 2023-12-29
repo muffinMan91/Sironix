@@ -18,7 +18,7 @@ async function createResume(userData) {
             {
                 role: "system",
                 content: `You are going to be given a strigified json object containing the professional experience of an applicant. You are going to generate a few
-            sections for a resume, which include the profile description, 3 of the main skills of the applicant, and 9 technical or soft skills of the applicant, but just make
+            sections for a resume, which include the profile description, 3 of the most significant/relavent skills of the applicant, and 9 technical or soft skills of the applicant, but just make
             sure that they add up to 9. Each technical or soft skill should be a maximum of 2 words long.`,
             },
             {
@@ -108,25 +108,28 @@ router.post('/reply', async (req, res) => {
                             "experience1Role": { "type": "string" },
                             "experience1Dates": { "type": "string" },
                             "experience1Description": {
-                                "type": "string", "description": `the details the user gives you about their first experience. you must ask atleast 2 follow up questions to extract 
+                                "type": "string", "description": `the details the user gives you about their first experience. you must ask the applicant follow up questions at least twice to extract 
                             more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
-                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
+                            you create must be atleast 4 sentences long.`,
                             },
                             "experience2Company": { "type": "string" },
                             "experience2Role": { "type": "string" },
                             "experience2Dates": { "type": "string" },
                             "experience2Description": {
-                                "type": "string", "description": `the details the user gives you about their second experience. you must ask atleast 2 follow up questions to extract 
+                                "type": "string", "description": `the details the user gives you about their second experience. you must ask the applicant follow up questions at least twice to extract 
                             more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
-                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
+                            you create must be atleast 4 sentences long.`,
                             },
                             "experience3Company": { "type": "string" },
                             "experience3Role": { "type": "string" },
                             "experience3Dates": { "type": "string" },
                             "experience3Description": {
-                                "type": "string", "description": `the details the user gives you about their third experience. you must ask atleast 2 follow up questions to extract 
+                                "type": "string", "description": `the details the user gives you about their third experience. you must ask the applicant follow up questions at least twice to extract 
                             more details about the experience such as , projects worked on, achievements, skills developed, role, and other follow up details you would like to ask. 
-                            The goal is to extract as much information as possible from the user about their professional background. This must be atleast 4 sentences long.`,
+                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
+                            you create must be atleast 4 sentences long.`,
                             },
                             "universityName": { "type": "string" },
                             "universityCity": { "type": "string" },
