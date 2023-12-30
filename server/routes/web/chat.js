@@ -8,6 +8,13 @@ app.use(bodyParser.json());
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
+
+//route to get the chat page
+router.get('/chat', (req, res) => {
+    res.render('chat');
+});
+
+
 // Define a function to create a resume with the user-provided data
 async function createResume(userData) {
 
@@ -58,6 +65,8 @@ async function createResume(userData) {
     const pdfUrl = await createResumeFromData(mergedUserData);
     return pdfUrl;
 }
+
+
 
 
 // Route to handle chat messages and get responses from OpenAI

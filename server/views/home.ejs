@@ -560,6 +560,7 @@
             margin-top: 1rem;
         }
 
+        a.style1,
         h1.style1,
         h2.style1,
         h3.style1,
@@ -2174,14 +2175,14 @@
             <% if (!currentUser) { %>
 
                 <!-- Login Button  -->
-                <a href="/login/federated/google"
-                    style="background-color: white; color: black; border: 2px solid black; padding: 5px 10px; font-size: 25px; border-radius: 5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; display: inline-block;">
-                    Login
+                <a href="/login/federated/google" class="style1" style="padding-right: 20px;">Login</a>
+
+                <a href="/login/federated/google" class="style1">Sign Up</a>
+
                 </a>
                 <% } else { %>
                     <!-- Link Styled as Button -->
-                    <a href="/logout"
-                        style="background-color: white; color: black; border: 2px solid black; padding: 5px 10px; font-size: 25px; border-radius: 5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; display: inline-block;">
+                    <a href="/logout" class="style1">
                         Logout
                     </a>
                     <% } %>
