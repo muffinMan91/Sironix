@@ -59,10 +59,6 @@ async function createResume(userData) {
     return pdfUrl;
 }
 
-// Route to render the chat page
-router.get('/chat', (req, res) => {
-    res.render('chat');
-});
 
 // Route to handle chat messages and get responses from OpenAI
 router.post('/reply', async (req, res) => {
@@ -163,11 +159,11 @@ router.post('/reply', async (req, res) => {
         if (response.choices[0].message.function_call) {
             const functionCallName = response.choices[0].message.function_call.name;
             if (functionCallName === "createResume") {
-                const completionArguments = JSON.parse(response.choices[0].message.function_call.arguments);
-                const resumeLink = await createResume(completionArguments);
+                const userData = JSON.parse(response.choices[0].message.function_call.arguments);
+                const resumeLink = await createResume(userData);
                 console.log("Resume data:", resumeLink)
                 // Handle the resume data here
-                res.json({ reply: "Resume created successfully", resumeLink });
+                res.json({ reply: `Resume created successfully: ${resumeLink}` });
             }
         } else {
             const assistantMessage = response.choices[0].message.content;
