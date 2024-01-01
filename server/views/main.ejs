@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Resume and Webpage Builder</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Resume Builder Section -->
+        <section id="resume-builder">
+            <h2>Build Your Resume</h2>
+            <!-- iframe for the chat.ejs  -->
+            <iframe src="/chat" width="350" height="430" style="border:1px solid #ccc"></iframe>
+        </section>
+
+        <!-- Webpage Builder Section -->
+        <section id="webpage-builder">
+            <h2>Create your webpage</h2>
+            <!-- Form for user inputs -->
+            <form id="webpage-form">
+                <label for="profile-picture">Profile Picture:</label>
+                <input type="file" id="profile-picture" name="profile-picture" accept="image/*"><br>
+
+                <label for="resume">Resume:</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc"><br>
+
+                <button type="submit">Create Webpage</button>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>
