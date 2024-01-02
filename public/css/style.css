@@ -4,8 +4,14 @@
     --viewport-height: 100vh;
 }
 
+/* Ensure all text is white, unless otherwise specified */
+* {
+    color: white;
+}
+
 /* Body Styling */
 body {
+    font-family: 'Inter', sans-serif;
     line-height: 1.0;
     min-height: var(--viewport-height);
     min-width: 320px;
@@ -13,8 +19,65 @@ body {
     word-wrap: break-word;
     background-color: #171A1C;
     color: white;
-    /* For text color */
 }
+
+
+
+.button {
+    position: relative;
+    width: 120px;
+    height: 40px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -4px;
+    top: -1px;
+    margin: auto;
+    width: 128px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.button::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+}
+
+.button:hover::after {
+    filter: blur(30px);
+}
+
+.button:hover::before {
+    transform: rotate(-180deg);
+}
+
+.button:active::before {
+    scale: 0.7;
+}
+
 
 /* Background Styling */
 body:before {
@@ -42,22 +105,8 @@ body:before {
     padding: 20px;
 }
 
-/* Resume Builder and Webpage Builder Sections */
-#resume-builder,
-#webpage-builder {
-    flex: 1;
-    margin: 10px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Semi-transparent white for contrast */
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
 
-h2 {
-    color: #4CAF50;
-    /* Light green color for headings */
-}
+
 
 /* Styles for Form Elements */
 label,
@@ -80,8 +129,46 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #4cae4c;
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    min-height: var(--viewport-height);
+    align-items: stretch;
+    /* Ensures equal height for both sections */
 }
+
+
+#resume-builder,
+#webpage-builder {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    border-right: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Right border for the resume builder */
+}
+
+#webpage-builder {
+    border-right: none;
+    /* Existing style */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centers content vertically */
+    align-items: center;
+    /* Centers content horizontally */
+}
+
+#submit-documents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 /* background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20width%3D%22512%22%20height%3D%22512%22%20preserveAspectRatio%3D%22none%22%3E%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%20path%20%7B%20fill%3A%20none%3B%20stroke%3A%20rgba(255,255,255,0.059)%3B%20stroke-width%3A%201.01px%3B%20stroke-linecap%3A%20round%3B%20stroke-linejoin%3A%20round%3B%20%7D%20%3C%2Fstyle%3E%20%3Cpath%20vector-effect%3D%22non-scaling-stroke%22%20d%3D%22M416%2C192L256%2C320L96%2C192L256%2C64L416%2C192z%20M96-64L256%2C64L416-64%20M416%2C576V448L256%2C576%20M256%2C576L96%2C448v128%20M512%2C191L512%2C191L352%2C320l160%2C128.3L672%2C320L352%2C64l320-256%20M512%2C191L672%2C64L352-192%20M160-192L-160%2C64l320%2C256L0%2C448.3%20M0%2C448.3%20L-160%2C320L160%2C64l-320-256%20M416%2C448L256%2C320L96%2C448%20M96-64v76.8%20M416-64v76.8%20M352%2C64v76.8%20M160%2C64v76.8%20M96%2C192v76.8%20M416%2C192%20l-0.5%2C76.8%20M352%2C320v76.8%20M160%2C320v76.8%20M160%2C115.2l15.8%2C13%20M352%2C115.2l-16.2%2C13%20M352%2C371.2l-16.2%2C13%20M160%2C371.2l16.2%2C13%20M671.5%2C575.4l-160-128l-160%2C128%20M159.5%2C575.4l-160-128l-160%2C128%22%20%2F%3E%3C%2Fsvg%3E'); */

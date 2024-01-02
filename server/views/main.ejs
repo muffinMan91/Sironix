@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>Resume and Webpage Builder</title>
     <link rel="stylesheet" href="../../public/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -13,24 +15,45 @@
         <section id="resume-builder">
             <h2>Build Your Resume</h2>
             <!-- iframe for the chat.ejs  -->
-            <iframe src="/chat" width="350" height="430" style="border:1px solid #ccc"></iframe>
+            <iframe src="/chat" width="500" height="430" style="border:1px solid #ccc"></iframe>
         </section>
 
         <!-- Webpage Builder Section -->
         <section id="webpage-builder">
             <h2>Create your webpage</h2>
+
             <!-- Form for user inputs -->
-            <form id="webpage-form">
+            <form id="submit-documents" class="file-upload-wrapper">
                 <label for="profile-picture">Profile Picture:</label>
                 <input type="file" id="profile-picture" name="profile-picture" accept="image/*"><br>
 
                 <label for="resume">Resume:</label>
-                <input type="file" id="resume" name="resume" accept=".pdf,.doc"><br>
+                <input type="file" id="resume" name="resume" accept=".pdf"><br>
 
-                <button type="submit">Create Webpage</button>
+                <button type="submit" class="button">Create Webpage</button>
+
             </form>
+
+            <div id="generated-website-div"></div>
         </section>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/src/formHandler.js"></script>
+
+<script>// Select the form and the div element
+    const form = document.getElementById('submit-documents');
+    const generatedWebsiteDiv = document.getElementById('generated-website-div');
+
+    // Add an event listener to the form's submit event
+    form.addEventListener('submit', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Change the content of the div to "hello"
+        generatedWebsiteDiv.textContent = 'generating website... this will take around 2 minutes';
+    });
+</script>
 
 </html>
