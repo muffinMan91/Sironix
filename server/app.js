@@ -107,6 +107,9 @@ app.get('/home', (req, res) => {
     res.render('home');
 });
 
+app.get('/main', isLoggedIn, (req, res) => {
+    res.render('main');
+});
 
 
 // route to handle the generate website

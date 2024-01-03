@@ -10,6 +10,28 @@
 </head>
 
 <body>
+
+    <nav style="background-color: transparent; padding: 10px 20px;">
+        <div style="display: flex; justify-content: flex-end;">
+
+
+
+
+            <!-- Link Styled as Button -->
+
+            <a href="/home" style="padding-right: 20px; font-size: 30px;">
+                Home
+            </a>
+            <a href="/logout" style="font-size: 30px;">
+                Logout
+            </a>
+
+
+        </div>
+    </nav>
+
+
+
     <div class="container">
         <!-- Resume Builder Section -->
         <section id="resume-builder">
@@ -24,15 +46,15 @@
 
             <!-- Form for user inputs -->
             <form id="submit-documents" class="file-upload-wrapper">
-                <label for="profile-picture">Profile Picture:</label>
-                <input type="file" id="profile-picture" name="profile-picture" accept="image/*"><br>
+                <label for="image">Profile Picture:</label>
+                <input type="file" id="image" name="image" accept="image/*" required><br>
 
                 <label for="resume">Resume:</label>
-                <input type="file" id="resume" name="resume" accept=".pdf"><br>
+                <input type="file" id="resume" name="resume" accept=".pdf" required><br>
 
                 <button type="submit" class="button">Create Webpage</button>
-
             </form>
+
 
             <div id="generated-website-div"></div>
         </section>
@@ -55,5 +77,8 @@
         generatedWebsiteDiv.textContent = 'generating website... this will take around 2 minutes';
     });
 </script>
+
+<!-- add pdfjsliv -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
 
 </html>
