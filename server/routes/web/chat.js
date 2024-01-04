@@ -117,46 +117,11 @@ router.post('/reply', async (req, res) => {
                             more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
                             The goal is to extract as much information as possible from the user about their professional background. the experience description that
                             you create must be atleast 4 sentences long.`,
-                            },
-                            "experience2Company": { "type": "string" },
-                            "experience2Role": { "type": "string" },
-                            "experience2Dates": { "type": "string" },
-                            "experience2Description": {
-                                "type": "string", "description": `the details the user gives you about their second experience. you must ask the applicant follow up questions at least twice to extract 
-                            more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
-                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
-                            you create must be atleast 4 sentences long.`,
-                            },
-                            "experience3Company": { "type": "string" },
-                            "experience3Role": { "type": "string" },
-                            "experience3Dates": { "type": "string" },
-                            "experience3Description": {
-                                "type": "string", "description": `the details the user gives you about their third experience. you must ask the applicant follow up questions at least twice to extract 
-                            more details about the experience such as , projects worked on, achievements, skills developed, role, and other follow up details you would like to ask. 
-                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
-                            you create must be atleast 4 sentences long.`,
-                            },
-                            "universityName": { "type": "string" },
-                            "universityCity": { "type": "string" },
-                            "universityState": { "type": "string" },
-                            "degreeType": { "type": "string" },
-                            "degreeFieldOfStudy": { "type": "string" },
-                            "gpa": { "type": "string" },
-                            "certification1Name": { "type": "string" },
-                            "certification1Origin": { "type": "string" },
-                            "certification1Date": { "type": "string" },
-                            "certification2Name": { "type": "string" },
-                            "certification2Origin": { "type": "string" },
-                            "certification2Date": { "type": "string" }
+                            }
                         },
                         "required": [
                             "fullName", "title", "email", "phone", "experience1Company", "experience1Role", "experience1Dates",
-                            "experience1Description", "experience2Company", "experience2Role",
-                            "experience2Dates", "experience2Description", "experience3Company",
-                            "experience3Role", "experience3Dates", "experience3Description",
-                            "universityName", "universityCity", "universityState", "degreeType",
-                            "degreeFieldOfStudy", "gpa", "certification1Name", "certification1Origin",
-                            "certification1Date", "certification2Name", "certification2Origin", "certification2Date"
+                            "experience1Description"
                         ]
                     }
                 }
@@ -184,5 +149,7 @@ router.post('/reply', async (req, res) => {
         res.status(500).send('Error processing your request');
     }
 });
+
+
 
 module.exports = router;
