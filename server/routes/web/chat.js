@@ -166,6 +166,7 @@ router.post('/reply', async (req, res) => {
 
         // Check if the response is a function call
         if (response.choices[0].message.function_call) {
+            console.log("we are currently creating your resume");
             const functionCallName = response.choices[0].message.function_call.name;
             if (functionCallName === "createResume") {
                 const userData = JSON.parse(response.choices[0].message.function_call.arguments);
