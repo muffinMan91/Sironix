@@ -22,7 +22,6 @@ const imageUploadRoute = require('./routes/web/uploadDocuments.js');
 const googleAuthRoute = require('./routes/web/googleAuth.js');
 const loadWebsiteRoute = require('./routes/web/load-website.js');
 const apiGenerateWebsite = require('./routes/Api/api-generate-resume.js');
-const chatRoute = require('./routes/web/chat.js');
 const navigateWebsiteRoute = require('./routes/web/navigateWebsite.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
@@ -122,8 +121,6 @@ app.use('/', googleAuthRoute);
 app.use('/', loadWebsiteRoute);
 // route to handle api generate website
 app.use('/', apiGenerateWebsite);
-// route to hand chatbot
-app.use('/', chatRoute);
 // route to handle navigation
 app.use('/', navigateWebsiteRoute);
 
