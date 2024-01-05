@@ -406,6 +406,7 @@
             // Update the conversation history in local storage
             updateHistory("assistant", data.reply);
         } catch (error) { // Add error class to the paragraph element and set error text
+            console.error('Error fetching reply:', error);
             pElement.classList.add("error");
             pElement.textContent = "Oops! Something went wrong while retrieving the response. Please try again.";
         }
@@ -502,7 +503,6 @@
         let input = document.getElementById('chat-input');
         let userMessage = input.value.trim();
 
-        // Check if the user message is not empty
         if (userMessage) {
             // Display the user message in the chat log
             addMessageToChat("user", userMessage);

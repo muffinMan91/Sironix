@@ -6,6 +6,8 @@ const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
 const app = express();
 app.use(bodyParser.json());
 
+
+
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 
@@ -25,7 +27,7 @@ async function createResume(userData) {
             {
                 role: "system",
                 content: `You are going to be given a strigified json object containing the professional experience of an applicant. You are going to generate a few
-            sections for a resume, which include the profile description, 3 of the most significant/relavent skills of the applicant, and 9 technical or soft skills of the applicant, but just make
+            sections for a resume, which include the profile description (which should only be about 2-3 sentences long), 3 of the most significant/relavent skills of the applicant, and 9 technical or soft skills of the applicant, but just make
             sure that they add up to 9. Each technical or soft skill should be a maximum of 2 words long.`,
             },
             {
@@ -71,6 +73,8 @@ async function createResume(userData) {
 
 // Route to handle chat messages and get responses from OpenAI
 router.post('/reply', async (req, res) => {
+
+
     const conversationHistory = req.body.conversationHistory; // Array of messages (user and assistant)
 
     // Insert a system message under certain conditions
@@ -95,13 +99,49 @@ router.post('/reply', async (req, res) => {
     }
 
     try {
+
+
+
+        const response = await getOpenAIResponse(conversationHistory);
+
+
+
+        // Check if the response is a function call
+        if (response.choices[0].message.function_call) {
+            console.log("we are currently creating your resume");
+            const functionCallName = response.choices[0].message.function_call.name;
+            if (functionCallName === "createResume") {
+                const userData = JSON.parse(response.choices[0].message.function_call.arguments);
+                const resumeLink = await createResume(userData);
+                console.log("Resume data:", resumeLink)
+
+
+                // Handle the resume data here
+                res.json({ reply: `Resume created successfully: ${resumeLink}` });
+            }
+        } else {
+            const assistantMessage = response.choices[0].message.content;
+
+            res.json({ reply: assistantMessage });
+        }
+    } catch (error) {
+        console.error("Error in OpenAI response:", error);
+        res.status(500).send('Error processing your request');
+
+    }
+});
+
+
+
+async function getOpenAIResponse(conversationHistory) {
+    try {
         const response = await openai.chat.completions.create({
             model: "gpt-4-1106-preview", // or your desired model
             messages: conversationHistory,
             "functions": [
                 {
                     "name": "createResume",
-                    "description": "generate pdf link to a resume generated from user-provided data",
+                    "description": "generate pdf link to a resume generated from user-provided data. begin to generate the pdf link after the user has provided all the data needed to generate the resume.",
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -113,42 +153,61 @@ router.post('/reply', async (req, res) => {
                             "experience1Role": { "type": "string" },
                             "experience1Dates": { "type": "string" },
                             "experience1Description": {
-                                "type": "string", "description": `the details the user gives you about their first experience. you must ask the applicant follow up questions at least twice to extract 
+                                "type": "string", "description": `the details the user gives you about their first experience. you must ask the applicant follow up questions once to extract 
                             more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
                             The goal is to extract as much information as possible from the user about their professional background. the experience description that
-                            you create must be atleast 4 sentences long.`,
-                            }
+                            you create must be 3 sentences long.`,
+                            },
+                            "experience2Company": { "type": "string" },
+                            "experience2Role": { "type": "string" },
+                            "experience2Dates": { "type": "string" },
+                            "experience2Description": {
+                                "type": "string", "description": `the details the user gives you about their second experience. you must ask the applicant follow up questions once to extract 
+                            more details about the experience such as , projects worked on,achievements, skills developed, role, and other follow up details you would like to ask. 
+                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
+                            you create must be 3 sentences long.`,
+                            },
+                            "experience3Company": { "type": "string" },
+                            "experience3Role": { "type": "string" },
+                            "experience3Dates": { "type": "string" },
+                            "experience3Description": {
+                                "type": "string", "description": `the details the user gives you about their third experience. you must ask the applicant follow up questions once to extract 
+                            more details about the experience such as , projects worked on, achievements, skills developed, role, and other follow up details you would like to ask. 
+                            The goal is to extract as much information as possible from the user about their professional background. the experience description that
+                            you create must be 3 sentences long.`,
+                            },
+                            "universityName": { "type": "string" },
+                            "universityCity": { "type": "string" },
+                            "universityState": { "type": "string" },
+                            "degreeType": { "type": "string" },
+                            "degreeFieldOfStudy": { "type": "string" },
+                            "gpa": { "type": "string" },
+                            "certification1Name": { "type": "string" },
+                            "certification1Origin": { "type": "string" },
+                            "certification1Date": { "type": "string" },
+                            "certification2Name": { "type": "string" },
+                            "certification2Origin": { "type": "string" },
+                            "certification2Date": { "type": "string" }
                         },
                         "required": [
                             "fullName", "title", "email", "phone", "experience1Company", "experience1Role", "experience1Dates",
-                            "experience1Description"
+                            "experience1Description", "experience2Company", "experience2Role",
+                            "experience2Dates", "experience2Description", "experience3Company",
+                            "experience3Role", "experience3Dates", "experience3Description",
+                            "universityName", "universityCity", "universityState", "degreeType",
+                            "degreeFieldOfStudy", "gpa", "certification1Name", "certification1Origin",
+                            "certification1Date", "certification2Name", "certification2Origin", "certification2Date"
                         ]
                     }
                 }
             ]
-
         });
-
-        // Check if the response is a function call
-        if (response.choices[0].message.function_call) {
-            console.log("we are currently creating your resume");
-            const functionCallName = response.choices[0].message.function_call.name;
-            if (functionCallName === "createResume") {
-                const userData = JSON.parse(response.choices[0].message.function_call.arguments);
-                const resumeLink = await createResume(userData);
-                console.log("Resume data:", resumeLink)
-                // Handle the resume data here
-                res.json({ reply: `Resume created successfully: ${resumeLink}` });
-            }
-        } else {
-            const assistantMessage = response.choices[0].message.content;
-            res.json({ reply: assistantMessage });
-        }
+        return response;
     } catch (error) {
-        console.error("Error in OpenAI response:", error);
-        res.status(500).send('Error processing your request');
+        console.error("Error in OpenAI call:", error);
+        throw error; // Rethrow the error to handle it in the calling context
     }
-});
+}
 
 
 
