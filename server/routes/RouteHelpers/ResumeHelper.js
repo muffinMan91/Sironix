@@ -37,15 +37,15 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- TechSoft9 -->', data.TechOrSoftSkill9);
 
     // Experience
-    resumeHtml = resumeHtml.replace('<!-- experience1Company -->', data.experience1Company);
+    resumeHtml = resumeHtml.replace('<!-- experience1 -->', data.experience1);
     resumeHtml = resumeHtml.replace('<!-- experience1Role -->', data.experience1Role);
     resumeHtml = resumeHtml.replace('<!-- experience1Dates -->', data.experience1Dates);
     resumeHtml = resumeHtml.replace('<!-- experience1Description -->', data.experience1Description);
-    resumeHtml = resumeHtml.replace('<!-- experience2Company -->', data.experience2Company);
+    resumeHtml = resumeHtml.replace('<!-- experience2 -->', data.experience2);
     resumeHtml = resumeHtml.replace('<!-- experience2Role -->', data.experience2Role);
     resumeHtml = resumeHtml.replace('<!-- experience2Dates -->', data.experience2Dates);
     resumeHtml = resumeHtml.replace('<!-- experience2Description -->', data.experience2Description);
-    resumeHtml = resumeHtml.replace('<!-- experience3Company -->', data.experience3Company);
+    resumeHtml = resumeHtml.replace('<!-- experience3 -->', data.experience3);
     resumeHtml = resumeHtml.replace('<!-- experience3Role -->', data.experience3Role);
     resumeHtml = resumeHtml.replace('<!-- experience3Dates -->', data.experience3Dates);
     resumeHtml = resumeHtml.replace('<!-- experience3Description -->', data.experience3Description);
@@ -122,6 +122,7 @@ async function convertHtmlToPdf(html) {
 
     }
 }
+
 
 async function createResumeFromData(userData) {
     const filledHtml = fillTemplateWithData(userData);
