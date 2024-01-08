@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" type="text/css"
         href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="resume.css" media="all" />
+
 
 </head>
 
@@ -46,7 +46,7 @@
 
     #inner {
         padding: 10px 80px;
-        margin: 80px auto;
+
         background: #f5f5f5;
         border: solid #666;
         border-width: 8px 0 2px 0;
@@ -75,33 +75,23 @@
         margin-bottom: 2em;
     }
 
-    /* //-- footer -- */
-    #ft {
-        padding: 1em 0 5em 0;
-        font-size: 92%;
-        border-top: 1px solid #ccc;
-        text-align: center;
-    }
 
-    #ft p {
-        margin-bottom: 0;
-        text-align: center;
-    }
+
 
     /* //-- core typography and style -- */
     #hd h1 {
-        font-size: 48px;
+        font-size: 67px;
         text-transform: uppercase;
         letter-spacing: 3px;
     }
 
     h2 {
-        font-size: 152%
+        font-size: 29px;
     }
 
     h3,
     h4 {
-        font-size: 122%;
+        font-size: 23px;
     }
 
     h1,
@@ -112,8 +102,8 @@
     }
 
     p {
-        font-size: 100%;
-        line-height: 18px;
+        font-size: 19px;
+        line-height: 25px;
         padding-right: 3em;
     }
 
@@ -135,9 +125,9 @@
     }
 
     p.enlarge {
-        font-size: 144%;
+        font-size: 23px;
         padding-right: 6.5em;
-        line-height: 24px;
+        line-height: 27px;
     }
 
     p.enlarge span {
@@ -175,8 +165,8 @@
 
     .job {
         position: relative;
-        margin-bottom: 1em;
-        padding-bottom: 1em;
+        margin-bottom: 10px;
+
         border-bottom: 1px solid #ccc;
     }
 
@@ -187,7 +177,7 @@
     }
 
     .job p {
-        margin: 0.75em 0 3em 0;
+        margin: 10px 0 16px 0;
     }
 
     .last {
@@ -201,16 +191,13 @@
     }
 
     .skills-list li {
-        margin: 3px 0;
-        padding: 3px 0;
+        margin: 5px 0;
+        padding: 6px 0;
+        font-size: 25px;
+
     }
 
-    .skills-list li span {
-        font-size: 152%;
-        display: block;
-        margin-bottom: -2px;
-        padding: 0
-    }
+
 
     .talent {
         width: 32%;
@@ -238,11 +225,18 @@
     .yui-gf div.first {
         width: 12.3%;
     }
+
+    .resume-container {
+
+        text-align: left;
+
+
+    }
 </style>
 
 <body>
 
-    <div id="doc2" class="yui-t7">
+    <div class="resume-container">
         <div id="inner">
 
             <div id="hd">
@@ -288,6 +282,7 @@
                                     <p><!-- skill1Description --> </p>
                                 </div>
 
+
                                 <div class="talent">
                                     <h2><!-- skill2 --></h2>
                                     <p><!-- skill2Description --> </p>
@@ -301,7 +296,7 @@
                         </div>
 
 
-                        <div class="yui-gf">
+                        <div class="yui-gf skills-list">
                             <div class="yui-u first">
                                 <h2>Technical/<br />Soft</h2>
                             </div>
@@ -326,6 +321,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="yui-gf">
 
                             <div class="yui-u first">
@@ -335,62 +332,54 @@
                             <div class="yui-u">
 
                                 <div class="job">
-                                    <h2><!-- experience1 --></h2>
+                                    <h2><!-- experience1Company --></h2>
                                     <h3><!-- experience1Role --></h3>
                                     <h4><!-- experience1Dates --></h4>
                                     <p><!-- experience1Description --></p>
                                 </div>
 
                                 <div class="job">
-                                    <h2><!-- experience2 --></h2>
+                                    <h2><!-- experience2Company --></h2>
                                     <h3><!-- experience2Role --></h3>
                                     <h4><!-- experience2Dates --></h4>
                                     <p><!-- experience2Description --></p>
                                 </div>
 
-                                <div class="job">
-                                    <h2><!-- experience3 --></h2>
+                                <div class="job last">
+                                    <h2><!-- experience3Company --></h2>
                                     <h3><!-- experience3Role --></h3>
                                     <h4><!-- experience3Dates --></h4>
                                     <p><!-- experience3Description --></p>
-
                                 </div>
+
                             </div>
                         </div>
+
 
                         <div class="yui-gf last">
-                            <div class="yui-u first">
-                                <h2>Education/<br />Certifications</h2>
-                            </div>
-                            <div class="yui-u">
-                                <h2><!-- universityName --> - <!-- universityCity -->, <!-- universityState --></h2>
-                                <h3><!-- degreeType -->, <!-- degreeFieldOfStudy -->
-                                    <!-- &mdash; <strong>4.0 GPA</strong> -->
-                                </h3>
-                                <br>
-                                <h2><!-- certification1Name --></h2>
-                                <h3><!-- certification1Origin --> <!-- certification1Date --></h3>
-                                <br>
-                                <h2><!-- certification2Name --></h2>
-                                <h3><!-- certification2Origin --> <!-- certification2Date --></h3>
-                            </div>
+                            <h2><!-- universityName --> - <!-- universityCity -->, <!-- universityState --></h2>
+                            <h3><!-- degreeType -->, <!-- degreeFieldOfStudy -->
+                                <!-- &mdash; <strong>4.0 GPA</strong> -->
+                            </h3>
+                            <br>
+                            <h2><!-- certification1Name --></h2>
+                            <h3><!-- certification1Origin --> <!-- certification1Date --></h3>
+                            <br>
+                            <h2><!-- certification2Name --></h2>
+                            <h3><!-- certification2Origin --> <!-- certification2Date --></h3>
                         </div>
-
 
 
 
                     </div>
                 </div>
-
-                <!-- <div id="ft">
-                    <p>Jonathan Doe &mdash; <a href="mailto:name@yourdomain.com">name@yourdomain.com</a> &mdash; (313) -
-                        867-5309</p>
-                </div> -->
-
             </div>
 
 
         </div>
+
+
+    </div>
 
 
 </body>
