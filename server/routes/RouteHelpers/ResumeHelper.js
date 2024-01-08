@@ -66,6 +66,7 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- certification2Origin -->', data.certification2Origin);
     resumeHtml = resumeHtml.replace('<!-- certification2Date -->', data.certification2Date);
 
+    console.log("moment of truth: ", data.certification2Name);
 
     return resumeHtml;
 }
