@@ -1,15 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const { storage } = require('../../services/cloudinary/index.js');
-const PersonalWebsite = require('../../../models/PersonalWebsite.js');
-const upload = multer({ storage });
-const wrapAsync = require('../routeErrors/wrapAsync.js');
-const AppError = require('../routeErrors/AppError.js');
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
-const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
+
 
 // API Route
 router.post('/createResumeAPI', async (req, res) => {
