@@ -59,12 +59,26 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- degreeType -->', data.degreeType);
     resumeHtml = resumeHtml.replace('<!-- degreeFieldOfStudy -->', data.degreeFieldOfStudy);
     resumeHtml = resumeHtml.replace('<!-- gpa -->', data.gpa);
-    resumeHtml = resumeHtml.replace('<!-- certification1Name -->', data.certification1Name);
-    resumeHtml = resumeHtml.replace('<!-- certification1Origin -->', data.certification1Origin);
-    resumeHtml = resumeHtml.replace('<!-- certification1Date -->', data.certification1Date);
-    resumeHtml = resumeHtml.replace('<!-- certification2Name -->', data.certification2Name);
-    resumeHtml = resumeHtml.replace('<!-- certification2Origin -->', data.certification2Origin);
-    resumeHtml = resumeHtml.replace('<!-- certification2Date -->', data.certification2Date);
+    if (data.certification1Name) {
+        resumeHtml = resumeHtml.replace('<!-- certification1Name -->', data.certification1Name);
+    }
+    if (data.certification1Origin) {
+        resumeHtml = resumeHtml.replace('<!-- certification1Origin -->', data.certification1Origin);
+    }
+    if (data.certification1Date) {
+        resumeHtml = resumeHtml.replace('<!-- certification1Date -->', data.certification1Date);
+    }
+    if (data.certification2Name) {
+        resumeHtml = resumeHtml.replace('<!-- certification2Name -->', data.certification2Name);
+    }
+    if (data.certification2Origin) {
+        resumeHtml = resumeHtml.replace('<!-- certification2Origin -->', data.certification2Origin);
+    }
+    if (data.certification2Date) {
+        resumeHtml = resumeHtml.replace('<!-- certification2Date -->', data.certification2Date);
+    }
+
+
 
     console.log("moment of truth: ", data.certification2Name);
 
