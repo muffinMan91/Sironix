@@ -37,18 +37,36 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- TechSoft9 -->', data.TechOrSoftSkill9);
 
     // Experience
-    resumeHtml = resumeHtml.replace('<!-- experience1 -->', data.experience1);
-    resumeHtml = resumeHtml.replace('<!-- experience1Role -->', data.experience1Role);
-    resumeHtml = resumeHtml.replace('<!-- experience1Dates -->', data.experience1Dates);
-    resumeHtml = resumeHtml.replace('<!-- experience1Description -->', data.experience1Description);
-    resumeHtml = resumeHtml.replace('<!-- experience2 -->', data.experience2);
-    resumeHtml = resumeHtml.replace('<!-- experience2Role -->', data.experience2Role);
-    resumeHtml = resumeHtml.replace('<!-- experience2Dates -->', data.experience2Dates);
-    resumeHtml = resumeHtml.replace('<!-- experience2Description -->', data.experience2Description);
-    resumeHtml = resumeHtml.replace('<!-- experience3 -->', data.experience3);
-    resumeHtml = resumeHtml.replace('<!-- experience3Role -->', data.experience3Role);
-    resumeHtml = resumeHtml.replace('<!-- experience3Dates -->', data.experience3Dates);
-    resumeHtml = resumeHtml.replace('<!-- experience3Description -->', data.experience3Description);
+    if (data.experience1) {
+        resumeHtml = resumeHtml.replace('<!-- experience1 -->', data.experience1);
+        resumeHtml = resumeHtml.replace('<!-- experience1Role -->', data.experience1Role);
+        resumeHtml = resumeHtml.replace('<!-- experience1Dates -->', data.experience1Dates);
+        resumeHtml = resumeHtml.replace('<!-- experience1Description -->', data.experience1Description);
+    }
+    if (data.experience2) {
+        resumeHtml = resumeHtml.replace('<!-- experience2 -->', data.experience2);
+        resumeHtml = resumeHtml.replace('<!-- experience2Role -->', data.experience2Role);
+        resumeHtml = resumeHtml.replace('<!-- experience2Dates -->', data.experience2Dates);
+        resumeHtml = resumeHtml.replace('<!-- experience2Description -->', data.experience2Description);
+    }
+    if (data.experience3) {
+        resumeHtml = resumeHtml.replace('<!-- experience3 -->', data.experience3);
+        resumeHtml = resumeHtml.replace('<!-- experience3Role -->', data.experience3Role);
+        resumeHtml = resumeHtml.replace('<!-- experience3Dates -->', data.experience3Dates);
+        resumeHtml = resumeHtml.replace('<!-- experience3Description -->', data.experience3Description);
+    }
+    if (data.experience4) {
+        resumeHtml = resumeHtml.replace('<!-- experience4 -->', data.experience4);
+        resumeHtml = resumeHtml.replace('<!-- experience4Role -->', data.experience4Role);
+        resumeHtml = resumeHtml.replace('<!-- experience4Dates -->', data.experience4Dates);
+        resumeHtml = resumeHtml.replace('<!-- experience4Description -->', data.experience4Description);
+    }
+    if (data.experience5) {
+        resumeHtml = resumeHtml.replace('<!-- experience5 -->', data.experience5);
+        resumeHtml = resumeHtml.replace('<!-- experience5Role -->', data.experience5Role);
+        resumeHtml = resumeHtml.replace('<!-- experience5Dates -->', data.experience5Dates);
+        resumeHtml = resumeHtml.replace('<!-- experience5Description -->', data.experience5Description);
+    }
 
     // Education and Certifications
     resumeHtml = resumeHtml.replace('<!-- universityName -->', data.universityName);
@@ -101,7 +119,7 @@ async function convertHtmlToPdf(html) {
             {
                 "Name": "File",
                 "FileValue": {
-                    "Name": "testing1.html",
+                    "Name": "resume.html",
                     "Data": base64Html
                 }
             },
