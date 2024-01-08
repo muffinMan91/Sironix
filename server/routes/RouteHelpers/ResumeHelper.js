@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+//require the resume model 
+const Resume = require('../../../models/Resume.js');
 
 // Fill the resume template with the data from the user
 function fillTemplateWithData(data) {
@@ -200,6 +202,12 @@ async function convertHtmlToPdf(html) {
 async function createResumeFromData(userData) {
     const filledHtml = fillTemplateWithData(userData);
     const pdfUrl = await convertHtmlToPdf(filledHtml);
+    // create a new item in resume collection
+    const newResume = new Resume({
+        pdfLink: pdfUrl
+    });
+    // save the new resume item
+    await newResume.save();
     return pdfUrl;
 }
 
