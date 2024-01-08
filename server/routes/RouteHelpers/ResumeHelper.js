@@ -44,12 +44,8 @@ function fillTemplateWithData(data) {
         resumeHtml = resumeHtml.replace('<!-- experience1Description -->', data.experience1Description);
     }
     else {
-        resumeHtml = resumeHtml.replace(`<div class="job">
-        <h2><!-- experience1 --></h2>
-        <h3><!-- experience1Role --></h3>
-        <h4><!-- experience1Dates --></h4>
-        <p><!-- experience1Description --></p>
-    </div>`, '');
+        resumeHtml = resumeHtml.replace('<div id="exp1div" class="job">', '');
+        resumeHtml = resumeHtml.replace('</div><span id="exp1span"></span>', '');
 
     }
 
@@ -61,12 +57,8 @@ function fillTemplateWithData(data) {
         resumeHtml = resumeHtml.replace('<!-- experience2Description -->', data.experience2Description);
     }
     else {
-        resumeHtml = resumeHtml.replace(`<div class="job">
-        <h2><!-- experience2 --></h2>
-        <h3><!-- experience2Role --></h3>
-        <h4><!-- experience2Dates --></h4>
-        <p><!-- experience2Description --></p>
-    </div>`, '');
+        resumeHtml = resumeHtml.replace('<div id="exp2div" class="job">', '');
+        resumeHtml = resumeHtml.replace('</div><span id="exp2span"></span>', '');
 
     }
 
@@ -78,12 +70,8 @@ function fillTemplateWithData(data) {
         resumeHtml = resumeHtml.replace('<!-- experience3Description -->', data.experience3Description);
     }
     else {
-        resumeHtml = resumeHtml.replace(`<div class="job">
-        <h2><!-- experience3 --></h2>
-        <h3><!-- experience3Role --></h3>
-        <h4><!-- experience3Dates --></h4>
-        <p><!-- experience3Description --></p>
-    </div>`, '');
+        resumeHtml = resumeHtml.replace('<div id="exp3div" class="job">', '');
+        resumeHtml = resumeHtml.replace('</div><span id="exp3span"></span>', '');
 
     }
 
@@ -95,12 +83,9 @@ function fillTemplateWithData(data) {
         resumeHtml = resumeHtml.replace('<!-- experience4Description -->', data.experience4Description);
     }
     else {
-        resumeHtml = resumeHtml.replace(`<div class="job">
-        <h2><!-- experience4 --></h2>
-        <h3><!-- experience4Role --></h3>
-        <h4><!-- experience4Dates --></h4>
-        <p><!-- experience4Description --></p>
-    </div>`, '');
+        resumeHtml = resumeHtml.replace('<div id="exp4div" class="job">', '');
+        resumeHtml = resumeHtml.replace('</div><span id="exp4span"></span>', '');
+
 
     }
 
