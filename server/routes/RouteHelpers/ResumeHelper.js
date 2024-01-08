@@ -77,11 +77,11 @@ function fillTemplateWithData(data) {
     resumeHtml = resumeHtml.replace('<!-- degreeType -->', data.degreeType);
     resumeHtml = resumeHtml.replace('<!-- degreeFieldOfStudy -->', data.degreeFieldOfStudy);
     if (data.gpa) {
-        resumeHtml = resumeHtml.replace('&mdash;', '');
+        resumeHtml = resumeHtml.replace('<!-- gpa -->', data.gpa);
     }
     else {
         // remove the gpa dash
-        resumeHtml = resumeHtml.replace('<!-- gpa -->', '');
+        resumeHtml = resumeHtml.replace('&mdash;', '')
     }
     if (data.certification1Name) {
         resumeHtml = resumeHtml.replace('<!-- certification1Name -->', data.certification1Name);
