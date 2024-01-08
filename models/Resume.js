@@ -10,6 +10,14 @@ const resumeSchema = new mongoose.Schema({
             },
             message: 'Please enter a valid URL'
         }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
