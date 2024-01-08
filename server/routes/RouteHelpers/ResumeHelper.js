@@ -76,7 +76,16 @@ function fillTemplateWithData(data) {
     // resumeHtml = resumeHtml.replace('<!-- universityEndDate -->', data.universityEndDate);
     resumeHtml = resumeHtml.replace('<!-- degreeType -->', data.degreeType);
     resumeHtml = resumeHtml.replace('<!-- degreeFieldOfStudy -->', data.degreeFieldOfStudy);
-    resumeHtml = resumeHtml.replace('<!-- gpa -->', data.gpa);
+    if (data.gpa) {
+        resumeHtml = resumeHtml.replace('<!-- gpa -->', data.gpa);
+    }
+    else {
+        // remove the gpa dash
+        let gpaDash = document.getElementById("gpaDash");
+        if (gpaDash) {
+            gpaDash.remove();
+        }
+    }
     if (data.certification1Name) {
         resumeHtml = resumeHtml.replace('<!-- certification1Name -->', data.certification1Name);
     }
@@ -98,7 +107,7 @@ function fillTemplateWithData(data) {
 
 
 
-    console.log("moment of truth: ", data.certification2Name);
+
 
     return resumeHtml;
 }
