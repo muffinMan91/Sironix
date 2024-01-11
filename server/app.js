@@ -21,8 +21,9 @@ const generateWebsiteRoute = require('./routes/web/generate-website.js');
 const imageUploadRoute = require('./routes/web/uploadDocuments.js');
 const googleAuthRoute = require('./routes/web/googleAuth.js');
 const loadWebsiteRoute = require('./routes/web/load-website.js');
-const apiGenerateWebsite = require('./routes/Api/api-generate-resume.js');
+const apiGenerateResume = require('./routes/Api/api-generate-resume.js');
 const navigateWebsiteRoute = require('./routes/web/navigateWebsite.js');
+const apiGenerateWebsite = require('./routes/Api/api-generate-website.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
@@ -119,11 +120,12 @@ app.use('/', imageUploadRoute);
 app.use('/', googleAuthRoute);
 // route to handle loading website
 app.use('/', loadWebsiteRoute);
-// route to handle api generate website
-app.use('/', apiGenerateWebsite);
+// route to handle api generate resume
+app.use('/', apiGenerateResume);
 // route to handle navigation
 app.use('/', navigateWebsiteRoute);
-
+///route to handle api generate website
+app.use('/', apiGenerateWebsite);
 
 
 
