@@ -157,7 +157,7 @@ router.post('/generate-schoolSummary', isLoggedIn, wrapAsync(async (req, res) =>
             </p> ...note that this is only an example and the content should be different. the degrees that the applicant is pursuing will most likely be different.
              the point of the example is to show how the length of the paragraph is around 3-4 sentences, and should relate to the resume given to you. follow the html format closely. 
              Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. make the paragraph very short and straight to the point. do not
-             make it longer than the xample i have given you.=`
+             make it longer than the example i have given you.`
         }],
         //todo: try to limit amount of responses
         n: 1,
