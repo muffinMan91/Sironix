@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { storage } = require('../../services/cloudinary/index.js');
+const { imageStorage } = require('../../services/cloudinary/index.js');
 const PersonalWebsite = require('../../../models/PersonalWebsite.js');
-const upload = multer({ storage });
+const upload = multer({ imageStorage });
 const wrapAsync = require('../routeErrors/wrapAsync.js');
 const AppError = require('../routeErrors/AppError.js');
 
