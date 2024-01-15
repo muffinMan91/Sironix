@@ -48,10 +48,9 @@ router.post('/createResumeAPI', async (req, res) => {
         });
 
         // Handle error during download or file writing
-        writer.on('error', () => {
-            console.error('Error in saving the file: ', error);
-
-            res.status(500).json({ success: false, message: 'Error in saving the file' });
+        writer.on('error', (err) => {
+            console.error('Error in saving the file:', err);
+            res.status(500).json({ success: false, message: `Error in saving the file: ${err.message}` });
         });
 
     } catch (error) {
