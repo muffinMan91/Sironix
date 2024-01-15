@@ -20,11 +20,14 @@ router.post('/createResumeAPI', async (req, res) => {
             responseType: 'stream'
         });
 
-        // Upload to Cloudinary
         const uploadResponse = await new Promise((resolve, reject) => {
             response.data.pipe(
                 cloudinary.uploader.upload_stream(
-                    { resource_type: 'auto', folder: 'sironixResumes' },
+                    {
+                        resource_type: 'raw', // Keep it as 'raw' since we are manually setting the format
+                        folder: 'sironixResumes',
+                        format: 'pdf' // Explicitly specify the format as PDF
+                    },
                     (error, result) => {
                         if (error) reject(error);
                         else resolve(result);
