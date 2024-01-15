@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 //require the resume model 
-const Resume = require('../../../models/Resume.js');
 const GPTContact = require('../../../models/GPTContact.js');
 
 // Fill the resume template with the data from the user
