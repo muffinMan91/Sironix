@@ -24,7 +24,7 @@ router.post('/createResumeAPI', async (req, res) => {
         const uploadResponse = await new Promise((resolve, reject) => {
             response.data.pipe(
                 cloudinary.uploader.upload_stream(
-                    { resource_type: 'raw', folder: 'sironixResumes' },
+                    { resource_type: 'auto', folder: 'sironixResumes' },
                     (error, result) => {
                         if (error) reject(error);
                         else resolve(result);
