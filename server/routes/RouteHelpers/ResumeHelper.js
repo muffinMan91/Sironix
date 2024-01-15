@@ -3,6 +3,7 @@ const path = require('path');
 const axios = require('axios');
 //require the resume model 
 const Resume = require('../../../models/Resume.js');
+const GPTContact = require('../../../models/GPTContact.js');
 
 // Fill the resume template with the data from the user
 function fillTemplateWithData(data) {
@@ -200,6 +201,13 @@ async function convertHtmlToPdf(html) {
 
 
 async function createResumeFromData(userData) {
+    //store the contact of the user in the database
+    const newContact = new GPTContact({
+        email: userData.email,
+        phone: userData.phone
+    });
+    //save the contact
+    await newContact.save();
     const filledHtml = fillTemplateWithData(userData);
     const pdfUrl = await convertHtmlToPdf(filledHtml);
     return pdfUrl;
