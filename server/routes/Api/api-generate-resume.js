@@ -20,38 +20,38 @@ router.post('/createResumeAPI', async (req, res) => {
         await newResume.save();
 
 
-        // Create a timestamp or unique identifier
-        const timestamp = new Date().getTime();
+        // // Create a timestamp or unique identifier
+        // const timestamp = new Date().getTime();
 
-        // Define path for saving the file
-        const destination = path.join(__dirname, '../../resumes', 'resume.pdf');
-
-
-
-        // Download PDF from the URL
-        const response = await axios({
-            method: 'GET',
-            url: pdfUrl,
-            responseType: 'stream'
-        });
-
-
-        // Save file to the server
-        const writer = fs.createWriteStream(destination);
-        response.data.pipe(writer);
+        // // Define path for saving the file
+        // const destination = path.join(__dirname, '../../resumes', 'resume.pdf');
 
 
 
-        // Handle finish event to confirm the file has been written
-        writer.on('finish', () => {
-            res.status(200).json({ success: true, pdfUrl });
-        });
+        // // Download PDF from the URL
+        // const response = await axios({
+        //     method: 'GET',
+        //     url: pdfUrl,
+        //     responseType: 'stream'
+        // });
 
-        // Handle error during download or file writing
-        writer.on('error', (err) => {
-            console.error('Error in saving the file:', err);
-            res.status(500).json({ success: false, message: `Error in saving the file: ${err.message}` });
-        });
+
+        // // Save file to the server
+        // const writer = fs.createWriteStream(destination);
+        // response.data.pipe(writer);
+
+
+
+        // // Handle finish event to confirm the file has been written
+        // writer.on('finish', () => {
+        //     res.status(200).json({ success: true, pdfUrl });
+        // });
+
+        // // Handle error during download or file writing
+        // writer.on('error', (err) => {
+        //     console.error('Error in saving the file:', err);
+        //     res.status(500).json({ success: false, message: `Error in saving the file: ${err.message}` });
+        // });
 
     } catch (error) {
         console.error('Error in /createResume:', error);
