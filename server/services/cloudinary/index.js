@@ -20,7 +20,7 @@ const storage = new CloudinaryStorage({
     params: {
 
         folder: 'sironix', // Folder in Cloudinary to store images
-        allowedFormats: ['jpeg', 'png', 'jpg'] // Allowed image formats
+        allowedFormats: ['jpeg', 'png', 'jpg', 'pdf'] // Allowed image formats
     }
 });
 
