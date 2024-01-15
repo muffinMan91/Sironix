@@ -44,12 +44,13 @@ router.post('/createResumeAPI', async (req, res) => {
 
         // Handle finish event to confirm the file has been written
         writer.on('finish', () => {
-            res.status(200).json({ success: true, pdfUrl, message: 'File downloaded successfully', fileName: `resume_${timestamp}.pdf` });
+            res.status(200).json({ success: true, pdfUrl });
         });
 
         // Handle error during download or file writing
         writer.on('error', () => {
-            console.error('Error in saving the file');
+            console.error('Error in saving the file: ', error);
+
             res.status(500).json({ success: false, message: 'Error in saving the file' });
         });
 
