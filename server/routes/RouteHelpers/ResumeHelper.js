@@ -202,12 +202,6 @@ async function convertHtmlToPdf(html) {
 async function createResumeFromData(userData) {
     const filledHtml = fillTemplateWithData(userData);
     const pdfUrl = await convertHtmlToPdf(filledHtml);
-    // create a new item in resume collection
-    const newResume = new Resume({
-        pdfLink: pdfUrl
-    });
-    // save the new resume item
-    await newResume.save();
     return pdfUrl;
 }
 
