@@ -202,6 +202,7 @@ async function convertHtmlToPdf(html) {
 async function createResumeFromData(userData) {
     //store the contact of the user in the database
     const newContact = new GPTContact({
+        fullName: userData.fullName,
         email: userData.email,
         phone: userData.phone
     });
