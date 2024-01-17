@@ -211,10 +211,13 @@ async function createResumeFromData(userData) {
     if (!existingContact) {
         // If the contact doesn't exist, create and save a new contact
         newContact = new GPTContact({
-            fullName: userData.fullName,
+            name: userData.fullName,
             email: userData.email,
             phone: userData.phone
         });
+        //print the contacts name 
+        console.log("here is the name that was set: ", newContact.name);
+        console.log("here is the name sent through api: ", userData.fullName);
         await newContact.save();
     }
     else {
