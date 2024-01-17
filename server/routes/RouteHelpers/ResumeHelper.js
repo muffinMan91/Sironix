@@ -217,8 +217,7 @@ async function createResumeFromData(userData) {
         });
         await newContact.save();
     }
-    //save the contact
-    await newContact.save();
+
     const filledHtml = fillTemplateWithData(userData);
     const pdfUrl = await convertHtmlToPdf(filledHtml);
     return pdfUrl;
