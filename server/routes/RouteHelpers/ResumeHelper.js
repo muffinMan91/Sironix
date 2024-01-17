@@ -217,11 +217,11 @@ async function createResumeFromData(userData) {
         });
         await newContact.save();
     }
-    // else {
-    //     //increment the number of resumes generated
-    //     existingContact.resumesGenerated++;
-    //     await existingContact.save();
-    // }
+    else {
+        //increment the number of resumes generated
+        existingContact.resumesGenerated++;
+        await existingContact.save();
+    }
 
     const filledHtml = fillTemplateWithData(userData);
     const pdfUrl = await convertHtmlToPdf(filledHtml);
