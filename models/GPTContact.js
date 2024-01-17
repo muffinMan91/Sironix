@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const GPTContactSchema = new Schema({
+    name: {
+        type: String,
+        // required: true
+    },
     email: {
         type: String,
         // required: true
@@ -13,6 +17,10 @@ const GPTContactSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    resumesGenerated: {
+        type: Number,
+        default: 0
     }
 });
 
