@@ -200,12 +200,23 @@ async function convertHtmlToPdf(html) {
 
 
 async function createResumeFromData(userData) {
-    //store the contact of the user in the database
-    const newContact = new GPTContact({
-        fullName: userData.fullName,
-        email: userData.email,
-        phone: userData.phone
+    // Check if the contact already exists in the database
+    const existingContact = await GPTContact.findOne({
+        email: userData.email
+        // You can also include other unique fields like phone number if needed
     });
+
+    let newContact;
+
+    if (!existingContact) {
+        // If the contact doesn't exist, create and save a new contact
+        newContact = new GPTContact({
+            fullName: userData.fullName,
+            email: userData.email,
+            phone: userData.phone
+        });
+        await newContact.save();
+    }
     //save the contact
     await newContact.save();
     const filledHtml = fillTemplateWithData(userData);
