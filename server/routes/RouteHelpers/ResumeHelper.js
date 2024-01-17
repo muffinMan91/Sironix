@@ -216,6 +216,10 @@ async function createResumeFromData(userData) {
             phone: userData.phone
         });
         await newContact.save();
+    } else {
+        //increment the number of resumes generated
+        existingContact.resumesGenerated++;
+        await existingContact.save();
     }
 
     const filledHtml = fillTemplateWithData(userData);
