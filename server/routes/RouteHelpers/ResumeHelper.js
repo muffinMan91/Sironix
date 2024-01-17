@@ -215,9 +215,6 @@ async function createResumeFromData(userData) {
             email: userData.email,
             phone: userData.phone
         });
-        //print the contacts name 
-        console.log("here is the name that was set: ", newContact.name);
-        console.log("here is the name sent through api: ", userData.fullName);
         await newContact.save();
     }
     else {
