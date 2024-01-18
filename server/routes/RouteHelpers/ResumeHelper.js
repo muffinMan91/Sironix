@@ -223,9 +223,34 @@ async function createResumeFromData(userData) {
         await existingContact.save();
     }
 
+    //fill the html contect with the user data
     const filledHtml = fillTemplateWithData(userData);
+    //if userData.tooLong is true, fix the css
+    if (userData.tooLong) {
+        //call function for fixing css
+        filledHtml = fixCss(filledHtml);
+    }
+
     const pdfUrl = await convertHtmlToPdf(filledHtml);
     return pdfUrl;
+}
+
+//fix css function
+function fixCss(filledHtml) {
+    resumeHtml = resumeHtml.replace('/* margin-bottom: 5px; */', "margin-bottom: 5px;");
+    resumeHtml = resumeHtml.replace('/* padding-bottom: 5px; */', "padding-bottom: 5px;");
+    //next is /*  margin: 0 0 5px 0; */
+    resumeHtml = resumeHtml.replace('/*  margin: 0 0 5px 0; */', "margin: 0 0 5px 0;");
+    // /* padding-bottom: 2px; */
+    resumeHtml = resumeHtml.replace('/* padding-bottom: 2px; */', "padding-bottom: 2px;");
+    ///* font-size: 46px; */
+    resumeHtml = resumeHtml.replace('/* font-size: 46px; */', "font-size: 46px;");
+    // /* font-size: 26px; */   
+    resumeHtml = resumeHtml.replace('/* font-size: 26px; */', "font-size: 26px;");
+    ///* font-size: 23px; */
+    resumeHtml = resumeHtml.replace('/* font-size: 23px; */', "font-size: 23px;");
+
+    return filledHtml;
 }
 
 // Update the export
