@@ -237,7 +237,7 @@ async function createResumeFromData(userData) {
 }
 
 //fix css function
-function fixCss(filledHtml) {
+function fixCss(resumeHtml) {
     resumeHtml = resumeHtml.replace('/* margin-bottom: 5px; */', "margin-bottom: 5px;");
     resumeHtml = resumeHtml.replace('/* padding-bottom: 5px; */', "padding-bottom: 5px;");
     //next is /*  margin: 0 0 5px 0; */
@@ -251,7 +251,7 @@ function fixCss(filledHtml) {
     ///* font-size: 23px; */
     resumeHtml = resumeHtml.replace('/* font-size: 23px; */', "font-size: 23px;");
 
-    return filledHtml;
+    return resumeHtml;
 }
 
 // Update the export
