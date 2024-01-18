@@ -224,7 +224,7 @@ async function createResumeFromData(userData) {
     }
 
     //fill the html contect with the user data
-    const filledHtml = fillTemplateWithData(userData);
+    let filledHtml = fillTemplateWithData(userData);
     console.log("is too long: ", userData.tooLong);
     //if userData.tooLong is true, fix the css
     if (userData.tooLong) {
