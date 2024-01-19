@@ -2170,23 +2170,7 @@
     <nav style="background-color: transparent; padding: 10px 20px;">
         <div style="display: flex; justify-content: flex-end;">
 
-
-
-            <% if (!currentUser) { %>
-
-                <!-- Login Button  -->
-                <a href="/login/federated/google" class="style1" style="padding-right: 20px;">Login</a>
-
-                <a href="/login/federated/google" class="style1">Sign Up</a>
-
-                </a>
-                <% } else { %>
-                    <!-- Link Styled as Button -->
-                    <a href="/logout" class="style1">
-                        Logout
-                    </a>
-                    <% } %>
-
+            <!-- removed code from here... -->
 
         </div>
     </nav>
@@ -2272,8 +2256,8 @@
                                             alt="" /></span></div>
                             </div>
                             <div>
-                                <h3 id="text12" class="style1">Free Permanent link</h3>
-                                <p id="text13" class="style2">Enjoy a dedicated, free permanent link to your
+                                <h3 id="text12" class="style1">Permanent link</h3>
+                                <p id="text13" class="style2">Enjoy a dedicated, permanent link to your
                                     personal
                                     website, accessible anytime, anywhere.</p>
                                 <hr id="divider03" class="style2">
@@ -2292,7 +2276,15 @@
                 </div>
                 <hr id="divider05" class="style1 full screen">
                 <p id="text20" class="style4">sironix</p>
-                <h2 id="text21" class="style3">Login and Use Sironix For Free</h2>
+                <h2 id="text21" class="style3">Use Sironix Now</h2>
+
+                <script async src="https://js.stripe.com/v3/buy-button.js">
+                </script>
+
+                <stripe-buy-button buy-button-id="buy_btn_1Oa9PmAs5SVysjWKY6yKnbin"
+                    publishable-key="pk_live_51Oa0EuAs5SVysjWKFgU6QUWc5Gvbe8fsDTE4fUyIQndORjW8Le5LCfKH2j4ttUeHJJSjpb3rvQYIfRSVlq5gvql800wLuwODfK">
+                </stripe-buy-button>
+
                 <div id="container05" class="style5 container default">
                     <div class="wrapper">
                         <div class="inner" data-onvisible-trigger="1">

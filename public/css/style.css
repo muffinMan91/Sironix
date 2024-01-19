@@ -24,9 +24,12 @@ body {
 
 
 .button {
+
     position: relative;
-    width: 120px;
-    height: 40px;
+    width: 150px;
+    /* Increased from 120px */
+    height: 50px;
+    /* Increased from 40px */
     background-color: #000;
     display: flex;
     align-items: center;
@@ -34,7 +37,8 @@ body {
     flex-direction: column;
     justify-content: center;
     border: none;
-    padding: 12px;
+    padding: 15px;
+    /* Increased from 12px */
     gap: 12px;
     border-radius: 8px;
     cursor: pointer;
@@ -47,8 +51,11 @@ body {
     left: -4px;
     top: -1px;
     margin: auto;
-    width: 128px;
-    height: 48px;
+    width: 158px;
+    /* Increased to maintain the relative size to the button */
+    height: 58px;
+    /* Increased to maintain the relative size to the button */
+
     border-radius: 10px;
     background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
     z-index: -10;
