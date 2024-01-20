@@ -40,7 +40,7 @@
             <h2>Create your webpage</h2>
 
             <!-- Form for user inputs -->
-            <form id="submit-documents" class="file-upload-wrapper">
+            <form id="submit-documents" class="file-upload-wrapper" enctype="multipart/form-data">
                 <label for="image">Profile Picture:</label>
                 <input type="file" id="image" name="image" accept="image/*" required><br>
 
@@ -69,7 +69,7 @@
         event.preventDefault();
 
         // Change the content of the div to "hello"
-        generatedWebsiteDiv.textContent = 'generating website... this will take around 2 minutes';
+        generatedWebsiteDiv.textContent = 'Generating website... This will take around 2 minutes';
     });
 </script>
 

@@ -14,15 +14,17 @@ try {
     process.exit(1); // Stop the application if configuration fails
 }
 
+console.log("cloudinary is working");
 // Setting up Cloudinary image storage for Multer. these are the images for the website
-const imageStorage = new CloudinaryStorage({
+const websiteStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
 
-        folder: 'sironixImages', // Folder in Cloudinary to store images
-        allowedFormats: ['jpeg', 'png', 'jpg'] // Allowed image formats
+        folder: 'sironixWebsiteFiles', // Folder in Cloudinary to store images
+        allowedFormats: ['jpeg', 'png', 'jpg', 'pdf'] // Allowed image formats
     }
 });
+
 
 //setting up cloudinary storage for the resume pdf
 const resumeStorage = new CloudinaryStorage({
@@ -30,14 +32,15 @@ const resumeStorage = new CloudinaryStorage({
     params: {
 
         folder: 'sironixResumes', // Folder in Cloudinary to store resume pdfs
-        allowedFormats: ['pdf'] // Allowed formats
+        allowedFormats: ['jpeg', 'png', 'jpg', 'pdf'] // Allowed formats
     }
 });
+
 
 
 // Exporting configured Cloudinary and storage
 module.exports = {
     cloudinary,
-    imageStorage,
+    websiteStorage,
     resumeStorage
 };

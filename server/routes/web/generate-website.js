@@ -29,7 +29,7 @@ router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
                 based on the detailed information provided. The output should be concise, containing only max of 8 words. The title should be tailored to highlight 2 of the applicant's specific professional expertise and background.
 
                 Here is the applicant's resume: ${resumeText}... 
-                create a concise title of the webiste that captures their unique professional identity and expertise. do not surround the title with any quotations.
+                create a concise title of the webiste that captures their unique professional identity and expertise. do not surround the title with any quotations. Do not include name of applicant in the title. speak in first person.
                 `
         }],
         //todo: try to limit amount of responses
@@ -49,7 +49,7 @@ router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
 
     //if the req.user.id is already in the PersonalWebsite collection, then update the htmlContent and imageURL
     const personalWebsiteExists = await PersonalWebsite.findOne({ userID: req.user.id });
-    console.log('personalWebsiteExists: ', personalWebsiteExists);
+
 
 
     if (personalWebsiteExists) {
@@ -92,7 +92,7 @@ router.post('/generate-subTitle', isLoggedIn, wrapAsync(async (req, res) => {
 
                 The one-liner should be formatted as an HTML paragraph (<p>) with id="text06" and class="style5". Example format: <p id="text06" class="style5">[Generated content here]</p>.
                 remember to cross reference the html you are generating and the applicant profile to make sure that the information is accurate.Only generate the html. 
-                Do not include any text/comments/recommendations/warnings before or after that is not html. 
+                Do not include any text/comments/recommendations/warnings before or after that is not html. speak in first person.
                `
 
         }],
@@ -157,7 +157,7 @@ router.post('/generate-schoolSummary', isLoggedIn, wrapAsync(async (req, res) =>
             </p> ...note that this is only an example and the content should be different. the degrees that the applicant is pursuing will most likely be different.
              the point of the example is to show how the length of the paragraph is around 3-4 sentences, and should relate to the resume given to you. follow the html format closely. 
              Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. make the paragraph very short and straight to the point. do not
-             make it longer than the xample i have given you.=`
+             make it longer than the xample i have given you. speak in first person.`
         }],
         //todo: try to limit amount of responses
         n: 1,
@@ -257,7 +257,7 @@ router.post('/generate-SchoolDetails', isLoggedIn, wrapAsync(async (req, res) =>
                   from the html template example, or even just mention what they might have learned from their degree/ certifications in place of the courses in the example shown. 
                   Also, only mention that they are "currently studying" if they are still in school which can be checked by the date of they degree.
                   remember to cross reference the html you are generating with the resume to make sure that the information is accurate.
-                  Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html.`
+                  Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. speak in first person.`
         }],
         //todo: try to limit amount of responses
         n: 1,
@@ -330,7 +330,7 @@ router.post('/generate-Experiences', isLoggedIn, wrapAsync(async (req, res) => {
                 </ul> ... follow the html format exactly as it is shown in the example. the only thing that should change is the text in the <a> tags.
 
                 The output should reflect the applicant's professional journey as described in 'applicantInfo', with the HTML formatting and styling exactly as shown in the example. Ensure that each experience is presented in its own <ul> for clarity and visual consistency with the provided template. 
-                aplicant's resume.Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html.`
+                aplicant's resume.Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. speak in first person.`
         }],
 
         //todo: try to limit amount of responses
@@ -455,7 +455,7 @@ router.post('/generate-Experience1', isLoggedIn, wrapAsync(async (req, res) => {
               Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. the example i have given you is a bit lengthy, so try to make the content a bit shorter, such as making it only 1 paragraph and 3 bullet points of 
               what the appilcant learned or what they may have learned from the experience. you do not 
               have to stick exactly to the example, but try to make it similar. try to add bullet points where you can in order to make it shorter and more concise.keep the paragraph less than 40 words. keep the words
-              in the bullet points less than 5 words each.`
+              in the bullet points less than 5 words each. speak in first person.`
         }],
 
         //todo: try to limit amount of responses
@@ -570,7 +570,7 @@ router.post('/generate-Experience2', isLoggedIn, wrapAsync(async (req, res) => {
                make sure to add the <strong> tag where you see fit. Ensure the output is tailored to reflect the specifics of the second experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the applicant's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template...
               Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html.the example i have given you is a bit lengthy, so try to make the content a bit shorter, such as making it only 2 paragraphs. you do not 
               have to stick exactly to the example, but try to make it similar. try to add bullet points where you can in order to make it shorter and more concise.keep the paragraph less than 40 words. keep the words
-              in the bullet points less than 5 words each.`
+              in the bullet points less than 5 words each. speak in first person.`
         }],
 
         //todo: try to limit amount of responses
@@ -689,7 +689,7 @@ router.post('/generate-Experience3', isLoggedIn, wrapAsync(async (req, res) => {
                     make sure to add the <strong> tag where you see fit.Ensure the output is tailored to reflect the specifics of the third experience in 'websiteExperiences', adhering to the style and structure of the HTML example provided. The content should be detailed, reflective of the applicant's role and contributions, and formatted with multiple <span> tags within the <p> tag, as shown in the template. 
                 Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html.the example i have given you is a bit lengthy, so try to make the content a bit shorter, such as making it only 2 paragraphs. you do not 
                 have to stick exactly to the example, but try to make it similar. try to add bullet points where you can in order to make it shorter and more concise. keep the paragraph less than 40 words. keep the words
-                in the bullet points less than 5 words each.`
+                in the bullet points less than 5 words each. speak in first person.`
         }],
 
         //todo: try to limit amount of responses
@@ -757,6 +757,7 @@ router.post('/generate-Contact', isLoggedIn, wrapAsync(async (req, res) => {
                                 </ul> ... the phone number should be the one in the resume. the email should be the one in the resume. the linkedin should be the one in the resume.
                                   Only generate the html. Do not include any text/comments/recommendations/warnings before or after that is not html. you may a contact method if the applicant does not have one.
                                   for example, if the applicant does not have a linkedin, then you may remove that html section. if the applicant does not have a phone number, then you may remove that html section.
+                                  speak in first person.
                                 `
         }],
 

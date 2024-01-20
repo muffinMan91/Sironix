@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { imageStorage } = require('../../services/cloudinary/index.js');
+const { websiteStorage } = require('../../services/cloudinary/index.js');
 const PersonalWebsite = require('../../../models/PersonalWebsite.js');
-const upload = multer({ imageStorage });
+const upload = multer({ storage: websiteStorage });
 const wrapAsync = require('../routeErrors/wrapAsync.js');
 const AppError = require('../routeErrors/AppError.js');
 
@@ -12,6 +12,7 @@ const multipleUpload = upload.fields([
     { name: 'image', maxCount: 1 },
     { name: 'resume', maxCount: 1 }
 ]);
+
 
 router.post('/upload-documents', multipleUpload, wrapAsync(async (req, res, next) => {
     const file = req.files;
@@ -23,14 +24,16 @@ router.post('/upload-documents', multipleUpload, wrapAsync(async (req, res, next
 
     //find the website of the user
     const userID = req.user.id;
+    //because the html should have been made by now for the user
     const websiteItem = await PersonalWebsite.findOne({ userID: userID });
     if (!websiteItem) {
         throw new AppError('Personalized website not found', 404);
     }
 
+
     //save the image url to the database
     websiteItem.imageURL = file.image[0].path;
-    //save the resume url to the database
+    // save the resume url to the database
     websiteItem.resumeURL = file.resume[0].path;
     await websiteItem.save();
 
