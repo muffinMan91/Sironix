@@ -30,6 +30,7 @@ router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
 
                 Here is the applicant's resume: ${resumeText}... 
                 create a concise title of the webiste that captures their unique professional identity and expertise. do not surround the title with any quotations. Do not include name of applicant in the title. speak in first person.
+                Do not use uncommon words such as "maven" instead of "expert".
                 `
         }],
         //todo: try to limit amount of responses
