@@ -17,7 +17,8 @@ router.post('/submitRatingAPI', wrapAsync(async (req, res) => {
         });
         await rating.save();
 
-
+        //send back a success message
+        res.status(200).json({ success: true });
 
     } catch (error) {
         console.error('Error in /recieve:', error);
