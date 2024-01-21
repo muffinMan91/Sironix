@@ -14,7 +14,7 @@ try {
     process.exit(1); // Stop the application if configuration fails
 }
 
-console.log("cloudinary is working");
+
 // Setting up Cloudinary image storage for Multer. these are the images for the website
 const websiteStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
