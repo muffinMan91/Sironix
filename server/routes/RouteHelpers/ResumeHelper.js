@@ -234,7 +234,7 @@ async function createResumeFromData(userData) {
 
     let pdfUrl = await convertHtmlToPdf(filledHtml);
     //add "https://sironix.app?pdflink=" to the pdfUrl
-    pdfUrl = "https://sironix.app?pdflink=" + pdfUrl;
+    // pdfUrl = "https://sironix.app?pdflink=" + pdfUrl;
     return pdfUrl;
 }
 
