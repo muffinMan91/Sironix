@@ -6,7 +6,7 @@ const ratingSchema = new Schema({
         type: Number, // Assuming the rating is a numeric value
         required: true,
         min: 1,      // Minimum value (example)
-        max: 5       // Maximum value (example)
+        max: 11       // Maximum value (example)
     },
     timestamp: {
         type: Date,
