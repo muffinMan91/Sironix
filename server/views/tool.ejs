@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N95PK53KBF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-N95PK53KBF');
+    </script>
+    <meta charset="utf-8">
+    <title>Resume and Webpage Builder</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <nav style="background-color: transparent; padding: 10px 20px;">
+        <div style="display: flex; justify-content: flex-end;">
+
+
+
+
+            <!-- Link Styled as Button -->
+
+            <a href="/home" style="padding-right: 20px; font-size: 30px;">
+                Home
+            </a>
+            <a href="/logout" style="font-size: 30px;">
+                Logout
+            </a>
+
+
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+
+
+        <!-- Webpage Builder Section -->
+        <section id="webpage-builder">
+            <h2>Create your webpage</h2>
+
+            <!-- Form for user inputs -->
+            <form id="submit-documents" class="file-upload-wrapper" enctype="multipart/form-data">
+                <label for="image">Profile Picture:</label>
+                <input type="file" id="image" name="image" accept="image/*" required><br>
+
+                <label for="resume">Resume:</label>
+                <input type="file" id="resume" name="resume" accept=".pdf" required><br>
+
+                <button type="submit" class="button">Create Webpage</button>
+            </form>
+
+
+            <div id="generated-website-div"></div>
+        </section>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/src/formHandler.js"></script>
+
+<script>// Select the form and the div element
+    const form = document.getElementById('submit-documents');
+    const generatedWebsiteDiv = document.getElementById('generated-website-div');
+
+    // Add an event listener to the form's submit event
+    form.addEventListener('submit', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Change the content of the div to "hello"
+        generatedWebsiteDiv.textContent = 'Generating website... This will take around 2 minutes';
+    });
+</script>
+
+<!-- add pdfjsliv -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
+
+</html>
