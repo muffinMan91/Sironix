@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const ratingSchema = new Schema({
+const GPTRatingSchema = new Schema({
     rating: {
         type: Number, // Assuming the rating is a numeric value
         required: true,
@@ -15,6 +15,6 @@ const ratingSchema = new Schema({
 });
 
 // Create a model from the schema
-const Rating = mongoose.model('Rating', ratingSchema);
+const GPTRating = mongoose.model('GPTRating', GPTRatingSchema);
 
-module.exports = Rating;
+module.exports = GPTRating;

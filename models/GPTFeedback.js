@@ -5,6 +5,10 @@ const GPTFeedbackSchema = new Schema({
     feedback: {
         type: String,
         // required: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
     }
 });
 
