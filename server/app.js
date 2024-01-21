@@ -22,6 +22,7 @@ const imageUploadRoute = require('./routes/web/uploadDocuments.js');
 const googleAuthRoute = require('./routes/web/googleAuth.js');
 const loadWebsiteRoute = require('./routes/web/load-website.js');
 const apiGenerateResume = require('./routes/Api/api-generate-resume.js');
+const apiRate = require('./routes/Api/api-rate.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
@@ -36,7 +37,7 @@ function requireHTTPS(req, res, next) {
 }
 
 //uncomment in production
-app.use(requireHTTPS);
+// app.use(requireHTTPS);
 
 
 
@@ -127,6 +128,8 @@ app.use('/', googleAuthRoute);
 app.use('/', loadWebsiteRoute);
 // route to handle api generate resume
 app.use('/', apiGenerateResume);
+// route to handle api rate
+app.use('/', apiRate);
 
 
 

@@ -9,9 +9,9 @@ const AppError = require('../routeErrors/AppError.js');
 
 
 router.post('/submitRatingAPI', wrapAsync(async (req, res) => {
+
     try {
-        console.log("hello this is running");
-        console.log("req.body: ", req.body);
+
         console.log("rating: ", req.body.rating);
         //store the rating in the database
         const rating = new Rating({
