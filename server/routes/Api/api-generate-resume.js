@@ -5,14 +5,16 @@ const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
 const Resume = require('../../../models/Resume.js');
 const { cloudinary } = require('../../services/cloudinary/index.js'); // Update the path
 const Feedback = require('../../../models/GPTFeedback.js');
+const wrapAsync = require('../routeErrors/wrapAsync');
+const AppError = require('../routeErrors/AppError');
 
 
 
 
-router.post('/createResumeAPI', async (req, res) => {
+router.post('/createResumeAPI', wrapAsync(async (req, res) => {
     try {
         // Create the resume from the data
-        const pdfUrl = await createResumeFromData(req.body);
+        let pdfUrl = await createResumeFromData(req.body);
 
         //store the feedback in the database
         const feedback = new Feedback({
@@ -51,6 +53,7 @@ router.post('/createResumeAPI', async (req, res) => {
         // save the new resume item
         await newResume.save();
 
+        pdfUrl = "https://sironix.app?pdflink=" + pdfUrl;
 
         res.status(200).json({ success: true, pdfUrl });
 
@@ -58,7 +61,7 @@ router.post('/createResumeAPI', async (req, res) => {
         console.error('Error in /createResume:', error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-});
+}));
 
 // Export Router
 module.exports = router;
