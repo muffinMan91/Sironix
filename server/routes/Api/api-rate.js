@@ -15,7 +15,8 @@ router.post('/submitRatingAPI', wrapAsync(async (req, res) => {
         console.log("rating: ", req.body.rating);
         //store the rating in the database
         const rating = new Rating({
-            rating: req.body.rating
+            rating: req.body.rating,
+            contact: req.body.contact
         });
         await rating.save();
 

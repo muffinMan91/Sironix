@@ -185,8 +185,6 @@ async function convertHtmlToPdf(html) {
             const fileUrl = response.data.Files[0].Url; // Extract the URL of the converted file
             const fileName = response.data.Files[0].FileName; // Extract the name of the converted fileds
 
-            console.log('PDF file URL:', fileUrl);
-            console.log('PDF file name:', fileName);
             return fileUrl;
         } else {
             throw new Error('File conversion failed or no file in response');

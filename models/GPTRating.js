@@ -8,6 +8,10 @@ const GPTRatingSchema = new Schema({
         min: 1,      // Minimum value (example)
         max: 11       // Maximum value (example)
     },
+    contact: {
+        type: String,
+        required: true
+    },
     timestamp: {
         type: Date,
         default: Date.now
