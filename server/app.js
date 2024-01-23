@@ -97,6 +97,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
+    console.log("req.query.pdflink: ", req.query.pdflink);
     // Check if the 'pdflink' query parameter exists and pass it to the template
     // If it doesn't exist, pass null or an empty string
     res.render('home', { pdflink: req.query.pdflink || null });
