@@ -12,13 +12,13 @@ router.post('/autoApplyAPI', wrapAsync(async (req, res) => {
 
     try {
 
-        console.log("auto apply: ", req.body.rating);
+        console.log("auto apply: ", req.body.autoApply);
         //store the rating in the database
         const autoApply = new AutoApply({
             autoApply: req.body.autoApply,
             contact: req.body.contact
         });
-        await rating.save();
+        await autoApply.save();
 
         //send back a success message
         res.status(200).json({ success: true });
