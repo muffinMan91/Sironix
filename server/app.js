@@ -23,6 +23,7 @@ const googleAuthRoute = require('./routes/web/googleAuth.js');
 const loadWebsiteRoute = require('./routes/web/load-website.js');
 const apiGenerateResume = require('./routes/Api/api-generate-resume.js');
 const apiRate = require('./routes/Api/api-rate.js');
+const apiAutoApply = require('./routes/Api/api-autoApply.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
@@ -97,7 +98,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    console.log("req.query.pdflink: ", req.query.pdflink);
+
     // Check if the 'pdflink' query parameter exists and pass it to the template
     // If it doesn't exist, pass null or an empty string
     res.render('home', { pdflink: req.query.pdflink || null });
@@ -131,6 +132,8 @@ app.use('/', loadWebsiteRoute);
 app.use('/', apiGenerateResume);
 // route to handle api rate
 app.use('/', apiRate);
+// route to handle api auto apply
+app.use('/', apiAutoApply);
 
 
 

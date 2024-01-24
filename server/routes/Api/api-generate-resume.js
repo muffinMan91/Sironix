@@ -55,7 +55,6 @@ router.post('/createResumeAPI', wrapAsync(async (req, res) => {
 
         pdfUrl = "https://sironix.app?pdflink=" + pdfUrl;
 
-        console.log("pdfUrl: ", pdfUrl);
 
         res.status(200).json({ success: true, pdfUrl });
 
