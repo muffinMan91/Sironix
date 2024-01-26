@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resume</title>
+
+</head>
+<style>
+    body {
+        /* font family of times new roman */
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+    }
+
+    .resume {
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    .header h1 {
+        font-size: 58px;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    hr {
+        border: 0;
+        height: 4px;
+        background-color: #ddd;
+        margin: 0px;
+    }
+
+    .header p {
+        font-size: 30px;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .header h2 {
+        font-size: 35px;
+        text-align: center;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    .skills {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+
+
+    .work-experience h2 {
+        font-size: 35px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+
+
+    .job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .job-header .company {
+        font-size: 39px;
+        font-weight: bold;
+    }
+
+    .job-header .date {
+        font-size: 16px;
+        text-align: right;
+        flex-shrink: 0;
+    }
+
+    .job h3 {
+        font-size: 30px;
+        margin-top: 5px;
+    }
+
+    .job ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        font-size: 25px;
+    }
+
+
+
+
+    .education ul {
+        list-style-type: circle;
+        margin-left: 20px;
+    }
+</style>
+
+<body>
+    <div class="resume">
+        <div class="header">
+            <h1>John Doe</h1>
+            <hr>
+            <p>
+                <strong>Phone:</strong> 123-456-7890 &bull;
+                <strong>Location:</strong> Anytown, USA &bull;
+                <strong>Email:</strong> john.doe@example.com &bull;
+                <strong>LinkedIn:</strong> linkedin.com/in/johndoe
+
+            </p>
+            <h2>Desired Position Title</h2>
+            <hr>
+            <p class="skills">
+                Client Services | Customer Relationship Management | Account Management
+            </p>
+        </div>
+        <div class="work-experience">
+            <h2>Work Experience</h2>
+            <hr>
+            <div class="job">
+                <div class="job-header">
+                    <span class="company">Company Name - Location</span>
+                    <span class="date">09/2018 - Present</span>
+                </div>
+                <h3>Position Title</h3>
+                <ul>
+                    <li>Responsibility or achievement 1</li>
+                    <li>Responsibility or achievement 2</li>
+                    <!-- Add more responsibilities as needed -->
+                </ul>
+            </div>
+            <!-- Repeat the above "job" div for each job experience -->
+        </div> <!-- Education Section -->
+        <div class="education section">
+            <h2>Education</h2>
+            <hr>
+            <ul>
+                <li><strong>Degree, Major</strong> - University Name, Graduation Year</li>
+                <!-- Additional education entries as needed -->
+            </ul>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
