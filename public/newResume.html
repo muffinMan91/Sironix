@@ -1,149 +1,277 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Resume</title>
+    <meta charset="UTF-8">
+    <title>Richard Hendricks</title>
+    <style>
+        body {
+            color: #000000;
+            background: #EEEEEE;
+            font: 1.1em "Times New Roman";
+            line-height: 1.2;
+            margin: 40px 0;
+        }
 
+        #resume {
+            margin: 0 auto;
+
+            padding: 40px 60px;
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-shadow: 2px 2px 4px #AAAAAA;
+            -webkit-box-shadow: 2px 2px 4px #AAAAAA;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 200%;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            border-bottom: 1px solid #000000;
+            text-transform: uppercase;
+            font-size: 130%;
+            margin: 1em 0 0 0;
+            padding: 0;
+        }
+
+        h3 {
+            font-size: 100%;
+            margin: 0.2em 0 0.3em 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        p {
+            margin: 0 0 0.5em 0;
+            padding: 0;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0 1.5em;
+        }
+
+        /* ul immediately after h1 = contact list */
+        h1+ul {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1+ul>li {
+            display: inline;
+            white-space: pre;
+            list-style-type: none;
+        }
+
+        h1+ul>li:after {
+            content: "  \2022  ";
+        }
+
+        h1+ul>li:last-child:after {
+            content: "";
+        }
+
+        /* p immediately after contact list = summary */
+        h1+ul+p {
+            margin: 1em 0;
+        }
+
+        hr {
+            border-top: 2px dashed #000;
+            /* This creates a dashed line */
+            width: 75%;
+            /* Adjust the width as needed */
+            margin: 10px auto;
+            /* This centers the line */
+            background: transparent;
+            /* Ensures the background doesn't interfere */
+        }
+
+
+        @media print {
+            body {
+                font-size: 10pt;
+                margin: 0;
+                padding: 0;
+                background: none;
+            }
+
+            #resume {
+                margin: 0;
+                padding: 0;
+                border: 0px;
+                background: none;
+                box-shadow: none;
+                -webkit-box-shadow: none;
+            }
+
+            /* Make links black in PDF */
+            /* Move this outside the print block to apply this in HTML too */
+            a,
+            a:link,
+            a:visited,
+            a:hover {
+                color: #000000;
+                text-decoration: underline;
+            }
+        }
+
+
+
+        @media screen {
+            body {
+                font-size: 16pt;
+                margin: 0;
+                padding: 0;
+                background: #FFFFFF !important;
+            }
+
+            #resume {
+                margin: 0;
+                padding: 1em;
+                border: 0px;
+                background: none;
+                box-shadow: none;
+                -webkit-box-shadow: none;
+            }
+        }
+    </style>
 </head>
-<style>
-    body {
-        /* font family of times new roman */
-        font-family: 'Times New Roman', Times, serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-    }
-
-    .resume {
-        width: 80%;
-        margin: 20px auto;
-    }
-
-    .header h1 {
-        font-size: 58px;
-        text-align: center;
-        margin-bottom: 0;
-    }
-
-    hr {
-        border: 0;
-        height: 4px;
-        background-color: #ddd;
-        margin: 0px;
-    }
-
-    .header p {
-        font-size: 30px;
-        text-align: center;
-        margin-top: 0;
-    }
-
-    .header h2 {
-        font-size: 35px;
-        text-align: center;
-        color: #333;
-        margin-top: 20px;
-    }
-
-    .skills {
-        text-align: center;
-        font-size: 30px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-
-
-
-    .work-experience h2 {
-        font-size: 35px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-
-
-    .job-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .job-header .company {
-        font-size: 39px;
-        font-weight: bold;
-    }
-
-    .job-header .date {
-        font-size: 16px;
-        text-align: right;
-        flex-shrink: 0;
-    }
-
-    .job h3 {
-        font-size: 30px;
-        margin-top: 5px;
-    }
-
-    .job ul {
-        list-style-type: disc;
-        margin-left: 20px;
-        font-size: 25px;
-    }
-
-
-
-
-    .education ul {
-        list-style-type: circle;
-        margin-left: 20px;
-    }
-</style>
 
 <body>
-    <div class="resume">
-        <div class="header">
-            <h1>John Doe</h1>
-            <hr>
-            <p>
-                <strong>Phone:</strong> 123-456-7890 &bull;
-                <strong>Location:</strong> Anytown, USA &bull;
-                <strong>Email:</strong> john.doe@example.com &bull;
-                <strong>LinkedIn:</strong> linkedin.com/in/johndoe
+    <div id="resume">
 
-            </p>
-            <h2>Desired Position Title</h2>
-            <hr>
-            <p class="skills">
-                Client Services | Customer Relationship Management | Account Management
-            </p>
-        </div>
-        <div class="work-experience">
-            <h2>Work Experience</h2>
-            <hr>
-            <div class="job">
-                <div class="job-header">
-                    <span class="company">Company Name - Location</span>
-                    <span class="date">09/2018 - Present</span>
-                </div>
-                <h3>Position Title</h3>
-                <ul>
-                    <li>Responsibility or achievement 1</li>
-                    <li>Responsibility or achievement 2</li>
-                    <!-- Add more responsibilities as needed -->
-                </ul>
-            </div>
-            <!-- Repeat the above "job" div for each job experience -->
-        </div> <!-- Education Section -->
-        <div class="education section">
-            <h2>Education</h2>
-            <hr>
-            <ul>
-                <li><strong>Degree, Major</strong> - University Name, Graduation Year</li>
-                <!-- Additional education entries as needed -->
-            </ul>
-        </div>
+        <h1>Richard Hendricks</h1>
+
+        <ul>
+            <li>example@.com</li>
+            <li>(912) 555-4321</li>
+            <li><a href="http://richardhendricks.example.com">richardhendricks.example.com</a></li>
+            <li>San Francisco, CA</li>
+            <li>raymalik.github.com</li>
+            <li>custom link</li>
+        </ul>
+
+        <!-- profile description -->
+
+        <h2>Profile Summary</h2>
+
+        <p>CEO and Software Engineer with knowledge of applied information theory,
+            including optimizing lossless compression schema of both the length-limited and
+            adaptive variants.</p>
 
 
+        <h2>Experience</h2>
+
+        <!-- experience 1 -->
+        <h3><span>CEO/President, Pied Piper</span> <span>Dec 2013 &ndash; Dec 2014</span></h3>
+        <p>Pied Piper is a multi-platform technology based on a proprietary universal
+            compression algorithm that has consistently fielded high Weisman Scores™ that
+            are not merely competitive, but approach the theoretical limit of lossless
+            compression.</p>
+        <ul>
+            <li>Build an algorithm for artist to detect if their music was violating
+                copyright infringement laws</li>
+            <li>Successfully won Techcrunch Disrupt</li>
+            <li>Optimized an algorithm that holds the current world record for Weisman Scores</li>
+        </ul>
+
+        <hr>
+
+        <!-- experience 2 -->
+        <h3><span>Teacher, CoderDojo</span> <span>July 2013 &ndash; Dec 2013</span></h3>
+        <p>Global movement of free coding clubs for young people.</p>
+        <ul>
+            <li>Awarded &lsquo;Teacher of the Month&rsquo;</li>
+        </ul>
+
+
+        <h2>Volunteer</h2>
+
+        <!-- volunteer 1 -->
+        <h3><span>Mice Chaser, Pied Piper</span> <span>Dec 2013 &ndash; Dec 2014</span></h3>
+        <p>Pied Piper is a multi-platform technology based on a proprietary universal
+            compression algorithm that has consistently fielded high Weisman Scores™ that
+            are not merely competitive, but approach the theoretical limit of lossless
+            compression.</p>
+        <ul>
+            <li>Build an algorithm for artist to detect if their music was violating
+                copyright infringement laws</li>
+            <li>Successfully won Techcrunch Disrupt</li>
+            <li>Optimized an algorithm that holds the current world record for Weisman Scores</li>
+        </ul>
+
+        <hr>
+
+        <!-- volunteer 2 -->
+        <h3><span>Teacher, CoderDojo</span> <span>July 2013 &ndash; Dec 2013</span></h3>
+        <p>Global movement of free coding clubs for young people.</p>
+        <ul>
+            <li>Awarded &lsquo;Teacher of the Month&rsquo;</li>
+        </ul>
+
+
+
+        <h2>Projects</h2>
+        <h3><span>Miss Direction</span> <span>Aug 2016</span></h3>
+        <p>A mapping engine that misguides you:</p>
+        <ul>
+            <li>Won award at AIHacks 2016</li>
+            <li>Built by all women team of newbie programmers</li>
+            <li>Using modern technologies such as GoogleMaps, Chrome Extension and Javascript</li>
+        </ul>
+        <hr>
+        <h3><span>Miss Direction</span> <span>Aug 2016</span></h3>
+        <p>A mapping engine that misguides you:</p>
+        <ul>
+            <li>Won award at AIHacks 2016</li>
+            <li>Built by all women team of newbie programmers</li>
+            <li>Using modern technologies such as GoogleMaps, Chrome Extension and Javascript</li>
+        </ul>
+
+
+        <h2>Awards / Recognition</h2>
+        <h3><span>Silver Service Award Winner</span> <span>2011</span></h3>
+        <p>Distinguished for significant increase in client satisfaction scores.</p>
+        <hr>
+        <h3><span>Silver Service Award Winner</span> <span>2011</span></h3>
+        <p>Distinguished for significant increase in client satisfaction scores.</p>
+
+
+
+        <h2>Education</h2>
+        <h3><span>University of Oklahoma, BA Information Technology</span> <span>2011 &ndash; 2014</span></h3>
+        <ul>
+            <li>GPA 4.0</li>
+            <li>DB1101 - Basic SQL</li>
+            <li>CS2011 - Java Introduction</li>
+        </ul>
+        <hr>
+        <h3><span>Amazon AWS Certification</span> <span>2013 </span></h3>
+        <ul>
+            <li>Database management</li>
+            <li>DB1101 - Basic SQL</li>
+            <li>CS2011 - Java Introduction</li>
+        </ul>
+
+        <h2>Publications</h2>
+        <ul>
+            <li>"one of a kind design," web design book, poulin publishing, 2018</li>
+            <li>Compression: Mpeg, MP4, GIF</li>
+        </ul>
+
+
+        <h2>Skills / Interests</h2>
+        <ul>
+            <li>Web development: HTML, CSS, JavaScript</li>
+            <li>Compression: Mpeg, MP4, GIF</li>
+        </ul>
     </div>
 </body>
 
