@@ -36,9 +36,12 @@ function requireHTTPS(req, res, next) {
     }
     next();
 }
+//proxy
+app.set('trust proxy', 1);
+
 
 //uncomment in production
-// app.use(requireHTTPS);
+app.use(requireHTTPS);
 
 
 
