@@ -60,7 +60,7 @@ router.post('/createResumeAPITEST', wrapAsync(async (req, res) => {
         res.status(200).json({ success: true, pdfUrl });
 
     } catch (error) {
-        console.error('Error in /createResume:', error);
+        console.error('Error in resume test:', error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 }));

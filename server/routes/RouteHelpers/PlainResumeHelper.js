@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const GPTContact = require('../../../models/GPTContact.js');
+const axios = require('axios');
 
 function fillTemplateWithData(data) {
     console.log("Filling template with data");
