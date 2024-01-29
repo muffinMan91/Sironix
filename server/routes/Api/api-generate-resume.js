@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
+const { createResumeFromData } = require('../RouteHelpers/PlainResumeHelper.js');
 const Resume = require('../../../models/Resume.js');
 const { cloudinary } = require('../../services/cloudinary/index.js');
 const Feedback = require('../../../models/GPTFeedback.js');

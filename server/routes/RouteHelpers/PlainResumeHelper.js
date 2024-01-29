@@ -7,82 +7,98 @@ function fillTemplateWithData(data) {
     console.log("Filling template with data");
 
     // Load your HTML template
-    const templatePath = path.join(__dirname, '..', '..', '..', 'public', 'PlainResume.html');
+    const templatePath = path.join(__dirname, '..', '..', '..', 'public', 'plainResume.html');
     let resumeHtml = fs.readFileSync(templatePath, 'utf8');
 
-    // contact
-    let contactHtml = data.contact ? data.contact.map(item => `<li>${item}</li>`).join('') : '';
-    resumeHtml = resumeHtml.replace('<!-- contact -->', contactHtml);
+    if (data.contact) {
+        // contact
+        let contactHtml = data.contact ? data.contact.map(item => `<li>${item}</li>`).join('') : '';
+        resumeHtml = resumeHtml.replace('<!-- contact -->', contactHtml);
+    }
 
-    //profileSummary
-    resumeHtml = resumeHtml.replace('<!-- profile summary -->', data.profileSummary);
+    if (data.profileSummary) {
+        //profileSummary
+        resumeHtml = resumeHtml.replace('<!-- profile summary -->', data.profileSummary);
+    }
 
-    // experiences
-    let experiencesHtml = data.experiences.map((exp, index) => {
-        return (index > 0 ? '<hr>' : '') +
-            `<h3><span>${exp.role}, ${exp.company}</span> <span>${exp.period}</span></h3>
+    if (data.experiences) {
+        // experiences
+        let experiencesHtml = data.experiences.map((exp, index) => {
+            return (index > 0 ? '<hr>' : '') +
+                `<h3><span>${exp.role}, ${exp.company}</span> <span>${exp.period}</span></h3>
             <p>${exp.description}</p>
             <ul>` +
-            exp.bulletPoints.map(point => `<li>${point}</li>`).join('') +
-            `</ul>`;
-    }).join('');
-    resumeHtml = resumeHtml.replace('<!-- experiences -->', experiencesHtml);
+                exp.bulletPoints.map(point => `<li>${point}</li>`).join('') +
+                `</ul>`;
+        }).join('');
+        resumeHtml = resumeHtml.replace('<!-- experiences -->', experiencesHtml);
+    }
 
-    // volunteer
-    let volunteerHtml = data.volunteers.map((vol, index) => {
-        return (index > 0 ? '<hr>' : '') +
-            `<h3><span>${vol.role}, ${vol.company}</span> <span>${vol.period}</span></h3>
+    if (data.volunteers) {
+        // volunteer
+        let volunteerHtml = data.volunteers.map((vol, index) => {
+            return (index > 0 ? '<hr>' : '') +
+                `<h3><span>${vol.role}, ${vol.company}</span> <span>${vol.period}</span></h3>
             <p>${vol.description}</p>
             <ul>` +
-            vol.bulletPoints.map(point => `<li>${point}</li>`).join('') +
-            `</ul>`;
-    }).join('');
-    resumeHtml = resumeHtml.replace('<!-- volunteer -->', volunteerHtml);
+                vol.bulletPoints.map(point => `<li>${point}</li>`).join('') +
+                `</ul>`;
+        }).join('');
+        resumeHtml = resumeHtml.replace('<!-- volunteer -->', volunteerHtml);
+    }
 
-
-    //projects
-    let projectsHtml = data.projects.map((proj, index) => {
-        return (index > 0 ? '<hr>' : '') +
-            `<h3><span>${proj.title}</span> <span>${proj.time}</span></h3>
+    if (data.projects) {
+        //projects
+        let projectsHtml = data.projects.map((proj, index) => {
+            return (index > 0 ? '<hr>' : '') +
+                `<h3><span>${proj.title}</span> <span>${proj.time}</span></h3>
             <p>${proj.description}</p>
             <ul>` +
-            proj.bulletPoints.map(point => `<li>${point}</li>`).join('') +
-            `</ul>`;
-    }).join('');
-    resumeHtml = resumeHtml.replace('<!-- projects -->', projectsHtml);
+                proj.bulletPoints.map(point => `<li>${point}</li>`).join('') +
+                `</ul>`;
+        }).join('');
+        resumeHtml = resumeHtml.replace('<!-- projects -->', projectsHtml);
+    }
 
-
-    //awards and recognition
-    let awardsHtml = data.awards.map((award, index) => {
-        return (index > 0 ? '<hr>' : '') +
-            `<h3><span>${award.title}</span> <span>${award.year}</span></h3>
+    if (data.awards) {
+        //awards and recognition
+        let awardsHtml = data.awards.map((award, index) => {
+            return (index > 0 ? '<hr>' : '') +
+                `<h3><span>${award.title}</span> <span>${award.year}</span></h3>
             <p>${award.description}</p>`;
-    }).join('');
-    resumeHtml = resumeHtml.replace('<!-- awards/recognition -->', awardsHtml);
+        }).join('');
+        resumeHtml = resumeHtml.replace('<!-- awards/recognition -->', awardsHtml);
 
-    // education and certifications
-    let educationHtml = data.education.map((edu, index) => {
-        return (index > 0 ? '<hr>' : '') +
-            `<h3><span>${edu.title}</span> <span>${edu.period}</span></h3>
+    }
+
+    if (data.education) {
+        // education and certifications
+        let educationHtml = data.education.map((edu, index) => {
+            return (index > 0 ? '<hr>' : '') +
+                `<h3><span>${edu.title}</span> <span>${edu.period}</span></h3>
             <ul>` +
-            edu.details.map(detail => `<li>${detail}</li>`).join('') +
+                edu.details.map(detail => `<li>${detail}</li>`).join('') +
+                `</ul>`;
+        }).join('');
+        resumeHtml = resumeHtml.replace('<!-- education / certifications -->', educationHtml);
+    }
+
+    if (data.publications) {
+
+        //publications
+        let publicationsHtml = `<ul>` +
+            data.publications.map(pub => `<li>${pub}</li>`).join('') +
             `</ul>`;
-    }).join('');
-    resumeHtml = resumeHtml.replace('<!-- education / certifications -->', educationHtml);
+        resumeHtml = resumeHtml.replace('<!-- publications -->', publicationsHtml);
+    }
 
-
-    //publications
-    let publicationsHtml = `<ul>` +
-        data.publications.map(pub => `<li>${pub}</li>`).join('') +
-        `</ul>`;
-    resumeHtml = resumeHtml.replace('<!-- publications -->', publicationsHtml);
-
-    // skills/interests 
-    let skillsInterestsHtml = `<ul>` +
-        data.skillsInterests.map(skill => `<li>${skill}</li>`).join('') +
-        `</ul>`;
-    resumeHtml = resumeHtml.replace('<!-- skills/interests -->', skillsInterestsHtml);
-
+    if (data.skillsInterests) {
+        // skills/interests 
+        let skillsInterestsHtml = `<ul>` +
+            data.skillsInterests.map(skill => `<li>${skill}</li>`).join('') +
+            `</ul>`;
+        resumeHtml = resumeHtml.replace('<!-- skills/interests -->', skillsInterestsHtml);
+    }
 
     return resumeHtml;
 }
