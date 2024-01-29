@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { createResumeFromData } = require('../RouteHelpers/ResumeHelper.js');
+const { createResumeFromData } = require('../RouteHelpers/PlainResumeHelper.js');
 const Resume = require('../../../models/Resume.js');
-const { cloudinary } = require('../../services/cloudinary/index.js');
+const { cloudinary } = require('../../services/cloudinary/index.js'); // Update the path
 const Feedback = require('../../../models/GPTFeedback.js');
 const wrapAsync = require('../routeErrors/wrapAsync');
 const AppError = require('../routeErrors/AppError');
@@ -11,8 +11,9 @@ const AppError = require('../routeErrors/AppError');
 
 
 
-router.post('/createResumeAPI', wrapAsync(async (req, res) => {
+router.post('/createResumeAPITEST', wrapAsync(async (req, res) => {
     try {
+        console.log("req.body");
         // Create the resume from the data
         let pdfUrl = await createResumeFromData(req.body);
 

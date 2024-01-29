@@ -24,6 +24,7 @@ const loadWebsiteRoute = require('./routes/web/load-website.js');
 const apiGenerateResume = require('./routes/Api/api-generate-resume.js');
 const apiRate = require('./routes/Api/api-rate.js');
 const apiAutoApply = require('./routes/Api/api-autoApply.js');
+const apiGenerateResumeTest = require('./routes/Api/api-generate-resume-test.js');
 const session = require('express-session');
 const { isLoggedIn } = require('./utils/middleware.js')
 const User = require('../models/User.js');
@@ -137,6 +138,9 @@ app.use('/', apiGenerateResume);
 app.use('/', apiRate);
 // route to handle api auto apply
 app.use('/', apiAutoApply);
+// route to handle api generate resume test
+app.use('/', apiGenerateResumeTest);
+
 
 
 

@@ -220,8 +220,8 @@ const sampleData = {
 };
 
 // Generate and print the filled resume HTML
-const filledResumeHtml = fillTemplateWithData(sampleData);
-console.log(filledResumeHtml);
+// const filledResumeHtml = fillTemplateWithData(sampleData);
+// console.log(filledResumeHtml);
 
 
 
