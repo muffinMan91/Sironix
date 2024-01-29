@@ -5,7 +5,7 @@ const axios = require('axios');
 
 function fillTemplateWithData(data) {
 
-    console.log("Filling template with data 2");
+
 
     // Load your HTML template
     const templatePath = path.join(__dirname, '..', '..', '..', 'public', 'plainResume.html');
@@ -148,7 +148,6 @@ function fillTemplateWithData(data) {
 // Logic to convert HTML to PDF using the external API
 async function convertHtmlToPdf(html) {
 
-    console.log("converting html to pdf 3");
 
     // Convert HTML to Base64
     let base64Html = Buffer.from(html).toString('base64');

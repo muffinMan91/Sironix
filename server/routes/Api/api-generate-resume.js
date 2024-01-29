@@ -13,7 +13,7 @@ const AppError = require('../routeErrors/AppError');
 
 router.post('/createResumeAPI', wrapAsync(async (req, res) => {
     try {
-        console.log("req.body: ", req.body);
+
         // Create the resume from the data
         let pdfUrl = await createResumeFromData(req.body);
 

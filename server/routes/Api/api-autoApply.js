@@ -11,8 +11,6 @@ const AppError = require('../routeErrors/AppError.js');
 router.post('/autoApplyAPI', wrapAsync(async (req, res) => {
 
     try {
-
-        console.log("auto apply: ", req.body.autoApply);
         //store the rating in the database
         const autoApply = new AutoApply({
             autoApply: req.body.autoApply,
