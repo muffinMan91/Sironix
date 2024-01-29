@@ -11,22 +11,30 @@ function fillTemplateWithData(data) {
     const templatePath = path.join(__dirname, '..', '..', '..', 'public', 'plainResume.html');
     let resumeHtml = fs.readFileSync(templatePath, 'utf8');
 
-    console.log("data.contact: ", data.contact);
+    if (data.fullName) {
+        // name
+        resumeHtml = resumeHtml.replace('<!-- fullName -->', data.fullName);
+    }
+
+
     if (data.contact) {
         // contact
         let contactHtml = data.contact ? data.contact.map(item => `<li>${item}</li>`).join('') : '';
         resumeHtml = resumeHtml.replace('<!-- contact -->', contactHtml);
-        console.log("contactHtml: ", contactHtml);
+
     }
 
-    console.log("data.profileSummary: ", data.profileSummary);
+
     if (data.profileSummary) {
         //profileSummary
         resumeHtml = resumeHtml.replace('<!-- profile summary -->', data.profileSummary);
 
+    } else {
+        //if there is no profile summary, then replace <h2>Profile Summary</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Profile Summary</h2>', '');
     }
 
-    console.log("data.experiences: ", data.experiences);
+
     if (data.experiences) {
         // experiences
         let experiencesHtml = data.experiences.map((exp, index) => {
@@ -38,8 +46,13 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- experiences -->', experiencesHtml);
-        console.log("experiencesHtml: ", experiencesHtml);
+
+    } else {
+        //if there is no experiences, then replace <h2>Experiences</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Experiences</h2>', '');
     }
+
+
 
     console.log("data.volunteers: ", data.volunteers);
     if (data.volunteers) {
@@ -53,10 +66,13 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- volunteer -->', volunteerHtml);
-        console.log("volunteerHtml: ", volunteerHtml);
+
+    } else {
+        //if there is no volunteer, then replace <h2>Volunteer</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Volunteer</h2>', '');
     }
 
-    console.log("data.projects: ", data.projects);
+
     if (data.projects) {
         //projects
         let projectsHtml = data.projects.map((proj, index) => {
@@ -68,7 +84,10 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- projects -->', projectsHtml);
-        console.log("projectsHtml: ", projectsHtml);
+
+    } else {
+        //if there is no projects, then replace <h2>Projects</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Projects</h2>', '');
     }
 
     if (data.awards) {
@@ -78,8 +97,11 @@ function fillTemplateWithData(data) {
                 `<h3><span>${award.title}</span> <span>${award.year}</span></h3>
             <p>${award.description}</p>`;
         }).join('');
-        resumeHtml = resumeHtml.replace('<!-- awards/recognition -->', awardsHtml);
+        resumeHtml = resumeHtml.replace('<!-- awards / recognition -->', awardsHtml);
 
+    } else {
+        //if there is no awards, then replace <h2>Awards and Recognition</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Awards / Recognition</h2>', '');
     }
 
     if (data.education) {
@@ -92,6 +114,9 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- education / certifications -->', educationHtml);
+    } else {
+        //if there is no education, then replace <h2>Education and Certifications</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Education / Certifications</h2>', '');
     }
 
     if (data.publications) {
@@ -101,6 +126,9 @@ function fillTemplateWithData(data) {
             data.publications.map(pub => `<li>${pub}</li>`).join('') +
             `</ul>`;
         resumeHtml = resumeHtml.replace('<!-- publications -->', publicationsHtml);
+    } else {
+        //if there is no publications, then replace <h2>Publications</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Publications</h2>', '');
     }
 
     if (data.skillsInterests) {
@@ -108,7 +136,10 @@ function fillTemplateWithData(data) {
         let skillsInterestsHtml = `<ul>` +
             data.skillsInterests.map(skill => `<li>${skill}</li>`).join('') +
             `</ul>`;
-        resumeHtml = resumeHtml.replace('<!-- skills/interests -->', skillsInterestsHtml);
+        resumeHtml = resumeHtml.replace('<!-- skills / interests -->', skillsInterestsHtml);
+    } else {
+        //if there is no skills/interests, then replace <h2>Skills / Interests</h2> with empty string
+        resumeHtml = resumeHtml.replace('<h2>Skills / Interests</h2>', '');
     }
 
     return resumeHtml;
