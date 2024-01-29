@@ -4,23 +4,29 @@ const GPTContact = require('../../../models/GPTContact.js');
 const axios = require('axios');
 
 function fillTemplateWithData(data) {
-    console.log("Filling template with data");
+
+    console.log("Filling template with data 2");
 
     // Load your HTML template
     const templatePath = path.join(__dirname, '..', '..', '..', 'public', 'plainResume.html');
     let resumeHtml = fs.readFileSync(templatePath, 'utf8');
 
+    console.log("data.contact: ", data.contact);
     if (data.contact) {
         // contact
         let contactHtml = data.contact ? data.contact.map(item => `<li>${item}</li>`).join('') : '';
         resumeHtml = resumeHtml.replace('<!-- contact -->', contactHtml);
+        console.log("contactHtml: ", contactHtml);
     }
 
+    console.log("data.profileSummary: ", data.profileSummary);
     if (data.profileSummary) {
         //profileSummary
         resumeHtml = resumeHtml.replace('<!-- profile summary -->', data.profileSummary);
+
     }
 
+    console.log("data.experiences: ", data.experiences);
     if (data.experiences) {
         // experiences
         let experiencesHtml = data.experiences.map((exp, index) => {
@@ -32,8 +38,10 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- experiences -->', experiencesHtml);
+        console.log("experiencesHtml: ", experiencesHtml);
     }
 
+    console.log("data.volunteers: ", data.volunteers);
     if (data.volunteers) {
         // volunteer
         let volunteerHtml = data.volunteers.map((vol, index) => {
@@ -45,8 +53,10 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- volunteer -->', volunteerHtml);
+        console.log("volunteerHtml: ", volunteerHtml);
     }
 
+    console.log("data.projects: ", data.projects);
     if (data.projects) {
         //projects
         let projectsHtml = data.projects.map((proj, index) => {
@@ -58,6 +68,7 @@ function fillTemplateWithData(data) {
                 `</ul>`;
         }).join('');
         resumeHtml = resumeHtml.replace('<!-- projects -->', projectsHtml);
+        console.log("projectsHtml: ", projectsHtml);
     }
 
     if (data.awards) {
@@ -105,7 +116,8 @@ function fillTemplateWithData(data) {
 
 // Logic to convert HTML to PDF using the external API
 async function convertHtmlToPdf(html) {
-    console.log("converting html to pdf");
+
+    console.log("converting html to pdf 3");
 
     // Convert HTML to Base64
     let base64Html = Buffer.from(html).toString('base64');
@@ -156,6 +168,7 @@ async function convertHtmlToPdf(html) {
 
 
 async function createResumeFromData(userData) {
+    console.log("creating resume from data 1");
     // Check if the contact already exists in the database
     const existingContact = await GPTContact.findOne({
         email: userData.email
