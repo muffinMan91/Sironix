@@ -85,6 +85,106 @@ function fillTemplateWithData(data) {
     return resumeHtml;
 }
 
+// Logic to convert HTML to PDF using the external API
+async function convertHtmlToPdf(html) {
+    console.log("converting html to pdf");
+
+    // Convert HTML to Base64
+    let base64Html = Buffer.from(html).toString('base64');
+    // API URL and Secret Key
+    const apiUrl = "https://v2.convertapi.com/convert/html/to/pdf";
+    const secretKey = "taLLzwxac5PkuXtC";
+
+    // Prepare the request body
+    const requestBody = {
+        "Parameters": [
+            {
+                "Name": "File",
+                "FileValue": {
+                    "Name": "resume.html",
+                    "Data": base64Html
+                }
+            },
+            {
+                "Name": "StoreFile",
+                "Value": true
+            }
+        ]
+    };
+
+    try {
+        // Make the API request
+        const response = await axios.post(apiUrl + '?Secret=' + secretKey, requestBody, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Check if the response has the 'Files' array with at least one file
+        if (response.data && response.data.Files && response.data.Files.length > 0) {
+            const fileUrl = response.data.Files[0].Url; // Extract the URL of the converted file
+            const fileName = response.data.Files[0].FileName; // Extract the name of the converted fileds
+
+            return fileUrl;
+        } else {
+            throw new Error('File conversion failed or no file in response');
+        }
+    } catch (error) {
+        console.error('Error in API request:', error);
+        throw new Error('Error converting HTML to PDF'); // Throw a new error
+
+    }
+}
+
+
+async function createResumeFromData(userData) {
+    // Check if the contact already exists in the database
+    const existingContact = await GPTContact.findOne({
+        email: userData.email
+        // You can also include other unique fields like phone number if needed
+    });
+
+    let newContact;
+
+    if (!existingContact) {
+        // If the contact doesn't exist, create and save a new contact
+        newContact = new GPTContact({
+            name: userData.fullName,
+            email: userData.email,
+            phone: userData.phone
+        });
+        await newContact.save();
+    }
+    else {
+        //increment the number of resumes generated
+        existingContact.resumesGenerated++;
+        await existingContact.save();
+    }
+
+    //fill the html contect with the user data
+    let filledHtml = fillTemplateWithData(userData);
+    //if userData.tooLong is true, fix the css
+    if (userData.tooLong) {
+        //call function for fixing css
+        filledHtml = fixCss(filledHtml);
+    }
+
+    let pdfUrl = await convertHtmlToPdf(filledHtml);
+
+
+    return pdfUrl;
+}
+
+
+// Update the export
+module.exports = {
+    fillTemplateWithData,
+    convertHtmlToPdf,
+    createResumeFromData
+};
+
+
+
 const sampleData = {
     contact: [
         'example@example.com',
