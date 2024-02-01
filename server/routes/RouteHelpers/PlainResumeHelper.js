@@ -152,7 +152,7 @@ async function convertHtmlToPdf(html) {
     // Convert HTML to Base64
     let base64Html = Buffer.from(html).toString('base64');
     // API URL and Secret Key
-    const apiUrl = "https://v2.convertapi.com/convert/html/to/pdf";
+    const apiUrl = "https://v2.convertapi.com/convert/html/to/docx";
     const secretKey = "taLLzwxac5PkuXtC";
 
     // Prepare the request body
