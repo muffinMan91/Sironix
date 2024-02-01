@@ -17,11 +17,15 @@ router.post('/createResumeAPI', wrapAsync(async (req, res) => {
         // Create the resume from the data
         let pdfUrl = await createResumeFromData(req.body);
 
+
+
         //store the feedback in the database
-        const feedback = new Feedback({
-            feedback: req.body.feedback
-        });
-        await feedback.save();
+        if (req.body.feedback) {
+            const feedback = new Feedback({
+                feedback: req.body.feedback
+            });
+            await feedback.save();
+        }
 
 
         // Download PDF from the URL
