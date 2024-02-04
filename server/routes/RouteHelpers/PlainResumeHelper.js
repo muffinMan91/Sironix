@@ -199,6 +199,7 @@ function fillTemplateWithData(data) {
 async function convertHtmlToPdf(html) {
 
 
+
     // Convert HTML to Base64
     let base64Html = Buffer.from(html).toString('base64');
     // API URL and Secret Key
