@@ -19,7 +19,6 @@ function fillTemplateWithData(data) {
 
 
     if (data.email || data.phone || data.linkedin || data.location || data.github || data.customLink) {
-
         // Starting the contactHtml string with the opening ul tag and inline style
         let contactHtml = '<ul style="font-weight: 900;">';
 
