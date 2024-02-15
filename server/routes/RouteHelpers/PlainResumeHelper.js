@@ -511,9 +511,9 @@ const sampleData = {
     skillsInterests6: 'and another skill'
 };
 
-// Generate and print the filled resume HTML
-const filledResumeHtml = fillTemplateWithData(sampleData);
-console.log(filledResumeHtml);
+// // Generate and print the filled resume HTML
+// const filledResumeHtml = fillTemplateWithData(sampleData);
+// console.log(filledResumeHtml);
 
 
 // Update the export

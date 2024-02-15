@@ -11,8 +11,6 @@ const AppError = require('../routeErrors/AppError.js');
 
 const router = express.Router();
 
-
-
 router.post('/generate-Title', isLoggedIn, wrapAsync(async (req, res) => {
     //read the html template as plain text and store it in generatedWebsite 
     let generatedWebsite = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'public', 'userProfile.html'), 'utf8');
@@ -793,13 +791,6 @@ router.post('/generate-Contact', isLoggedIn, wrapAsync(async (req, res) => {
 
 
 }));
-
-
-
-
-
-
-
 
 
 
